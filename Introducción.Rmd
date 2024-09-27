@@ -1,0 +1,50 @@
+---
+title: "Práctica 1: Estadística descriptiva"
+output: html_document
+date: "2024-09-27"
+author: "Grupo 2:
+          Paula Armenteros
+          Marta de Miguel
+          Victor Gil
+          María Fernanda Montero
+          Daniel Redondo"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Práctica 1: Estadística descriptiva
+
+Estadística - Curso 2024/2025
+
+## Introducción y definición de objetivos
+
+En este estudio se analizarán datos obtenidos de "smogon" y "kaggle" que recogen las estadísticas y usabilidad de cada pokémon desde la primera hasta la octaba generación.
+
+Los objetivos de este análisis se centrarán en:
+
+1.  Determinar la variación de las estadísticas de los pokémons entre generaciones.
+
+2.  Determinar la variación de tipos de pokémons entre generaciones.
+
+3.  Determinar la variación de la cantidad de pokémons legendarios entre generaciones.
+
+4.  Elaborar una predicción sobre la novena generación de pokémons.
+
+5. Concluir cuáles son los pokémons más usados en el ámbito competitivo y sus motivos
+
+```{r cars}
+ ------
+
+```
+
+## Including Plots
+
+You can also embed plots, for example:
+
+```{r pressure, echo=FALSE}
+plot(pressure)
+```
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
