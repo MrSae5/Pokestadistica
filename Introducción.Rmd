@@ -1,24 +1,15 @@
 ---
 title: "Práctica 1: Estadística descriptiva"
 output: html_document
-date: "2024-09-27"
-author: "Grupo 2:
-          Paula Armenteros
-          Marta de Miguel
-          Victor Gil
-          María Fernanda Montero
-          Daniel Redondo"
+date: "**Estadística - Curso 2024/2025**"
+author: "**Grupo 2:** Paula Armenteros, Marta de Miguel, Victor Gil, María Fernanda Montero, Daniel Redondo"
 ---
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-# Práctica 1: Estadística descriptiva
-
-Estadística - Curso 2024/2025
-
-## Introducción y definición de objetivos
+# Introducción y definición de objetivos
 
 En este estudio se analizarán datos obtenidos de "smogon" y "kaggle" que recogen las estadísticas y usabilidad de cada pokémon desde la primera hasta la octaba generación.
 
@@ -32,19 +23,27 @@ Los objetivos de este análisis se centrarán en:
 
 4.  Elaborar una predicción sobre la novena generación de pokémons.
 
-5. Concluir cuáles son los pokémons más usados en el ámbito competitivo y sus motivos
+5.  Concluir cuáles son los pokémons más usados en el ámbito competitivo y sus motivos
 
-```{r cars}
- ------
+## Diccionario de datos
+* `Number:` Número identificador del Pokémon en la Pokédex Nacional.
+* `Name:` Nombre del Pokémon.
+* `Type_1:` El primer tipo elemental del Pokémon.
+* `Type_2:` El segundo tipo opcional elemental del Pokémon.
+* `Total:` La suma de las estadísticas del Pokémon.
+* `HP:` Los puntos de salud del Pokémon.
+* `Phys_Attack:` Los puntos de ataque físico del Pokémon.
+* `Phys_Defense:` Los puntos de defensa física del Pokémon.
+* `Sp_Attack:` Los puntos de ataque especial del Pokémon.
+* `Sp_Defense:` Los puntos de defensa especial del Pokémon.
+* `Speed:` Los puntos de velocidad del Pokémon.
+* `Stat_Average:` La media de las estadísticas del Pokémon.
+* `Generation:` La generación de juegos que pertenece el Pokémon.
+* `Legendary:` Si el Pokémon es legendario o no (YES/NO).
+* `Double_Type:` Si el Pokémon tiene dos tipos o no (YES/NO).
+
+
+```{r}
 
 ```
 
-## Including Plots
-
-You can also embed plots, for example:
-
-```{r pressure, echo=FALSE}
-plot(pressure)
-```
-
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
