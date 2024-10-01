@@ -55,6 +55,11 @@ pokemon <- read_excel("data/PokemonV4.xlsx")
 * `Legendary:` Si el Pokémon es legendario o no (YES/NO).
 * `Double_Type:` Si el Pokémon tiene dos tipos o no (YES/NO).
 
+## Holaaa
+
+hola hola
+hola
+
 ```{r}
 
 ```
