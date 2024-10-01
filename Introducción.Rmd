@@ -7,9 +7,10 @@ author: "**Grupo 2:** Paula Armenteros, Marta de Miguel, Victor Gil, María Fern
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
+suppressPackageStartupMessages(library(tidyverse))
 ```
 
-# Introducción y definición de objetivos
+# 1 Introducción y definición de objetivos
 
 En este estudio se analizarán datos obtenidos de "smogon" y "kaggle" que recogen las estadísticas y usabilidad de cada pokémon desde la primera hasta la octaba generación.
 
@@ -25,7 +26,19 @@ Los objetivos de este análisis se centrarán en:
 
 5.  Concluir cuáles son los pokémons más usados en el ámbito competitivo y sus motivos
 
-## Diccionario de datos
+## 2 Importación de datos y carga de paquetes
+
+```{r echo=TRUE}
+library(readxl)
+library(tidyverse)
+library(ggplot2)
+library(knitr)
+
+pokemon <- read_excel("data/PokemonV4.xlsx")
+```
+
+
+## 3 Diccionario de datos
 * `Number:` Número identificador del Pokémon en la Pokédex Nacional.
 * `Name:` Nombre del Pokémon.
 * `Type_1:` El primer tipo elemental del Pokémon.
@@ -41,9 +54,4 @@ Los objetivos de este análisis se centrarán en:
 * `Generation:` La generación de juegos que pertenece el Pokémon.
 * `Legendary:` Si el Pokémon es legendario o no (YES/NO).
 * `Double_Type:` Si el Pokémon tiene dos tipos o no (YES/NO).
-
-
-```{r}
-
-```
 
