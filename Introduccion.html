@@ -366,6 +366,8 @@ primera hasta la octaba generación.</p>
 <ol style="list-style-type: decimal">
 <li><p>Determinar la variación de las estadísticas de los pokémons entre
 generaciones.</p></li>
+<li><p>Comprobar la posibilidad de existencia de correlaciones entre
+estadísticas de cualidades similares.</p></li>
 <li><p>Determinar la variación de tipos de pokémons entre
 generaciones.</p></li>
 <li><p>Determinar la variación de la cantidad de pokémons legendarios
@@ -418,13 +420,13 @@ Pokémon.
 <ul>
 <li>Variable tipo: Numérica discreta.</li>
 </ul></li>
-<li><strong><code>Phys_Attack:</code></strong> Los puntos de ataque
-físico del Pokémon.
+<li><strong><code>Attack:</code></strong> Los puntos de ataque físico
+del Pokémon.
 <ul>
 <li>Variable tipo: Numérica discreta.</li>
 </ul></li>
-<li><strong><code>Phys_Defense:</code></strong> Los puntos de defensa
-física del Pokémon.
+<li><strong><code>Defense:</code></strong> Los puntos de defensa física
+del Pokémon.
 <ul>
 <li>Variable tipo: Numérica discreta.</li>
 </ul></li>
@@ -463,10 +465,109 @@ tipos o no (YES/NO).
 <ul>
 <li>Variable tipo: Categórica dicotómica.</li>
 </ul></li>
+<li><strong><code>Usage_Percentage:</code></strong> Porcentaje de uso de
+cada Pokémon en torneos competitivos.
+<ul>
+<li>Variable tipo: Numérica continua.</li>
+</ul></li>
 </ul>
 </div>
 <div id="análisis-exploratorio-de-datos" class="section level1">
 <h1>4. Análisis exploratorio de datos</h1>
+<div id="datos-univariantes" class="section level2">
+<h2>4.1 Datos univariantes</h2>
+<div id="tabla-de-frecuencia-todos-pokemons" class="section level3">
+<h3>Tabla de frecuencia (TODOS POKEMONS)</h3>
+<div id="total-histograma" class="section level4">
+<h4>Total(+ histograma)</h4>
+</div>
+<div id="hp" class="section level4">
+<h4>HP</h4>
+</div>
+<div id="attack" class="section level4">
+<h4>Attack</h4>
+</div>
+<div id="defense" class="section level4">
+<h4>Defense</h4>
+</div>
+<div id="sp_attack" class="section level4">
+<h4>Sp_attack</h4>
+</div>
+<div id="sp_defense" class="section level4">
+<h4>Sp_defense</h4>
+</div>
+<div id="speed" class="section level4">
+<h4>Speed</h4>
+</div>
+<div id="tipo" class="section level4">
+<h4>Tipo</h4>
+</div>
+</div>
+<div id="boxplotgenneracón" class="section level3">
+<h3>Boxplot(GENNERACÓN)</h3>
+<div id="hp-1" class="section level4">
+<h4>HP</h4>
+</div>
+<div id="attack-1" class="section level4">
+<h4>Attack</h4>
+</div>
+<div id="defense-1" class="section level4">
+<h4>Defense</h4>
+</div>
+<div id="sp_attack-1" class="section level4">
+<h4>Sp_attack</h4>
+</div>
+<div id="sp_defense-1" class="section level4">
+<h4>Sp_defense</h4>
+</div>
+<div id="speed-1" class="section level4">
+<h4>Speed</h4>
+</div>
+</div>
+<div id="gráficos-de-barras-generación" class="section level3">
+<h3>Gráficos de barras (GENERACIÓN)</h3>
+<div id="tipos-de-pokémons-por-generación8-graficos-juntos-tipos-y-cantidad" class="section level4">
+<h4>Tipos de Pokémons por generación(8 graficos juntos| tipos y
+cantidad)</h4>
+</div>
+<div id="top-100-tipos-mas-usados" class="section level4">
+<h4>Top 100 tipos mas usados</h4>
+</div>
+</div>
+<div id="gráfico-de-lineaslegendarios-por-generación" class="section level3">
+<h3>Gráfico de lineas(Legendarios por generación)</h3>
+</div>
+<div id="resúmenes-numéricosmedia-de-pokémons-por-generación-pókemons-legendarios-cada-tipo" class="section level3">
+<h3>Resúmenes numéricos(media de Pokémons por generación, Pókemons
+legendarios, cada tipo)</h3>
+</div>
+</div>
+<div id="datos-bivariantes" class="section level2">
+<h2>4.2 Datos bivariantes</h2>
+<div id="scatter-plot" class="section level3">
+<h3>Scatter plot</h3>
+<div id="correlación-entre-attack-vs.-sp_attack" class="section level4">
+<h4>Correlación entre attack vs. sp_attack</h4>
+</div>
+<div id="correlación-entre-defense-vs.-sp_defense" class="section level4">
+<h4>Correlación entre defense vs. sp_defense</h4>
+</div>
+</div>
+<div id="gráfico-de-regresión" class="section level3">
+<h3>Gráfico de regresión</h3>
+<div id="covarianza-entre-stat_average-vs.-usage_percentage" class="section level4">
+<h4>Covarianza entre Stat_Average vs. Usage_Percentage</h4>
+</div>
+</div>
+</div>
+</div>
+<div id="conclusión" class="section level1">
+<h1>5. Conclusión</h1>
+</div>
+<div id="bibliografía" class="section level1">
+<h1>6. Bibliografía</h1>
+<p><a href="https://www.smogon.com/stats/2022-04/gen8vgc2022-0.txt" class="uri">https://www.smogon.com/stats/2022-04/gen8vgc2022-0.txt</a></p>
+<p><a href="https://www.kaggle.com/datasets/jaidalmotra/pokemon-dataset" class="uri">https://www.kaggle.com/datasets/jaidalmotra/pokemon-dataset</a></p>
 </div>
 
 
