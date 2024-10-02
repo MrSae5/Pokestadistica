@@ -75,3 +75,13 @@ pokemon <- read_excel("data/PokemonV4.xlsx")
 
 # 4. Análisis exploratorio de datos
 
+## 4.1 Estadísticas de pokémons entre generaciones
+
+## 4.2 Tipos de pokémons entre generaciones
+
+## 4.3 Pokémons lengendarios entre generaciones
+
+## 4.4 Predicción para la 9ª generación
+
+## 4.5 Pokémons competitivos
+
