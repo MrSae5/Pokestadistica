@@ -9,7 +9,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
 
 
-<meta name="author" content="Grupo 2: Paula Armenteros, Marta de Miguel, Victor Gil, María Fernanda Montero, Daniel Redondo" />
+<meta name="author" content="Estadística - Curso 2024/2025" />
 
 
 <title>Práctica 1: Estadística descriptiva</title>
@@ -350,15 +350,15 @@ display: none;
 
 
 <h1 class="title toc-ignore">Práctica 1: Estadística descriptiva</h1>
-<h4 class="author"><strong>Grupo 2:</strong> Paula Armenteros, Marta de
-Miguel, Victor Gil, María Fernanda Montero, Daniel Redondo</h4>
-<h4 class="date"><strong>Estadística - Curso 2024/2025</strong></h4>
+<h4 class="author"><strong>Estadística - Curso 2024/2025</strong></h4>
+<h4 class="date"><strong>Grupo 2:</strong> Paula Armenteros, Marta de
+Miguel, Victor Gil, María Fernanda Montero, Daniel Redondo.</h4>
 
 </div>
 
 
 <div id="introducción-y-definición-de-objetivos" class="section level1">
-<h1>1 Introducción y definición de objetivos</h1>
+<h1>1. Introducción y definición de objetivos</h1>
 <p>En este estudio se analizarán datos obtenidos de “smogon” y “kaggle”
 que recogen las estadísticas y usabilidad de cada pokémon desde la
 primera hasta la octaba generación.</p>
@@ -375,45 +375,98 @@ pokémons.</p></li>
 <li><p>Concluir cuáles son los pokémons más usados en el ámbito
 competitivo y sus motivos</p></li>
 </ol>
-<div id="importación-de-datos-y-carga-de-paquetes" class="section level2">
-<h2>2 Importación de datos y carga de paquetes</h2>
+</div>
+<div id="importación-de-datos-y-carga-de-paquetes" class="section level1">
+<h1>2. Importación de datos y carga de paquetes</h1>
 <pre class="r"><code>library(readxl)
 library(tidyverse)
+library(summarytools)
 library(ggplot2)
 library(knitr)
 
+
 pokemon &lt;- read_excel(&quot;data/PokemonV4.xlsx&quot;)</code></pre>
 </div>
-<div id="diccionario-de-datos" class="section level2">
-<h2>3 Diccionario de datos</h2>
+<div id="diccionario-de-datos" class="section level1">
+<h1>3. Diccionario de datos</h1>
 <ul>
-<li><code>Number:</code> Número identificador del Pokémon en la Pokédex
-Nacional.</li>
-<li><code>Name:</code> Nombre del Pokémon.</li>
-<li><code>Type_1:</code> El primer tipo elemental del Pokémon.</li>
-<li><code>Type_2:</code> El segundo tipo opcional elemental del
-Pokémon.</li>
-<li><code>Total:</code> La suma de las estadísticas del Pokémon.</li>
-<li><code>HP:</code> Los puntos de salud del Pokémon.</li>
-<li><code>Phys_Attack:</code> Los puntos de ataque físico del
-Pokémon.</li>
-<li><code>Phys_Defense:</code> Los puntos de defensa física del
-Pokémon.</li>
-<li><code>Sp_Attack:</code> Los puntos de ataque especial del
-Pokémon.</li>
-<li><code>Sp_Defense:</code> Los puntos de defensa especial del
-Pokémon.</li>
-<li><code>Speed:</code> Los puntos de velocidad del Pokémon.</li>
-<li><code>Stat_Average:</code> La media de las estadísticas del
-Pokémon.</li>
-<li><code>Generation:</code> La generación de juegos que pertenece el
-Pokémon.</li>
-<li><code>Legendary:</code> Si el Pokémon es legendario o no
-(YES/NO).</li>
-<li><code>Double_Type:</code> Si el Pokémon tiene dos tipos o no
-(YES/NO).</li>
+<li><strong><code>Number:</code></strong> Número identificador del
+Pokémon en la Pokédex Nacional.
+<ul>
+<li>Variable tipo: Identificador.</li>
+</ul></li>
+<li><strong><code>Name:</code></strong> Nombre del Pokémon.
+<ul>
+<li>Variable tipo: Categórica multinivel.</li>
+</ul></li>
+<li><strong><code>Type_1:</code></strong> El primer tipo elemental del
+Pokémon.
+<ul>
+<li>Variable tipo: Categórica multinivel.</li>
+</ul></li>
+<li><strong><code>Type_2:</code></strong> El segundo tipo opcional
+elemental del Pokémon.
+<ul>
+<li>Variable tipo: Categórica multinivel.</li>
+</ul></li>
+<li><strong><code>Total:</code></strong> La suma de las estadísticas del
+Pokémon.
+<ul>
+<li>Variable tipo: Numérica discreta.</li>
+</ul></li>
+<li><strong><code>HP:</code></strong> Los puntos de salud del Pokémon.
+<ul>
+<li>Variable tipo: Numérica discreta.</li>
+</ul></li>
+<li><strong><code>Phys_Attack:</code></strong> Los puntos de ataque
+físico del Pokémon.
+<ul>
+<li>Variable tipo: Numérica discreta.</li>
+</ul></li>
+<li><strong><code>Phys_Defense:</code></strong> Los puntos de defensa
+física del Pokémon.
+<ul>
+<li>Variable tipo: Numérica discreta.</li>
+</ul></li>
+<li><strong><code>Sp_Attack:</code></strong> Los puntos de ataque
+especial del Pokémon.
+<ul>
+<li>Variable tipo: Numérica discreta.</li>
+</ul></li>
+<li><strong><code>Sp_Defense:</code></strong> Los puntos de defensa
+especial del Pokémon.
+<ul>
+<li>Variable tipo: Numérica discreta.</li>
+</ul></li>
+<li><strong><code>Speed:</code></strong> Los puntos de velocidad del
+Pokémon.
+<ul>
+<li>Variable tipo: Numérica discreta.</li>
+</ul></li>
+<li><strong><code>Stat_Average:</code></strong> La media de las
+estadísticas del Pokémon.
+<ul>
+<li>Variable tipo: Numérica continua.</li>
+</ul></li>
+<li><strong><code>Generation:</code></strong> La generación de juegos
+que pertenece el Pokémon.
+<ul>
+<li>Variable tipo: Categórica ordinal.</li>
+</ul></li>
+<li><strong><code>Legendary:</code></strong> Si el Pokémon es legendario
+o no (YES/NO).
+<ul>
+<li>Variable tipo: Categórica dicotómica.</li>
+</ul></li>
+<li><strong><code>Double_Type:</code></strong> Si el Pokémon tiene dos
+tipos o no (YES/NO).
+<ul>
+<li>Variable tipo: Categórica dicotómica.</li>
+</ul></li>
 </ul>
 </div>
+<div id="análisis-exploratorio-de-datos" class="section level1">
+<h1>4. Análisis exploratorio de datos</h1>
 </div>
 
 
