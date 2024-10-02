@@ -26,21 +26,19 @@ Los objetivos de este análisis se centrarán en:
 
 5.  Concluir cuáles son los pokémons más usados en el ámbito competitivo y sus motivos
 
-# 2 Importación de datos y carga de paquetes
+## 2 Importación de datos y carga de paquetes
 
 ```{r echo=TRUE}
 library(readxl)
 library(tidyverse)
-library(summarytools)
 library(ggplot2)
 library(knitr)
-
 
 pokemon <- read_excel("data/PokemonV4.xlsx")
 ```
 
 
-# 3 Diccionario de datos
+## 3 Diccionario de datos
 * `Number:` Número identificador del Pokémon en la Pokédex Nacional.
 * `Name:` Nombre del Pokémon.
 * `Type_1:` El primer tipo elemental del Pokémon.
@@ -57,7 +55,7 @@ pokemon <- read_excel("data/PokemonV4.xlsx")
 * `Legendary:` Si el Pokémon es legendario o no (YES/NO).
 * `Double_Type:` Si el Pokémon tiene dos tipos o no (YES/NO).
 
-# 4 Análisis exploratorio de datos
+
 ```{r}
 
 ```
