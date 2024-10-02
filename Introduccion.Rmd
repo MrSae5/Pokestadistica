@@ -84,3 +84,4 @@ pokemon <- read_excel("data/PokemonV4.xlsx")
 ## 4.4 Predicción para la 9ª generación
 
 ## 4.5 Pokémons competitivos
+
