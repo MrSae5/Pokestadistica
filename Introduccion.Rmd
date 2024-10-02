@@ -19,13 +19,15 @@ Los objetivos de este análisis se centrarán en:
 
 1.  Determinar la variación de las estadísticas de los pokémons entre generaciones.
 
-2.  Determinar la variación de tipos de pokémons entre generaciones.
+2. Comprobar la posibilidad de existencia de correlaciones entre estadísticas de cualidades similares. 
 
-3.  Determinar la variación de la cantidad de pokémons legendarios entre generaciones.
+3.  Determinar la variación de tipos de pokémons entre generaciones.
 
-4.  Elaborar una predicción sobre la novena generación de pokémons.
+4.  Determinar la variación de la cantidad de pokémons legendarios entre generaciones.
 
-5.  Concluir cuáles son los pokémons más usados en el ámbito competitivo y sus motivos
+5.  Elaborar una predicción sobre la novena generación de pokémons.
+
+6.  Concluir cuáles son los pokémons más usados en el ámbito competitivo y sus motivos
 
 # 2. Importación de datos y carga de paquetes
 
@@ -54,9 +56,9 @@ pokemon <- read_excel("data/PokemonV4.xlsx")
   - Variable tipo: Numérica discreta.
 * **`HP:`** Los puntos de salud del Pokémon.
   - Variable tipo: Numérica discreta.
-* **`Phys_Attack:`** Los puntos de ataque físico del Pokémon.
+* **`Attack:`** Los puntos de ataque físico del Pokémon.
   - Variable tipo: Numérica discreta.
-* **`Phys_Defense:`** Los puntos de defensa física del Pokémon.
+* **`Defense:`** Los puntos de defensa física del Pokémon.
   - Variable tipo: Numérica discreta.
 * **`Sp_Attack:`** Los puntos de ataque especial del Pokémon.
   - Variable tipo: Numérica discreta.
@@ -72,16 +74,76 @@ pokemon <- read_excel("data/PokemonV4.xlsx")
   - Variable tipo: Categórica dicotómica.
 * **`Double_Type:`** Si el Pokémon tiene dos tipos o no (YES/NO).
   - Variable tipo: Categórica dicotómica.
+* **`Usage_Percentage:`** Porcentaje de uso de cada Pokémon en torneos competitivos.
+  - Variable tipo: Numérica continua.
 
 # 4. Análisis exploratorio de datos
 
-## 4.1 Estadísticas de pokémons entre generaciones
+## 4.1 Datos univariantes 
 
-## 4.2 Tipos de pokémons entre generaciones
+### Tabla de frecuencia (TODOS POKEMONS) 
 
-## 4.3 Pokémons lengendarios entre generaciones
+#### Total(+ histograma)
 
-## 4.4 Predicción para la 9ª generación
+#### HP
 
-## 4.5 Pokémons competitivos
+#### Attack
 
+#### Defense
+
+#### Sp_attack
+
+#### Sp_defense
+
+#### Speed
+
+#### Tipo
+
+
+### Boxplot(GENNERACÓN)
+
+#### HP
+
+#### Attack
+
+#### Defense
+
+#### Sp_attack
+
+#### Sp_defense
+
+#### Speed
+
+
+### Gráficos de barras (GENERACIÓN)
+
+#### Tipos de Pokémons por generación(8 graficos juntos| tipos y cantidad)
+
+#### Top 100 tipos mas usados 
+
+
+### Gráfico de lineas(Legendarios por generación)
+
+### Resúmenes numéricos(media de Pokémons por generación, Pókemons legendarios, cada tipo)
+
+
+## 4.2 Datos bivariantes
+
+### Scatter plot
+
+#### Correlación entre attack vs. sp_attack
+
+#### Correlación entre defense vs. sp_defense
+
+
+### Gráfico de regresión
+
+#### Covarianza entre Stat_Average vs. Usage_Percentage
+
+
+# 5. Conclusión
+
+# 6. Bibliografía
+https://www.smogon.com/stats/2022-04/gen8vgc2022-0.txt
+
+https://www.kaggle.com/datasets/jaidalmotra/pokemon-dataset
