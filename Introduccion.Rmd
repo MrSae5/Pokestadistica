@@ -19,11 +19,11 @@ Los objetivos de este análisis se centrarán en:
 
 1.  Determinar la variación de las estadísticas de los pokémons entre generaciones.
 
-2. Comprobar la posibilidad de existencia de correlaciones entre estadísticas de cualidades similares. 
+2.  Determinar la variación de tipos de pokémons entre generaciones.
 
-3.  Determinar la variación de tipos de pokémons entre generaciones.
+3.  Determinar la variación de la cantidad de pokémons legendarios entre generaciones.
 
-4.  Determinar la variación de la cantidad de pokémons legendarios entre generaciones.
+4.  Comprobar la posibilidad de existencia de correlaciones entre estadísticas de cualidades similares.
 
 5.  Elaborar una predicción sobre la novena generación de pokémons.
 
