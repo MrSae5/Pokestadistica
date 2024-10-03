@@ -37,6 +37,7 @@ library(tidyverse)
 library(summarytools)
 library(ggplot2)
 library(knitr)
+library('dplyr')
 
 
 pokemon <- read_excel("data/PokemonV4.xlsx")
@@ -179,6 +180,49 @@ ggplot(pokemon_by_type, aes(x = Types, y = count, fill = Types)) +
 
 #### Covarianza entre Stat_Average vs. Usage_Percentage
 
+```{r echo=TRUE}
+
+#STAT_AVERAGE VS USAGE
+
+# Define ranges for x and y
+Stat_range <- c(5, 131)
+Usage_range <- c(0.001, 100)
+
+# Filter data based on the defined ranges
+filtered_data <- pokemon %>% select(Stat_Average, Usage_Percentage) %>%
+  filter(Stat_Average >= Stat_range[1] & Stat_Average <= Stat_range[2],
+         Usage_Percentage >= Usage_range[1] & Usage_Percentage <= Usage_range[2])
+
+
+filtered_data|> 
+
+ggplot(aes(x = Stat_Average, y = Usage_Percentage)) +   geom_point() +
+  
+geom_smooth(method = lm) +
+  
+labs(title = "Gráfico de dispersión con ajuste de regresión")
+
+#TOTAL VS USAGE
+
+# Define ranges for x and y
+Total_range <- c(5, 800)
+Usage_range <- c(0.01, 100)
+
+# Filter data based on the defined ranges
+filtered_data <- pokemon %>% select(Total, Usage_Percentage) %>%
+  filter(Total >= Total_range[1] & Total <= Total_range[2],
+         Usage_Percentage >= Usage_range[1] & Usage_Percentage <= Usage_range[2])
+
+
+filtered_data|> 
+
+ggplot(aes(x = Total, y = Usage_Percentage)) +   geom_point() +
+  
+geom_smooth(method = lm) +
+  
+labs(title = "Gráfico de dispersión con ajuste de regresión")
+
+```
 
 # 5. Conclusión
 
