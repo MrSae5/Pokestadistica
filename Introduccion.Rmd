@@ -119,6 +119,45 @@ pokemon <- read_excel("data/PokemonV4.xlsx")
 
 #### Tipos de Pokémons por generación(8 graficos juntos| tipos y cantidad)
 
+```{r echo=TRUE}
+# Definir una paleta de colores personalizada para los tipos
+colors <- c("Fire" = "#F08030", "Water" = "#6890F0", "Grass" = "#78C850", 
+            "Bug" = "#A8B820", "Poison" = "#A040A0", "Flying" = "#A890F0", 
+            "Normal" = "#A8A878", "Electric" = "#F8D030", "Ground" = "#E0C068", 
+            "Rock" = "#B8A038", "Psychic" = "#F85888", "Ice" = "#98D8D8", 
+            "Dragon" = "#7038F8", "Ghost" = "#705898", "Dark" = "#705848", 
+            "Steel" = "#B8B8D0", "Fairy" = "#EE99AC")
+
+# Agrupar los tipos de Pokémon
+pokemon_long <- pokemon %>%
+  # Convertir en formato largo para contar ambos tipos
+  pivot_longer(cols = c(Type_1, Type_2), names_to = "Type", values_to = "Types") %>%
+  # Eliminar los NA, que representan Pokémon que no tienen segundo tipo
+  filter(!is.na(Types))
+
+# Agrupar por generación y tipo de Pokémon, contando las ocurrencias
+pokemon_by_type <- pokemon_long %>%
+  group_by(Generation, Types) %>%
+  summarise(count = n()) %>%
+  ungroup()
+
+# Crear los gráficos de barras, uno por cada generación, con colores personalizados
+ggplot(pokemon_by_type, aes(x = Types, y = count, fill = Types)) +
+  geom_bar(stat = "identity") +
+  scale_fill_manual(values = colors) +  # Aplicar la paleta de colores personalizada
+  scale_y_continuous(breaks = seq(0, max(pokemon_by_type$count), by = 5)) +  # Ajustar el eje Y
+  facet_wrap(~ Generation, ncol = 4) +  # Distribuir en 4 columnas
+  labs(title = "Distribución de Tipos de Pokémon por Generación",
+       x = "Tipo de Pokémon",
+       y = "Cantidad") +
+  theme_minimal() +
+  theme(axis.text.x = element_blank(),  # Eliminar el texto del eje x
+        axis.ticks.x = element_blank(),  # Eliminar las marcas del eje x
+        strip.text = element_text(size = 12),  # Tamaño de los títulos de las facetas (Generación)
+        panel.spacing = unit(2, "lines"),  # Aumentar el espacio entre gráficos
+        legend.title = element_blank())  # Eliminar el título de la leyenda
+```
+
 #### Top 100 tipos mas usados 
 
 
