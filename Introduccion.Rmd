@@ -164,6 +164,29 @@ ggplot(pokemon_by_type, aes(x = Types, y = count, fill = Types)) +
 
 ### Gráfico de lineas(Legendarios por generación)
 
+A continuación, en el gráfico se muestra la variación de la cantidad de pokémons legendarios entre generaciones.
+
+```{r echo=TRUE}
+#Agrupar los Pokémons legendarios
+legendarios <- pokemon %>%
+  filter(Legendary == TRUE) %>%
+  group_by(Generation) %>%
+  summarise(count = n())
+
+# Verificar los resultados
+legendarios
+
+# Crear el gráfico de barras
+ggplot(legendarios, aes(x = Generation, y = count)) +
+  geom_bar(stat = "identity", fill = "#3565fc") +
+  scale_x_continuous(breaks = seq(min(legendarios$Generation), max(legendarios$Generation), by = 1)) + 
+  labs(title = "Cantidad de Pokémon legendarios por generación",
+       x = "Generación",
+       y = "Cantidad") +
+  theme_minimal()
+
+```
+
 ### Resúmenes numéricos(media de Pokémons por generación, Pókemons legendarios, cada tipo)
 
 
