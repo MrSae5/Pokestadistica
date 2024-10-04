@@ -25,7 +25,7 @@ Los objetivos de este análisis se centrarán en:
 
 4.  Comprobar la posibilidad de existencia de correlaciones entre estadísticas de cualidades similares.
 
-5.  Elaborar una predicción sobre la novena generación de pokémons.
+5.  Elaborar una predicción sobre la novena generación de pokémons. si
 
 6.  Concluir cuáles son los pokémons más usados en el ámbito competitivo y sus motivos
 
@@ -96,29 +96,12 @@ tabla_frecuencias <- pokemon|>
     F = cumsum(f)) 
 knitr::kable(tabla_frecuencias, digits = 4)
 
-
 ```
-#### HP
-
-#### Attack
-
-#### Defense
-
-#### Sp_attack
-
-#### Sp_defense
-
-#### Speed
-
-#### Tipo
-
 
 #### HP(Grafico de cajas HP y Gener)
 
 ```{r}
-
 pokemon |> ggplot(aes(y=HP , x=factor(Generation))) +  geom_boxplot() + labs(x="Generacion")
-
 
 ```
 
@@ -150,6 +133,12 @@ pokemon|> ggplot(aes(y=Sp_defense , x=factor(Generation))) +  geom_boxplot() + l
 
 ```{r}
 pokemon|> ggplot(aes(y=Speed , x=factor(Generation))) +  geom_boxplot() + labs(x="Generacion")
+```
+
+#### Total
+
+```{r}
+pokemon|> ggplot(aes(y=Total , x=factor(Generation))) +  geom_boxplot() + labs(x="Generacion")
 ```
 
 
