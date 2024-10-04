@@ -25,7 +25,7 @@ Los objetivos de este análisis se centrarán en:
 
 4.  Comprobar la posibilidad de existencia de correlaciones entre estadísticas de cualidades similares.
 
-5.  Elaborar una predicción sobre la novena generación de pokémons.
+5.  Elaborar una predicción sobre la novena generación de pokémons. si
 
 6.  Concluir cuáles son los pokémons más usados en el ámbito competitivo y sus motivos
 
