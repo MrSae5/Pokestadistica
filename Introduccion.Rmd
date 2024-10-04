@@ -137,16 +137,19 @@ pokemon |> ggplot(aes(y=HP , x=factor(Generation))) +  geom_boxplot() + labs(x="
 ### Gráficos de barras (GENERACIÓN)
 
 #### Tipos de Pokémons por generación(8 graficos juntos| tipos y cantidad)
-
-```{r echo=TRUE}
+A continuación, se va a analizar la cantidad de apariciones de cada tipo en cada generación, con el objetivo de diferencias de cantidades entre tipos y entre cada juego. Se espera que en las primeras genreraciones sean más dispares las cantidades entre tipos, y que los valores se estabilicen según avancen las generaciones, porque es lógico que el equilibrio al comienzo sea menos importante, que según se iban creando más y más generaciones. También se espera que si hay un crecimiento repentino de un tipo en una generación, en la siguiente haya un descenso igual de importante, para compensar por la disparidad anterior.
+```{r echo=FALSE}
 # Definir una paleta de colores personalizada para los tipos
+
 colors <- c("Fire" = "#F08030", "Water" = "#6890F0", "Grass" = "#78C850", 
             "Bug" = "#A8B820", "Poison" = "#A040A0", "Flying" = "#A890F0", 
             "Normal" = "#A8A878", "Electric" = "#F8D030", "Ground" = "#E0C068", 
             "Rock" = "#B8A038", "Psychic" = "#F85888", "Ice" = "#98D8D8", 
             "Dragon" = "#7038F8", "Ghost" = "#705898", "Dark" = "#705848", 
             "Steel" = "#B8B8D0", "Fairy" = "#EE99AC")
+```
 
+```{r echo=TRUE}
 # Agrupar los tipos de Pokémon
 pokemon_long <- pokemon %>%
   # Convertir en formato largo para contar ambos tipos
@@ -159,7 +162,9 @@ pokemon_by_type <- pokemon_long %>%
   group_by(Generation, Types) %>%
   summarise(count = n()) %>%
   ungroup()
-
+```
+Una vez agrupadas y contadas todas las ocurrencias de cada tipo, se procede a crear el gráfico.
+```{r echo=TRUE}
 # Crear los gráficos de barras, uno por cada generación, con colores personalizados
 ggplot(pokemon_by_type, aes(x = Types, y = count, fill = Types)) +
   geom_bar(stat = "identity") +
@@ -181,29 +186,6 @@ ggplot(pokemon_by_type, aes(x = Types, y = count, fill = Types)) +
 
 
 ### Gráfico de lineas(Legendarios por generación)
-
-A continuación, en el gráfico se muestra la variación de la cantidad de pokémons legendarios entre generaciones.
-
-```{r echo=TRUE}
-#Agrupar los Pokémons legendarios
-legendarios <- pokemon %>%
-  filter(Legendary == TRUE) %>%
-  group_by(Generation) %>%
-  summarise(count = n())
-
-# Verificar los resultados
-legendarios
-
-# Crear el gráfico de barras
-ggplot(legendarios, aes(x = Generation, y = count)) +
-  geom_bar(stat = "identity", fill = "#3565fc") +
-  scale_x_continuous(breaks = seq(min(legendarios$Generation), max(legendarios$Generation), by = 1)) + 
-  labs(title = "Cantidad de Pokémon legendarios por generación",
-       x = "Generación",
-       y = "Cantidad") +
-  theme_minimal()
-
-```
 
 ### Resúmenes numéricos(media de Pokémons por generación, Pókemons legendarios, cada tipo)
 
@@ -347,6 +329,29 @@ ggplot(pokemon_by_type, aes(x = Types, y = count, fill = Types)) +
 
 
 ### Gráfico de lineas(Legendarios por generación)
+
+A continuación, en el gráfico se muestra la variación de la cantidad de pokémons legendarios entre generaciones.
+
+```{r echo=TRUE}
+#Agrupar los Pokémons legendarios
+legendarios <- pokemon %>%
+  filter(Legendary == TRUE) %>%
+  group_by(Generation) %>%
+  summarise(count = n())
+
+# Verificar los resultados
+legendarios
+
+# Crear el gráfico de barras
+ggplot(legendarios, aes(x = Generation, y = count)) +
+  geom_bar(stat = "identity", fill = "#3565fc") +
+  scale_x_continuous(breaks = seq(min(legendarios$Generation), max(legendarios$Generation), by = 1)) + 
+  labs(title = "Cantidad de Pokémon legendarios por generación",
+       x = "Generación",
+       y = "Cantidad") +
+  theme_minimal()
+
+```
 
 ### Resúmenes numéricos(media de Pokémons por generación, Pókemons legendarios, cada tipo)
 
