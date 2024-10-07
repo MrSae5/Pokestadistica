@@ -108,36 +108,44 @@ pokemon |> ggplot(aes(y=HP , x=factor(Generation))) +  geom_boxplot() + labs(x="
 
 #### Attack
 
-#### Defense
-
-#### Sp_attack
-
-#### Sp_defense
-
-#### Speed
-
-#### Tipo
-
-
-### Boxplot(GENNERACÓN)
-
-#### HP
-
-#### Attack
+```{r}
+pokemon |> ggplot(aes(y=Attack , x=factor(Generation))) +  geom_boxplot() + labs(x="Generacion")
+```
 
 #### Defense
 
+```{r}
+pokemon |> ggplot(aes(y=Defense , x=factor(Generation))) +  geom_boxplot() + labs(x="Generacion")
+```
+
 #### Sp_attack
+
+```{r}
+pokemon |> ggplot(aes(y=Sp_attack , x=factor(Generation))) +  geom_boxplot() + labs(x="Generacion")
+```
 
 #### Sp_defense
 
+```{r}
+pokemon|> ggplot(aes(y=Sp_defense , x=factor(Generation))) +  geom_boxplot() + labs(x="Generacion")
+```
+
 #### Speed
 
+```{r}
+pokemon|> ggplot(aes(y=Speed , x=factor(Generation))) +  geom_boxplot() + labs(x="Generacion")
+```
+
+#### Total
+
+```{r}
+pokemon|> ggplot(aes(y=Total , x=factor(Generation))) +  geom_boxplot() + labs(x="Generacion")
+```
 
 ### Gráficos de barras (GENERACIÓN)
 
 #### Tipos de Pokémons por generación(8 graficos juntos| tipos y cantidad)
-A continuación, se va a analizar la cantidad de apariciones de cada tipo en cada generación, con el objetivo de diferencias de cantidades entre tipos y entre cada juego. Se espera que en las primeras genreraciones sean más dispares las cantidades entre tipos, y que los valores se estabilicen según avancen las generaciones, porque es lógico que el equilibrio al comienzo sea menos importante, que según se iban creando más y más generaciones. También se espera que si hay un crecimiento repentino de un tipo en una generación, en la siguiente haya un descenso igual de importante, para compensar por la disparidad anterior.
+A continuación, se va a analizar la cantidad de apariciones de cada tipo de Pokémon en cada generación, con el objetivo de diferenciar las cantidades entre tipos y entre cada juego. Se espera que en las primeras generaciones las cantidades entre tipos, sean más dispares y que los valores se estabilicen según avancen las generaciones, porque es lógico que el equilibrio al comienzo sea menos importante, que según se iban creando más y más generaciones. También se espera que, si hay un crecimiento repentino de un tipo en una generación, en la siguiente haya un descenso igual de importante, para compensar por la disparidad anterior.
 ```{r echo=FALSE}
 # Definir una paleta de colores personalizada para los tipos (son los colores oficiales para los tipos)
 
@@ -199,7 +207,7 @@ ggplot(pokemon_by_type, aes(x = Types, y = count, fill = Types)) +
         legend.title = element_blank())  # Eliminar el título de la leyenda
 ```
 
-A partir de la cuarta generación en adelante, la cantidad de tipos tiende a estabilizarse. Sin embargo, las primeras generaciones muestran una mayor disparidad en los tipos, como en la primera, donde la cantidadde tipos Dark, Dragon o Ghost, y de Water o Poison, son muy dispares.
+A partir de la cuarta generación en adelante, la cantidad de tipos tiende a estabilizarse. Sin embargo, las primeras generaciones muestran una mayor disparidad en los tipos, como en la primera, donde la cantidad de tipos Dark, Dragon o Ghost, y de Water o Poison, son muy dispares.
 
 Un fenómeno interesante es la variabilidad de ciertos tipos a lo largo del tiempo. Por ejemplo, en la segunda y tercera generación, el tipo Dragon muestra un crecimiento, que luego se estabiliza. Otros tipos, como Electric, Grass o Fire, parecen mantenerse más consistentes. El cambio más drástico se produce con el tipo Poison de primera a segunda generación.
 
@@ -208,147 +216,54 @@ En general, se cumple la tendencia esperada: conforme avanzan las generaciones, 
 #### Top 100 tipos mas usados 
 
 
-### Gráfico de lineas(Legendarios por generación)
+### Gráfico de líneas(Legendarios por generación)
+
+A continuación, en el gráfico se muestra la variación de la cantidad de pokémons legendarios entre generaciones, además de la media, la mediana y la moda. Estos datos servirán luego para poder crear una predicción de la posible novena generación de Pokémon.
 
 ```{r echo=TRUE}
-#Agrupar los Pokémons legendarios
-legendarios <- pokemon %>%
-  filter(Legendary == TRUE) %>%
-  group_by(Generation) %>%
-  summarise(count = n())
-# Verificar los resultados
-legendarios
-# Crear el gráfico de barras
-ggplot(legendarios, aes(x = Generation, y = count)) +
-  geom_bar(stat = "identity", fill = "#3565fc") +
-  scale_x_continuous(breaks = seq(min(legendarios$Generation), max(legendarios$Generation), by = 1)) + 
-  labs(title = "Cantidad de Pokémon legendarios por generación",
-       x = "Generación",
-       y = "Cantidad") +
-  theme_minimal()
-```
-
-### Resúmenes numéricos(media de Pokémons por generación, Pókemons legendarios, cada tipo)
-
-
-## 4.2 Datos bivariantes
-
-### Scatter plot
-
-#### Correlación entre attack vs. sp_attack
-
-#### Correlación entre defense vs. sp_defense
-
-
-### Gráfico de regresión
-
-#### Covarianza entre Stat_Average vs. Usage_Percentage
-
-```{r echo=TRUE}
-
-#STAT_AVERAGE VS USAGE
-
-# Define ranges for x and y
-Stat_range <- c(5, 131)
-Usage_range <- c(0.001, 100)
-
-# Filter data based on the defined ranges
-filtered_data <- pokemon %>% select(Stat_Average, Usage_Percentage) %>%
-  filter(Stat_Average >= Stat_range[1] & Stat_Average <= Stat_range[2],
-         Usage_Percentage >= Usage_range[1] & Usage_Percentage <= Usage_range[2])
-
-
-filtered_data|> 
-
-ggplot(aes(x = Stat_Average, y = Usage_Percentage)) +   geom_point() +
-  
-geom_smooth(method = lm) +
-  
-labs(title = "Gráfico de dispersión con ajuste de regresión")
-
-#TOTAL VS USAGE
-
-# Define ranges for x and y
-Total_range <- c(5, 800)
-Usage_range <- c(0.01, 100)
-
-# Filter data based on the defined ranges
-filtered_data <- pokemon %>% select(Total, Usage_Percentage) %>%
-  filter(Total >= Total_range[1] & Total <= Total_range[2],
-         Usage_Percentage >= Usage_range[1] & Usage_Percentage <= Usage_range[2])
-
-
-filtered_data|> 
-
-ggplot(aes(x = Total, y = Usage_Percentage)) +   geom_point() +
-  
-geom_smooth(method = lm) +
-  
-labs(title = "Gráfico de dispersión con ajuste de regresión")
-
-#### Attack
-
-```{r}
-pokemon |> ggplot(aes(y=Attack , x=factor(Generation))) +  geom_boxplot() + labs(x="Generacion")
-```
-
-#### Defense
-
-```{r}
-pokemon |> ggplot(aes(y=Defense , x=factor(Generation))) +  geom_boxplot() + labs(x="Generacion")
-```
-
-#### Sp_attack
-
-```{r}
-pokemon |> ggplot(aes(y=Sp_attack , x=factor(Generation))) +  geom_boxplot() + labs(x="Generacion")
-```
-
-#### Sp_defense
-
-```{r}
-pokemon|> ggplot(aes(y=Sp_defense , x=factor(Generation))) +  geom_boxplot() + labs(x="Generacion")
-```
-
-#### Speed
-
-```{r}
-pokemon|> ggplot(aes(y=Speed , x=factor(Generation))) +  geom_boxplot() + labs(x="Generacion")
-```
-
-#### Total
-
-```{r}
-pokemon|> ggplot(aes(y=Total , x=factor(Generation))) +  geom_boxplot() + labs(x="Generacion")
-```
-
-
-### Gráficos de barras (GENERACIÓN)
-
-#### Top 100 tipos mas usados 
-
-
-### Gráfico de lineas(Legendarios por generación)
-
-A continuación, en el gráfico se muestra la variación de la cantidad de pokémons legendarios entre generaciones.
-
-```{r echo=TRUE}
-#Agrupar los Pokémons legendarios
+# Agrupar los Pokémons legendarios
 legendarios <- pokemon %>%
   filter(Legendary == TRUE) %>%
   group_by(Generation) %>%
   summarise(count = n())
 
-# Verificar los resultados
-legendarios
+# Calcular media, mediana y moda
+media <- mean(legendarios$count)
+mediana <- median(legendarios$count)
 
-# Crear el gráfico de barras
+# Función para calcular la moda
+moda <- function(x) {
+  ux <- unique(x)
+  ux[which.max(tabulate(match(x, ux)))]
+}
+
+moda_val <- moda(legendarios$count)
+
+# Crear el gráfico de líneas con las líneas de media, mediana y moda
 ggplot(legendarios, aes(x = Generation, y = count)) +
-  geom_bar(stat = "identity", fill = "#3565fc") +
-  scale_x_continuous(breaks = seq(min(legendarios$Generation), max(legendarios$Generation), by = 1)) + 
+  geom_line(color = "#3565fc", linewidth  = 1) +  
+  geom_point(size = 3, color = "#3565fc") + 
+  
+  # Agregar líneas para media, mediana y moda
+  geom_hline(yintercept = media, color = "black", linetype = "dashed", linewidth = 1) +
+  geom_hline(yintercept = mediana, color = "red", linetype = "dotted", linewidth = 1) +
+  geom_hline(yintercept = moda_val, color = "green", linetype = "solid", linewidth = 1) +
+  
+  # Agregar etiquetas para media, mediana y moda al lado derecho de la gráfica
+  annotate("text", x = max(legendarios$Generation) + 1, y = media + 0.5, 
+           label = paste("Media:", round(media, 1)), color = "black", hjust = 1) +
+  annotate("text", x = max(legendarios$Generation) + 1, y = mediana + 0.5, 
+           label = paste("Mediana:", round(mediana, 1)), color = "red", hjust = 1) +
+  annotate("text", x = max(legendarios$Generation) + 1, y = moda_val + 0.5, 
+           label = paste("Moda:", round(moda_val, 1)), color = "green", hjust = 1) +
+  
+  # Ajustes en los ejes y etiquetas del gráfico
+  scale_x_continuous(breaks = seq(min(legendarios$Generation), max(legendarios$Generation), by = 1)) +
+  scale_y_continuous(breaks = seq(min(legendarios$count), max(legendarios$count), by = 1)) +
   labs(title = "Cantidad de Pokémon legendarios por generación",
        x = "Generación",
        y = "Cantidad") +
+ 
   theme_minimal()
 
 ```
