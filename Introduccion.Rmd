@@ -141,12 +141,24 @@ A continuación, se va a analizar la cantidad de apariciones de cada tipo en cad
 ```{r echo=FALSE}
 # Definir una paleta de colores personalizada para los tipos (son los colores oficiales para los tipos)
 
-colors <- c("Fire" = "#F08030", "Water" = "#6890F0", "Grass" = "#78C850", 
-            "Bug" = "#A8B820", "Poison" = "#A040A0", "Flying" = "#A890F0", 
-            "Normal" = "#A8A878", "Electric" = "#F8D030", "Ground" = "#E0C068", 
-            "Rock" = "#B8A038", "Psychic" = "#F85888", "Ice" = "#98D8D8", 
-            "Dragon" = "#7038F8", "Ghost" = "#705898", "Dark" = "#705848", 
-            "Steel" = "#B8B8D0", "Fairy" = "#EE99AC", "Fighting" = "#C22E28")
+colors <- c("Fighting" = "#C22E28",
+            "Fire" = "#F08030",
+            "Electric" = "#F8D030",
+            "Grass" = "#78C850",
+            "Bug" = "#A8B820",
+            "Flying" = "#A890F0",
+            "Water" = "#6890F0",
+            "Dragon" = "#7038F8",
+            "Psychic" = "#F85888",
+            "Poison" = "#A040A0",
+            "Ghost" = "#705898",
+            "Dark" = "#705848",
+            "Ground" = "#E0C068",
+            "Rock" = "#B8A038",
+            "Steel" = "#B8B8D0",
+            "Fairy" = "#EE99AC",
+            "Ice" = "#98D8D8",
+            "Normal" = "#A8A878")
 ```
 
 ```{r echo=TRUE}
@@ -162,6 +174,11 @@ pokemon_by_type <- pokemon_long %>%
   group_by(Generation, Types) %>%
   summarise(count = n()) %>%
   ungroup()
+```
+
+```{r echo=FALSE}
+# Asegurarse de que el orden de los tipos siga el de la paleta de colores
+pokemon_by_type$Types <- factor(pokemon_by_type$Types, levels = names(colors))
 ```
 Una vez agrupadas y contadas todas las ocurrencias de cada tipo, se procede a crear el gráfico.
 ```{r echo=TRUE}
