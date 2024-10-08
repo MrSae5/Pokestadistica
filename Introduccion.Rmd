@@ -207,6 +207,7 @@ ggplot(pokemon_by_type, aes(x = Types, y = count, fill = Types)) +
         legend.title = element_blank())  # Eliminar el título de la leyenda
 ```
 
+
 A partir de la cuarta generación en adelante, la cantidad de tipos tiende a estabilizarse. Sin embargo, las primeras generaciones muestran una mayor disparidad en los tipos, como en la primera, donde la cantidad de tipos Dark, Dragon o Ghost, y de Water o Poison, son muy dispares.
 
 Un fenómeno interesante es la variabilidad de ciertos tipos a lo largo del tiempo. Por ejemplo, en la segunda y tercera generación, el tipo Dragon muestra un crecimiento, que luego se estabiliza. Otros tipos, como Electric, Grass o Fire, parecen mantenerse más consistentes. El cambio más drástico se produce con el tipo Poison de primera a segunda generación.
@@ -215,19 +216,33 @@ En general, se cumple la tendencia esperada: conforme avanzan las generaciones, 
 
 #### Top 100 tipos mas usados 
 
-A contunuación, se analiza la cantidad de apariciones de cada tipo Pokémon en los top 100 Pokémon más usados en el competitivo:
+A continuación, se analiza la cantidad de apariciones de cada tipo Pokémon en los top 100 Pokémon más usados en el competitivo:
 
-```{r echo=TRUE}
-
+````{r echo=FALSE}
   pokemon_by_usage <- arrange(pokemon,desc(Usage_Percentage))
 
   # Definir una paleta de colores personalizada para los tipos
-  colors <- c("Fire" = "#F08030", "Water" = "#6890F0", "Grass" = "#78C850", 
-            "Bug" = "#A8B820", "Poison" = "#A040A0", "Flying" = "#A890F0", 
-            "Normal" = "#A8A878", "Electric" = "#F8D030", "Ground" = "#E0C068", 
-            "Rock" = "#B8A038", "Psychic" = "#F85888", "Ice" = "#98D8D8", 
-            "Dragon" = "#7038F8", "Ghost" = "#705898", "Dark" = "#705848", 
-            "Steel" = "#B8B8D0", "Fairy" = "#EE99AC", "Fighting" = "#C22E28")
+  colors <- c("Fighting" = "#C22E28",
+            "Fire" = "#F08030",
+            "Electric" = "#F8D030",
+            "Grass" = "#78C850",
+            "Bug" = "#A8B820",
+            "Flying" = "#A890F0",
+            "Water" = "#6890F0",
+            "Dragon" = "#7038F8",
+            "Psychic" = "#F85888",
+            "Poison" = "#A040A0",
+            "Ghost" = "#705898",
+            "Dark" = "#705848",
+            "Ground" = "#E0C068",
+            "Rock" = "#B8A038",
+            "Steel" = "#B8B8D0",
+            "Fairy" = "#EE99AC",
+            "Ice" = "#98D8D8",
+            "Normal" = "#A8A878")
+````
+  
+````{r echo=TRUE}
 
   # Agrupar los tipos de Pokémon
   top100usage <- head(pokemon_by_usage,100) %>%
@@ -256,11 +271,11 @@ A contunuación, se analiza la cantidad de apariciones de cada tipo Pokémon en 
         panel.spacing = unit(2, "lines"),  # Aumentar el espacio entre gráficos
         legend.title = element_blank())  # Eliminar el título de la leyenda
 
-```
+````
 
 Podemos apreciar la gran disparidad entre uso de cada tipo Pokémon. Lógicamente, podemos concluir que generalmente, los típos Pokémon más usados (Agua, Fuego, Volador...) tienen una ventaja intrinseca, ya sea por sus interacciones entre otros tipos, u otras razones, sobre los tipos Pokémon menos usados (Bicho, Roca, Electrico...)
 
-### Gráfico de líneas(Legendarios por generación)
+### Gráfico de líneas
 
 A continuación, en el gráfico se muestra la variación de la cantidad de pokémons legendarios entre generaciones, además de la media, la mediana y la moda. Estos datos servirán luego para poder crear una predicción de la posible novena generación de Pokémon.
 
@@ -312,7 +327,56 @@ ggplot(legendarios, aes(x = Generation, y = count)) +
 
 ```
 
-### Resúmenes numéricos(media de Pokémons por generación, Pókemons legendarios, cada tipo)
+### Resúmenes numéricos
+
+#### Pokémons por generación
+````{r}
+# Tabla con los pokémon por generación
+tabla_generacion_pokemons <- pokemon %>%
+  group_by(Generation) %>%
+  summarise(Pokemons_Por_Generacion = n()) %>%
+  as.data.frame()  # Convertimos a data frame para evitar <dbl> e <int>
+
+# Calcular la media total de pokémon por generación
+media_total_pokemons <- mean(tabla_generacion_pokemons$Pokemons_Por_Generacion)
+
+# Mostramos la tabla con los pokémon por generación
+print(tabla_generacion_pokemons)
+
+# Mostramos la media total separada
+print(media_total_pokemons)
+````
+
+#### Análisis descriptivo de estadísticas
+
+````{r}
+with(pokemon, stby(HP,Generation, descr))
+````
+
+
+````{r}
+with(pokemon, stby(Attack,Generation, descr))
+````
+
+
+````{r}
+with(pokemon, stby(Defense,Generation, descr))
+````
+
+
+````{r}
+with(pokemon, stby(Sp_attack,Generation, descr))
+````
+
+
+````{r}
+with(pokemon, stby(Sp_defense,Generation, descr))
+````
+
+
+````{r}
+with(pokemon, stby(Speed,Generation, descr))
+````
 
 
 ## 4.2 Datos bivariantes
@@ -371,7 +435,34 @@ geom_smooth(method = lm) +
 labs(title = "Gráfico de dispersión con ajuste de regresión")
 
 ```
+
 # 5. Conclusión
+A lo largo de las generaciones, tanto los tipos de pokémon como sus estadísticas han tendido a equilibrarse, evitando grandes picos de disparidad.
+Las variaciones entre las estadísticas individuales de los pokémon de cada generación han sido relativamente consistentes, lo que sugiere que la tendencia hacia un equilibrio continuará en la 9ª generación.
+
+A partir de todos los datos analizados, se puede hacer una estimación a valores generales y particulares.
+
+## Valores generales
+La media de pokémon por generación es de 134, por lo que podemos esperar que la 9ª generación presente un número similar de nuevos pokémon.
+De la misma manera, la media de los legendarios rondan los 15, por lo que se sugiere un número similar no muy lejano.
+
+## Valores particulares
+Según los gráficos de barras los tipos de pokemon se puede esperar que ronden los valores entre 20 y 10 por elemento, donde los más perjudiciados, con valores menores, serán los tipos de Ground y Normal.
+
+En cuanto a las estadísticas básicas de los pokemons:
+
+- El 50% de los pokémon probablemente tendrá un HP rondando los 70.
+
+- El 50% de los pokémon tendrán un ataque cercano a 80.
+
+- El 50% de los pokémon mostrarán una defensa en torno a 75.
+
+- Para las estadísticas especiales, el 50% tendrá un sp_ataque alrededor y una sp_defensa cercana a 70.
+
+- La velocidad de los pokémon también será similar a generaciones previas, con el 50% de ellos rondando los 65 puntos.
+
+- Finalmente, el 50% de los pokémon tendrán un total de estadísticas cercanas a 500.
+
 
 # 6. Bibliografía
 https://www.smogon.com/stats/2022-04/gen8vgc2022-0.txt
