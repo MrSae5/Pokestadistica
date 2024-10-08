@@ -207,6 +207,7 @@ ggplot(pokemon_by_type, aes(x = Types, y = count, fill = Types)) +
         legend.title = element_blank())  # Eliminar el título de la leyenda
 ```
 
+
 A partir de la cuarta generación en adelante, la cantidad de tipos tiende a estabilizarse. Sin embargo, las primeras generaciones muestran una mayor disparidad en los tipos, como en la primera, donde la cantidad de tipos Dark, Dragon o Ghost, y de Water o Poison, son muy dispares.
 
 Un fenómeno interesante es la variabilidad de ciertos tipos a lo largo del tiempo. Por ejemplo, en la segunda y tercera generación, el tipo Dragon muestra un crecimiento, que luego se estabiliza. Otros tipos, como Electric, Grass o Fire, parecen mantenerse más consistentes. El cambio más drástico se produce con el tipo Poison de primera a segunda generación.
@@ -461,6 +462,7 @@ En cuanto a las estadísticas básicas de los pokemons:
 - La velocidad de los pokémon también será similar a generaciones previas, con el 50% de ellos rondando los 65 puntos.
 
 - Finalmente, el 50% de los pokémon tendrán un total de estadísticas cercanas a 500.
+
 
 # 6. Bibliografía
 https://www.smogon.com/stats/2022-04/gen8vgc2022-0.txt
