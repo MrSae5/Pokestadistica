@@ -482,6 +482,10 @@ ggplot(aes(x = Total, y = Usage_Percentage)) +   geom_point() +
 
 ```
 
+En tanto el grafico comparando el porcentaje de uso con el total de estadistica, como en el que compara el porcentaje de uso con la media de estadisticas, podemos apreciar una clara pero débil relación directamente proporcional entre el uso de un Pokémon y sus estadísticas. Podemos concluir entonces, que el uso de un Pokémon en competitivo está menos determinado por sus estadisticas, y más relacionado con otros factores, como su tipo, plantel de movimientos, relevancia en cuanto al "metajuego" del momento, o incluso la combinación de todos estos factores.
+
+Esta conclusión es reforzada al observar los Pokémon más usados en competitivo, como Incineroar, que a pesar de caer alrededor de la mitad del eje X en la gráfica en cuanto a estadisticas, es el Pokémon más usado en el competitivo, con 52,33% de los equipos registrados teniéndolo en uno de sus seis puestos. Incineroar, al mismo tiempo, pertenece al tipo Fuego (3er tipo más usado) y al tipo Siniestro (6to tipo más usado), lo cual sugiere que las interacciones de tipo tengan una mayor importancia al decidir la relevancia de un Pokémon.
+
 # 5. Conclusión
 A lo largo de las generaciones, tanto los tipos de Pokémon como sus estadísticas han tendido a equilibrarse, evitando grandes picos de disparidad.
 Las variaciones entre las estadísticas individuales de los Pokémon de cada generación han sido relativamente consistentes, lo que sugiere que la tendencia hacia un equilibrio continuará en la 9ª generación.
