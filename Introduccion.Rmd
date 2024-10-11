@@ -17,17 +17,19 @@ En este estudio se analizarán datos obtenidos de "smogon" y "kaggle" que recoge
 
 Los objetivos de este análisis se centrarán en:
 
-1.  Determinar la variación de las estadísticas de los pokémons entre generaciones.
+1.  Determinar la variación de las estadísticas de los pokémons entre generaciones. Con esto se busca analizar la variación de HP, Attack, Defense, Sp_attack, Sp_defense y Speed; y analizar cómo está repartida la suma de estas estadísticas entre todos los pokemon.
 
-2.  Determinar la variación de tipos de pokémons entre generaciones.
+2.  Determinar la variación de tipos de pokémons entre generaciones. Se busca determinar la variación de tipos en distintas generaciones, para ver tendencias y comprender cómo ha variado la forma de elegir los tipos de cada pokémon en cada generación. También se estudiarán los tipos más usados en la escena competitiva.
 
-3.  Determinar la variación de la cantidad de pokémons legendarios entre generaciones.
+3.  Determinar la variación de la cantidad de pokémons legendarios entre generaciones. Así se intenta determinar la tendencia que están tomando los juegos según avanzan a la hora de determinar la cantidad de pokémon legendarios presentes en cada juego.
 
-4.  Comprobar la posibilidad de existencia de correlaciones entre estadísticas de cualidades similares.
+4.  Comprobar la posibilidad de existencia de correlaciones entre estadísticas de cualidades similares. Es decir, se busca si estadísticas como Attack influyen en la cantidad de una estadística similar, es decir Sp_attack, en cada pokemon. También se busca encontrar una relación entre el uso de cada pokemon en la escena competitiva con respecto a su media de estadísticas.
 
-5.  Elaborar una predicción sobre la novena generación de pokémons. 
+Una vez recogidos todos estos datos, los siguientes objetivos son:
 
-6.  Concluir cuáles son los pokémons más usados en el ámbito competitivo y sus motivos
+5.  Elaborar una predicción sobre la novena generación de pokémons. Una vez analizada la progresión en las distintas variables por cada generación, ver qué tendencia están tomando para formular lo que se espera para una posible novena generación.
+
+6.  Concluir cuáles son los pokémons más usados en el ámbito competitivo y sus motivos. Se quiere determinar qué factores pueden influir a la hora de usar un pokémon en la escena competitiva del juego.
 
 
 # 2. Importación de datos y carga de paquetes
@@ -82,9 +84,7 @@ pokemon <- read_excel("data/PokemonV4.xlsx")
 
 ## 4.1 Datos univariantes 
 
-### Tabla de frecuencia 
-
-### Intervalos de total
+### Tabla de frecuencia de intervalos de total de estadísticas
 ```{r echo=TRUE}
 # Transformamos el dataframe pokemon creando una nueva columna llamada " intervalos_totales" que creara 20 intervalos del dato total.
 pokemon <- pokemon |>

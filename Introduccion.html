@@ -366,17 +366,36 @@ primera hasta la octava generación.</p>
 <p>Los objetivos de este análisis se centrarán en:</p>
 <ol style="list-style-type: decimal">
 <li><p>Determinar la variación de las estadísticas de los pokémons entre
-generaciones.</p></li>
-<li><p>Determinar la variación de tipos de pokémons entre
-generaciones.</p></li>
+generaciones. Con esto se busca analizar la variación de HP, Attack,
+Defense, Sp_attack, Sp_defense y Speed; y analizar cómo está repartida
+la suma de estas estadísticas entre todos los pokemon.</p></li>
+<li><p>Determinar la variación de tipos de pokémons entre generaciones.
+Se busca determinar la variación de tipos en distintas generaciones,
+para ver tendencias y comprender cómo ha variado la forma de elegir los
+tipos de cada pokémon en cada generación. También se estudiarán los
+tipos más usados en la escena competitiva.</p></li>
 <li><p>Determinar la variación de la cantidad de pokémons legendarios
-entre generaciones.</p></li>
+entre generaciones. Así se intenta determinar la tendencia que están
+tomando los juegos según avanzan a la hora de determinar la cantidad de
+pokémon legendarios presentes en cada juego.</p></li>
 <li><p>Comprobar la posibilidad de existencia de correlaciones entre
-estadísticas de cualidades similares.</p></li>
-<li><p>Elaborar una predicción sobre la novena generación de
-pokémons.</p></li>
+estadísticas de cualidades similares. Es decir, se busca si estadísticas
+como Attack influyen en la cantidad de una estadística similar, es decir
+Sp_attack, en cada pokemon. También se busca encontrar una relación
+entre el uso de cada pokemon en la escena competitiva con respecto a su
+media de estadísticas.</p></li>
+</ol>
+<p>Una vez recogidos todos estos datos, los siguientes objetivos
+son:</p>
+<ol start="5" style="list-style-type: decimal">
+<li><p>Elaborar una predicción sobre la novena generación de pokémons.
+Una vez analizada la progresión en las distintas variables por cada
+generación, ver qué tendencia están tomando para formular lo que se
+espera para una posible novena generación.</p></li>
 <li><p>Concluir cuáles son los pokémons más usados en el ámbito
-competitivo y sus motivos</p></li>
+competitivo y sus motivos. Se quiere determinar qué factores pueden
+influir a la hora de usar un pokémon en la escena competitiva del
+juego.</p></li>
 </ol>
 </div>
 <div id="importación-de-datos-y-carga-de-paquetes" class="section level1">
@@ -480,11 +499,8 @@ cada Pokémon en torneos competitivos.
 <h1>4. Análisis exploratorio de datos</h1>
 <div id="datos-univariantes" class="section level2">
 <h2>4.1 Datos univariantes</h2>
-<div id="tabla-de-frecuencia" class="section level3">
-<h3>Tabla de frecuencia</h3>
-</div>
-<div id="intervalos-de-total" class="section level3">
-<h3>Intervalos de total</h3>
+<div id="tabla-de-frecuencia-de-intervalos-de-total-de-estadísticas" class="section level3">
+<h3>Tabla de frecuencia de intervalos de total de estadísticas</h3>
 <pre class="r"><code># Transformamos el dataframe pokemon creando una nueva columna llamada &quot; intervalos_totales&quot; que creara 20 intervalos del dato total.
 pokemon &lt;- pokemon |&gt;
   mutate(intervalos_totales = cut(Total, breaks = 20))
