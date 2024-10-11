@@ -1,6 +1,6 @@
 ---
 output: html_document
-title: "Práctica 1: Estadística descriptiva"
+title: "Práctica 1: Análisis descriptivo de las estádisticas de Pokémon"
 date: "**Grupo 2:** Paula Armenteros, Marta de Miguel, Victor Gil, María Fernanda Montero, Daniel Redondo."
 author: "**Estadística - Curso 2024/2025**"
 ---
