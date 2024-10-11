@@ -490,7 +490,7 @@ ggplot(aes(x = Stat_Average, y = Usage_Percentage)) +   geom_point() +
   
   geom_smooth(method = lm) +
   
-  labs(title = "Gráfico de dispersión con ajuste de regresión")+
+  labs(title = "Gráfico de dispersión Stat_Average vs Usage_Percentage")+
   theme_minimal()
 
 #TOTAL VS USAGE
@@ -511,7 +511,7 @@ ggplot(aes(x = Total, y = Usage_Percentage)) +   geom_point() +
   
   geom_smooth(method = lm) +
   
-  labs(title = "Gráfico de dispersión con ajuste de regresión")+
+  labs(title = "Gráfico de dispersión Total vs Usage_Percentage")+
   theme_minimal()
 
 ```
