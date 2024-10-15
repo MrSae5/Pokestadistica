@@ -31,9 +31,9 @@ Los objetivos de este análisis se centrarán en:
 
 Una vez recogidos todos estos datos, los siguientes objetivos son:
 
-5.  Elaborar una predicción sobre la novena generación de pokémons. Una vez analizada la progresión en las distintas variables por cada generación, ver qué tendencia están tomando para formular lo que se espera para una posible novena generación.
+5.  Concluir cuáles son los pokémons más usados en el ámbito competitivo y sus motivos. Se quiere determinar qué factores pueden influir a la hora de usar un pokémon en la escena competitiva del juego.
 
-6.  Concluir cuáles son los pokémons más usados en el ámbito competitivo y sus motivos. Se quiere determinar qué factores pueden influir a la hora de usar un pokémon en la escena competitiva del juego.
+6.  Elaborar una predicción sobre la novena generación de pokémons. Una vez analizada la progresión en las distintas variables por cada generación, ver qué tendencia están tomando para formular lo que se espera para una posible novena generación.
 
 
 # 2. Importación de datos y carga de paquetes
@@ -387,36 +387,45 @@ print(tabla_generacion_pokemons)
 print(media_total_pokemons)
 ````
 
-#### Análisis descriptivo de estadísticas
+#### Análisis descriptivo de las estadísticas
+
 
 ````{r}
 with(pokemon, stby(HP,Generation, descr))
 ````
+La vida de los Pokémon se irá estabilizando, con un aumento en el valor mínimo y una ligera variación con tendencia a la baja. Al comparar la primera generación con la última, la variación no es significativa.
+
 
 
 ````{r}
 with(pokemon, stby(Attack,Generation, descr))
 ````
+El ataque, contrario a la vida, tendrá su máximo decayendo con cada generación, lo que generará una mayor simetría, medida por el Skewness (coeficiente de asimetría).
+
 
 
 ````{r}
 with(pokemon, stby(Defense,Generation, descr))
 ````
+La defensa será la estadística que genera mayor asimetría. Sus valores máximos seguirán en aumento, mientras que el valor mínimo mantendrá la misma tendencia observada en las tablas anteriores.
+
 
 
 ````{r}
 with(pokemon, stby(Sp_attack,Generation, descr))
 ````
-
-
 ````{r}
 with(pokemon, stby(Sp_defense,Generation, descr))
 ````
+Ambas tablas de ataque y defensa especial estarán en consonancia con las estadísticas correspondientes, reforzando la idea de que estas variables están proporcionalmente relacionadas, como se comprobará a continuación.
+
 
 
 ````{r}
 with(pokemon, stby(Speed,Generation, descr))
 ````
+La velocidad varía de manera diferente a las demás estadísticas, llegando incluso a tener un coeficiente de asimetría negativo, algo que no había ocurrido hasta ahora. El valor mínimo se mantendrá constante en el tiempo, mientras que el máximo fluctúa sin seguir un patrón claro.
+
 
 
 ## 4.2 Datos bivariantes
@@ -539,17 +548,19 @@ Según los gráficos de barras los tipos de Pokémon se puede esperar que ronden
 
 En cuanto a las estadísticas básicas de los Pokémons:
 
-- El 50% de los Pokémon probablemente tendrá un HP rondando los 70.
+- HP: 25% tendrá un rango de 20 a 60, 50% estará entre 60 y 90 y el último 25% estará entre 90 y 140. El máximo será cercano a 230. 
 
-- El 50% de los Pokémon tendrán un ataque cercano a 80.
+- Attack: 25% tendrá un rango de 20 a 65, 50% estará entre 65 y 125 y el último 25% estará entre 125 y 170. Es probable que no hayan casos que se salgan de los porcentajes.
 
-- El 50% de los Pokémon mostrarán una defensa en torno a 75.
+- Defense: 25% tendrá un rango de 20 a 55, 50% estará entre 55 y 100 y el último 25% estará entre 100 y 150. El máximo será cercano a 230. 
 
-- Para las estadísticas especiales, el 50% tendrá un sp_ataque alrededor y una sp_defensa cercana a 70.
+- Sp_Attack: 25% tendrá un rango de 15 a 65, 50% estará entre 65 y 95 y el último 25% estará entre 95 y 150. El máximo será cercano a 170. 
 
-- La velocidad de los Pokémon también será similar a generaciones previas, con el 50% de ellos rondando los 65 puntos.
+- Sp_Defense: 25% tendrá un rango de 20 a 55, 50% estará entre 55 y 90 y el último 25% estará entre 90 y 130. El máximo será cercano a 175. 
 
-- Finalmente, el 50% de los Pokémon tendrán un total de estadísticas cercanas a 500.
+- Speed: 25% tendrá un rango de 10 a 55, 50% estará entre 55 y 90 y el último 25% estará entre 90 y 130. El máximo será cercano a 200. 
+
+- Finalmente, l mayoría de pokemons caerán en un rango de estadísticas totales entre 270 y 550, con algunos casos particulares que salgan del rango.
 
 
 # 6. Bibliografía
