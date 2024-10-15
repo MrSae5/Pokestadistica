@@ -388,26 +388,24 @@ media de estadísticas.</p></li>
 <p>Una vez recogidos todos estos datos, los siguientes objetivos
 son:</p>
 <ol start="5" style="list-style-type: decimal">
-<li><p>Elaborar una predicción sobre la novena generación de pokémons.
-Una vez analizada la progresión en las distintas variables por cada
-generación, ver qué tendencia están tomando para formular lo que se
-espera para una posible novena generación.</p></li>
 <li><p>Concluir cuáles son los pokémons más usados en el ámbito
 competitivo y sus motivos. Se quiere determinar qué factores pueden
 influir a la hora de usar un pokémon en la escena competitiva del
 juego.</p></li>
+<li><p>Elaborar una predicción sobre la novena generación de pokémons.
+Una vez analizada la progresión en las distintas variables por cada
+generación, ver qué tendencia están tomando para formular lo que se
+espera para una posible novena generación.</p></li>
 </ol>
 </div>
 <div id="importación-de-datos-y-carga-de-paquetes" class="section level1">
 <h1>2. Importación de datos y carga de paquetes</h1>
-<pre class="r"><code>library(readxl)</code></pre>
-<pre><code>## Warning: package &#39;readxl&#39; was built under R version 4.4.1</code></pre>
-<pre class="r"><code>library(tidyverse)
+<pre class="r"><code>library(readxl)
+library(tidyverse)
 library(summarytools)
 library(ggplot2)
-library(knitr)</code></pre>
-<pre><code>## Warning: package &#39;knitr&#39; was built under R version 4.4.1</code></pre>
-<pre class="r"><code>library(&#39;dplyr&#39;)
+library(knitr)
+library(&#39;dplyr&#39;)
 
 
 pokemon &lt;- read_excel(&quot;data/PokemonV4.xlsx&quot;)</code></pre>
@@ -907,8 +905,8 @@ print(tabla_generacion_pokemons)</code></pre>
 print(media_total_pokemons)</code></pre>
 <pre><code>## [1] 134</code></pre>
 </div>
-<div id="análisis-descriptivo-de-estadísticas" class="section level4">
-<h4>Análisis descriptivo de estadísticas</h4>
+<div id="análisis-descriptivo-de-las-estadísticas" class="section level4">
+<h4>Análisis descriptivo de las estadísticas</h4>
 <pre class="r"><code>with(pokemon, stby(HP,Generation, descr))</code></pre>
 <pre><code>## Descriptive Statistics  
 ## HP by Generation  
@@ -932,6 +930,10 @@ print(media_total_pokemons)</code></pre>
 ##          Kurtosis     8.83    12.07     2.46     0.76     0.85     9.84     7.63     8.99
 ##           N.Valid   178.00   106.00   160.00   121.00   166.00    85.00   116.00   140.00
 ##         Pct.Valid   100.00   100.00   100.00   100.00   100.00   100.00   100.00   100.00</code></pre>
+<p>La vida de los Pokémon se irá estabilizando, con un aumento en el
+valor mínimo y una ligera variación con tendencia a la baja. Al comparar
+la primera generación con la última, la variación no es
+significativa.</p>
 <pre class="r"><code>with(pokemon, stby(Attack,Generation, descr))</code></pre>
 <pre><code>## Descriptive Statistics  
 ## Attack by Generation  
@@ -955,6 +957,9 @@ print(media_total_pokemons)</code></pre>
 ##          Kurtosis     0.46     0.72    -0.14    -0.06    -0.58     0.20    -0.42    -0.51
 ##           N.Valid   178.00   106.00   160.00   121.00   166.00    85.00   116.00   140.00
 ##         Pct.Valid   100.00   100.00   100.00   100.00   100.00   100.00   100.00   100.00</code></pre>
+<p>El ataque, contrario a la vida, tendrá su máximo decayendo con cada
+generación, lo que generará una mayor simetría, medida por el Skewness
+(coeficiente de asimetría).</p>
 <pre class="r"><code>with(pokemon, stby(Defense,Generation, descr))</code></pre>
 <pre><code>## Descriptive Statistics  
 ## Defense by Generation  
@@ -978,6 +983,9 @@ print(media_total_pokemons)</code></pre>
 ##          Kurtosis     1.56     3.73     2.60    -0.55     0.03     0.86     1.25     5.21
 ##           N.Valid   178.00   106.00   160.00   121.00   166.00    85.00   116.00   140.00
 ##         Pct.Valid   100.00   100.00   100.00   100.00   100.00   100.00   100.00   100.00</code></pre>
+<p>La defensa será la estadística que genera mayor asimetría. Sus
+valores máximos seguirán en aumento, mientras que el valor mínimo
+mantendrá la misma tendencia observada en las tablas anteriores.</p>
 <pre class="r"><code>with(pokemon, stby(Sp_attack,Generation, descr))</code></pre>
 <pre><code>## Descriptive Statistics  
 ## Sp_attack by Generation  
@@ -1024,6 +1032,10 @@ print(media_total_pokemons)</code></pre>
 ##          Kurtosis    -0.73     4.49     1.51    -0.79    -0.10     0.53    -0.59     7.81
 ##           N.Valid   178.00   106.00   160.00   121.00   166.00    85.00   116.00   140.00
 ##         Pct.Valid   100.00   100.00   100.00   100.00   100.00   100.00   100.00   100.00</code></pre>
+<p>Ambas tablas de ataque y defensa especial estarán en consonancia con
+las estadísticas correspondientes, reforzando la idea de que estas
+variables están proporcionalmente relacionadas, como se comprobará a
+continuación.</p>
 <pre class="r"><code>with(pokemon, stby(Speed,Generation, descr))</code></pre>
 <pre><code>## Descriptive Statistics  
 ## Speed by Generation  
@@ -1047,6 +1059,11 @@ print(media_total_pokemons)</code></pre>
 ##          Kurtosis    -0.35    -0.71     0.67    -0.86    -0.84    -0.63    -0.59     0.29
 ##           N.Valid   178.00   106.00   160.00   121.00   166.00    85.00   116.00   140.00
 ##         Pct.Valid   100.00   100.00   100.00   100.00   100.00   100.00   100.00   100.00</code></pre>
+<p>La velocidad varía de manera diferente a las demás estadísticas,
+llegando incluso a tener un coeficiente de asimetría negativo, algo que
+no había ocurrido hasta ahora. El valor mínimo se mantendrá constante en
+el tiempo, mientras que el máximo fluctúa sin seguir un patrón
+claro.</p>
 </div>
 </div>
 </div>
