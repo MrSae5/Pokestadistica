@@ -544,17 +544,19 @@ Según los gráficos de barras los tipos de Pokémon se puede esperar que ronden
 
 En cuanto a las estadísticas básicas de los Pokémons:
 
-- El 50% de los Pokémon probablemente tendrá un HP rondando los 70.
+- HP: 25% tendrá un rango de 20 a 60, 50% estará entre 60 y 90 y el último 25% estará entre 90 y 140. El máximo será cercano a 230. 
 
-- El 50% de los Pokémon tendrán un ataque cercano a 80.
+- Attack: 25% tendrá un rango de 20 a 65, 50% estará entre 65 y 125 y el último 25% estará entre 125 y 170. Es probable que no hayan casos que se salgan de los porcentajes.
 
-- El 50% de los Pokémon mostrarán una defensa en torno a 75.
+- Defense: 25% tendrá un rango de 20 a 55, 50% estará entre 55 y 100 y el último 25% estará entre 100 y 150. El máximo será cercano a 230. 
 
-- Para las estadísticas especiales, el 50% tendrá un sp_ataque alrededor y una sp_defensa cercana a 70.
+- Sp_Attack: 25% tendrá un rango de 15 a 65, 50% estará entre 65 y 95 y el último 25% estará entre 95 y 150. El máximo será cercano a 170. 
 
-- La velocidad de los Pokémon también será similar a generaciones previas, con el 50% de ellos rondando los 65 puntos.
+- Sp_Defense: 25% tendrá un rango de 20 a 55, 50% estará entre 55 y 90 y el último 25% estará entre 90 y 130. El máximo será cercano a 175. 
 
-- Finalmente, el 50% de los Pokémon tendrán un total de estadísticas cercanas a 500.
+- Speed: 25% tendrá un rango de 10 a 55, 50% estará entre 55 y 90 y el último 25% estará entre 90 y 130. El máximo será cercano a 200. 
+
+- Finalmente, l mayoría de pokemons caerán en un rango de estadísticas totales entre 270 y 550, con algunos casos particulares que salgan del rango.
 
 
 # 6. Bibliografía
