@@ -1,5 +1,9 @@
 ---
-output: html_document
+output: 
+  html_document:
+    toc: yes
+    toc_float: yes
+
 title: "Práctica 1: Análisis descriptivo de las estadísticas de Pokémon"
 date: "**Grupo 2:** Paula Armenteros, Marta de Miguel, Victor Gil, María Fernanda Montero, Daniel Redondo."
 author: "**Estadística - Curso 2024/2025**"
