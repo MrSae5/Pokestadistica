@@ -1,6 +1,6 @@
 ---
 output: html_document
-title: "Práctica 1: Estadística descriptiva"
+title: "Práctica 1: Análisis descriptivo de las estadísticas de Pokémon"
 date: "**Grupo 2:** Paula Armenteros, Marta de Miguel, Victor Gil, María Fernanda Montero, Daniel Redondo."
 author: "**Estadística - Curso 2024/2025**"
 ---
@@ -13,21 +13,23 @@ suppressPackageStartupMessages(library(summarytools))
 
 # 1. Introducción y definición de objetivos
 
-En este estudio se analizarán datos obtenidos de "smogon" y "kaggle" que recogen las estadísticas y usabilidad de cada pokémon desde la primera hasta la octaba generación.
+En este estudio se analizarán datos obtenidos de "smogon" y "kaggle" que recogen las estadísticas y usabilidad de cada pokémon desde la primera hasta la octava generación.
 
 Los objetivos de este análisis se centrarán en:
 
-1.  Determinar la variación de las estadísticas de los pokémons entre generaciones.
+1.  Determinar la variación de las estadísticas de los pokémons entre generaciones. Con esto se busca analizar la variación de HP, Attack, Defense, Sp_attack, Sp_defense y Speed; y analizar cómo está repartida la suma de estas estadísticas entre todos los pokemon.
 
-2.  Determinar la variación de tipos de pokémons entre generaciones.
+2.  Determinar la variación de tipos de pokémons entre generaciones. Se busca determinar la variación de tipos en distintas generaciones, para ver tendencias y comprender cómo ha variado la forma de elegir los tipos de cada pokémon en cada generación. También se estudiarán los tipos más usados en la escena competitiva.
 
-3.  Determinar la variación de la cantidad de pokémons legendarios entre generaciones.
+3.  Determinar la variación de la cantidad de pokémons legendarios entre generaciones. Así se intenta determinar la tendencia que están tomando los juegos según avanzan a la hora de determinar la cantidad de pokémon legendarios presentes en cada juego.
 
-4.  Comprobar la posibilidad de existencia de correlaciones entre estadísticas de cualidades similares.
+4.  Comprobar la posibilidad de existencia de correlaciones entre estadísticas de cualidades similares. Es decir, se busca si estadísticas como Attack influyen en la cantidad de una estadística similar, es decir Sp_attack, en cada pokemon. También se busca encontrar una relación entre el uso de cada pokemon en la escena competitiva con respecto a su media de estadísticas.
 
-5.  Elaborar una predicción sobre la novena generación de pokémons. si
+Una vez recogidos todos estos datos, los siguientes objetivos son:
 
-6.  Concluir cuáles son los pokémons más usados en el ámbito competitivo y sus motivos
+5.  Concluir cuáles son los pokémons más usados en el ámbito competitivo y sus motivos. Se quiere determinar qué factores pueden influir a la hora de usar un pokémon en la escena competitiva del juego.
+
+6.  Elaborar una predicción sobre la novena generación de pokémons. Una vez analizada la progresión en las distintas variables por cada generación, ver qué tendencia están tomando para formular lo que se espera para una posible novena generación.
 
 
 # 2. Importación de datos y carga de paquetes
@@ -61,9 +63,9 @@ pokemon <- read_excel("data/PokemonV4.xlsx")
   - Variable tipo: Numérica discreta.
 * **`Defense:`** Los puntos de defensa física del Pokémon.
   - Variable tipo: Numérica discreta.
-* **`Sp_Attack:`** Los puntos de ataque especial del Pokémon.
+* **`Sp_attack:`** Los puntos de ataque especial del Pokémon.
   - Variable tipo: Numérica discreta.
-* **`Sp_Defense:`** Los puntos de defensa especial del Pokémon.
+* **`Sp_defense:`** Los puntos de defensa especial del Pokémon.
   - Variable tipo: Numérica discreta.
 * **`Speed:`** Los puntos de velocidad del Pokémon.
   - Variable tipo: Numérica discreta.
@@ -82,69 +84,101 @@ pokemon <- read_excel("data/PokemonV4.xlsx")
 
 ## 4.1 Datos univariantes 
 
-### Tabla de frecuencia (TODOS POKEMONS) 
-
-#### Total(+ histograma)
-
+### Tabla de frecuencia de intervalos de total de estadísticas
 ```{r echo=TRUE}
+# Transformamos el dataframe pokemon creando una nueva columna llamada " intervalos_totales" que creara 20 intervalos del dato total.
+pokemon <- pokemon |>
+  mutate(intervalos_totales = cut(Total, breaks = 20))
 
-# Creamos una tabla de frecuencias a partir del dataframe pokemon
-
+# Creamos una tabla de frecuencias a partir del dataframe pokemon.
 tabla_frecuencias <- pokemon|> 
- count(Total) |>
+# Contamos los intervalos que hay y creamos la frecuencia relativa, la frecuencia acumulada, la frecuencia relativa acumulada.
+ count(intervalos_totales) |>
   mutate(f = n/nrow(pokemon),
    N = cumsum(n),
     F = cumsum(f)) 
-knitr::kable(tabla_frecuencias, digits = 4)
+#Pintamos y definimos el número de decimales queremos que tenga nuestra tabla
+knitr::kable(tabla_frecuencias, digits = 3)
 
 ```
+### Histograma de los intervalos de total
+```{r echo=TRUE}
+# Creamos un histograma a partir de los datos Total. 
+pokemon |> ggplot(aes(Total)) + 
+# Definimos el color y el numero de barras que tendrá nuestro historama. Calculamos el número de barras a través de la raíz cuadrada de nuestro número de datos.
+  geom_histogram(fill = "#3565fc", bins = 33, col = "white") + 
+# Indicamos el tema.
+  theme_minimal() 
+```
 
-#### HP(Grafico de cajas HP y Gener)
+Podemos observar que la mayoría de las estadísticas de los Pokémon se encuentran dentro del rango de 300 a 600, con un pico más pronunciado entre 500 y 600. Además, notamos que solo hay un Pokémon que se encuentra fuera de estos rangos, cuyo total supera los 1000
+
+#### Grafico de cajas HP y Generación 
 
 ```{r}
-pokemon |> ggplot(aes(y=HP , x=factor(Generation))) +  geom_boxplot() + labs(x="Generacion")
+# Definimos el dataframe pokemon, definiremos el estilo del blox pot y a continuación indicaremos que datos debe tener cada variable , y le asignaremos un nombre.
+pokemon |> ggplot(aes(y=HP , x=factor(Generation))) +  geom_boxplot(fill = "#3565fc") + labs(x="Generacion") + theme_minimal()
 
 ```
 
-#### Attack
+En este gráfico de cajas compara la estadística de HP con el número de generación de los Pokémon. Podemos observar que la mediana es similar y siempre se encuentra por debajo de 100. También podemos notar que en todas las generaciones hay Pokémon que se salen de la norma y están por encima de 100 HP; por el contrario, solo vemos un caso atípico por debajo de 100, situado en la tercera generación. 
+Podemos concluir que la octava generación es la que tiene el mayor HP, ya que muestra una mayor concentración de valores cercanos a los niveles superiores teniendo la caja más alta y teniendo valores atípicos que superan los 200.
+
+#### Grafico de cajas Attack y Generación 
 
 ```{r}
-pokemon |> ggplot(aes(y=Attack , x=factor(Generation))) +  geom_boxplot() + labs(x="Generacion")
+pokemon |> ggplot(aes(y=Attack , x=factor(Generation))) +  geom_boxplot(fill = "#3565fc") + labs(x="Generacion") + theme_minimal()
 ```
 
-#### Defense
+En este gráfico de cajas compara la estadística de Attack con el número de generación de los Pokémon. 
+Podemos observar que, desde la primera hasta la cuarta generación, hay casos atípicos que superan los 150 puntos de Attack. Sin embargo, a partir de la cuarta generación, estos valores atípicos desaparecen. 
+Aunque todas las generaciones presentan un rango de dispersión similar, podemos concluir que la octava generación es la que tiene el mayor Attack, ya que muestra una mayor concentración de valores cercanos a los niveles superiores teniendo la caja más alta. Además, no se observan valores atípicos en esta generación, lo que indica que los datos están consistentemente concentrados en un rango más alto.
+
+#### Grafico de cajas Defense y Generación 
 
 ```{r}
-pokemon |> ggplot(aes(y=Defense , x=factor(Generation))) +  geom_boxplot() + labs(x="Generacion")
+pokemon |> ggplot(aes(y=Defense , x=factor(Generation))) +  geom_boxplot(fill = "#3565fc") + labs(x="Generacion") + theme_minimal()
 ```
 
-#### Sp_attack
+Este gráfico de cajas compara la estadística de Defense con el número de generación de los Pokémon. Podemos observar que, en todas las generaciones, excepto en la cuarta, hay casos atípicos que superan los 150 puntos de Defense. En particular, en las generaciones 2, 3, 6 y 7, se encuentran casos que superan los 200 puntos, e incluso algunos llegan a los 250.
+
+La cuarta generación es la que presenta una defensa mayor, ya que su caja es más amplia y ligeramente más alta que las demás, lo que indica una mayor dispersión de datos y una mediana más elevada. Aunque la octava generación muestra algunos valores atípicos muy altos, su caja está algo más baja en comparación con la cuarta generación.
+
+#### Grafico de cajas Sp_attack y Generación 
 
 ```{r}
-pokemon |> ggplot(aes(y=Sp_attack , x=factor(Generation))) +  geom_boxplot() + labs(x="Generacion")
+pokemon |> ggplot(aes(y=Sp_attack , x=factor(Generation))) +  geom_boxplot(fill = "#3565fc") + labs(x="Generacion") + theme_minimal()
 ```
 
-#### Sp_defense
+Este gráfico de cajas compara la estadística de Sp_attack con el número de generación de los Pokémon. Podemos observar que, en todas las generaciones, excepto en la cuarta, hay casos atípicos que superan los 150 puntos de Sp_attack.
+
+La cuarta generación es la que presenta una Sp_attack mayor, ya que su caja es ligeramente más alta que las demás, lo que indica una mayor dispersión de datos y una mediana más elevada. 
+
+#### Grafico de cajas Sp_defense y Generación 
 
 ```{r}
-pokemon|> ggplot(aes(y=Sp_defense , x=factor(Generation))) +  geom_boxplot() + labs(x="Generacion")
+pokemon|> ggplot(aes(y=Sp_defense , x=factor(Generation))) +  geom_boxplot(fill = "#3565fc") + labs(x="Generacion") + theme_minimal()
 ```
 
-#### Speed
+Este gráfico de cajas compara la estadística de Sp_defense con el número de generación de los Pokémon. Podemos observar que en las generaciones 2,3,6 y 8 hay casos atípicos que superan los 150 puntos de Sp_defense y en la 2 y 8 llegando a superar los 200.
+
+La cuarta generación es la que presenta una Sp_defense mayor, ya que su caja es ligeramente más alta que las demás, lo que indica una mayor dispersión de datos y una mediana más elevada. 
+
+
+#### Grafico de cajas Speed y Generacion 
 
 ```{r}
-pokemon|> ggplot(aes(y=Speed , x=factor(Generation))) +  geom_boxplot() + labs(x="Generacion")
+pokemon|> ggplot(aes(y=Speed , x=factor(Generation))) +  geom_boxplot(fill = "#3565fc") + labs(x="Generacion") + theme_minimal()
 ```
 
-#### Total
+Este gráfico de cajas compara la estadística de Speed con el número de generación de los Pokémon. Podemos observar que en las generaciones 3 y 8 hay casos atípicos viendo que en la 3 hay más cantidad que en la 8. 
 
-```{r}
-pokemon|> ggplot(aes(y=Total , x=factor(Generation))) +  geom_boxplot() + labs(x="Generacion")
-```
+La cuarta octaba es la que presenta una Speed mayor, ya que su caja es ligeramente más alta que las demás y tiene un dato atípico que supera los 200.
 
-### Gráficos de barras (GENERACIÓN)
 
-#### Tipos de Pokémons por generación(8 graficos juntos| tipos y cantidad)
+### Gráficos de barras
+
+#### Tipos de Pokémons por generación
 A continuación, se va a analizar la cantidad de apariciones de cada tipo de Pokémon en cada generación, con el objetivo de diferenciar las cantidades entre tipos y entre cada juego. Se espera que en las primeras generaciones las cantidades entre tipos, sean más dispares y que los valores se estabilicen según avancen las generaciones, porque es lógico que el equilibrio al comienzo sea menos importante, que según se iban creando más y más generaciones. También se espera que, si hay un crecimiento repentino de un tipo en una generación, en la siguiente haya un descenso igual de importante, para compensar por la disparidad anterior.
 ```{r echo=FALSE}
 # Definir una paleta de colores personalizada para los tipos (son los colores oficiales para los tipos)
@@ -214,7 +248,7 @@ Un fenómeno interesante es la variabilidad de ciertos tipos a lo largo del tiem
 
 En general, se cumple la tendencia esperada: conforme avanzan las generaciones, la cantidad de Pokémon de cada tipo tiende a nivelarse, y que grandes picos van acompañados por grandes caídas, que luego se estabilizan.
 
-#### Top 100 tipos mas usados 
+#### Top 100 tipos más usados 
 
 A continuación, se analiza la cantidad de apariciones de cada tipo Pokémon en los top 100 Pokémon más usados en el competitivo:
 
@@ -273,11 +307,11 @@ A continuación, se analiza la cantidad de apariciones de cada tipo Pokémon en 
 
 ````
 
-Podemos apreciar la gran disparidad entre uso de cada tipo Pokémon. Lógicamente, podemos concluir que generalmente, los típos Pokémon más usados (Agua, Fuego, Volador...) tienen una ventaja intrinseca, ya sea por sus interacciones entre otros tipos, u otras razones, sobre los tipos Pokémon menos usados (Bicho, Roca, Electrico...)
+Podemos apreciar la gran disparidad entre uso de cada tipo Pokémon. Lógicamente, podemos concluir que generalmente, los tipos Pokémon más usados (Water, Fire, Flying...) tienen una ventaja intrínseca, ya sea por sus interacciones entre otros tipos, u otras razones, sobre los tipos Pokémon menos usados (Bug, Rock, Electric...)
 
 ### Gráfico de líneas
 
-A continuación, en el gráfico se muestra la variación de la cantidad de pokémons legendarios entre generaciones, además de la media, la mediana y la moda. Estos datos servirán luego para poder crear una predicción de la posible novena generación de Pokémon.
+A continuación, en el gráfico se muestra la variación de la cantidad de pokémons legendarios entre generaciones, además de la media, la mediana y la moda. Estos datos servirán luego para poder crear una predicción de la posible 9ª generación de Pokémon.
 
 ```{r echo=TRUE}
 # Agrupar los Pokémons legendarios
@@ -286,7 +320,7 @@ legendarios <- pokemon %>%
   group_by(Generation) %>%
   summarise(count = n())
 
-# Calcular media, mediana y moda
+# Calcular media y mediana
 media <- mean(legendarios$count)
 mediana <- median(legendarios$count)
 
@@ -298,25 +332,25 @@ moda <- function(x) {
 
 moda_val <- moda(legendarios$count)
 
-# Crear el gráfico de líneas con las líneas de media, mediana y moda
+# Crear el gráfico de líneas
 ggplot(legendarios, aes(x = Generation, y = count)) +
-  geom_line(color = "#3565fc", linewidth  = 1) +  
-  geom_point(size = 3, color = "#3565fc") + 
+  geom_line(color = "black", linewidth  = 1) +  
+  geom_point(size = 3, color = "black") + 
   
   # Agregar líneas para media, mediana y moda
-  geom_hline(yintercept = media, color = "black", linetype = "dashed", linewidth = 1) +
+  geom_hline(yintercept = media, color = "#3565fc", linetype = "dashed", linewidth = 1) +
   geom_hline(yintercept = mediana, color = "red", linetype = "dotted", linewidth = 1) +
-  geom_hline(yintercept = moda_val, color = "green", linetype = "solid", linewidth = 1) +
+  geom_hline(yintercept = moda_val, color = "darkgreen", linetype = "solid", linewidth = 1) +
   
-  # Agregar etiquetas para media, mediana y moda al lado derecho de la gráfica
+  # Agregar etiquetas para media, mediana y moda
   annotate("text", x = max(legendarios$Generation) + 1, y = media + 0.5, 
-           label = paste("Media:", round(media, 1)), color = "black", hjust = 1) +
+           label = paste("Media:", round(media, 1)), color = "#3565fc", hjust = 1) +
   annotate("text", x = max(legendarios$Generation) + 1, y = mediana + 0.5, 
            label = paste("Mediana:", round(mediana, 1)), color = "red", hjust = 1) +
   annotate("text", x = max(legendarios$Generation) + 1, y = moda_val + 0.5, 
-           label = paste("Moda:", round(moda_val, 1)), color = "green", hjust = 1) +
+           label = paste("Moda:", round(moda_val, 1)), color = "darkgreen", hjust = 1) +
   
-  # Ajustes en los ejes y etiquetas del gráfico
+  # Ajustes en los ejes del gráfico
   scale_x_continuous(breaks = seq(min(legendarios$Generation), max(legendarios$Generation), by = 1)) +
   scale_y_continuous(breaks = seq(min(legendarios$count), max(legendarios$count), by = 1)) +
   labs(title = "Cantidad de Pokémon legendarios por generación",
@@ -326,6 +360,8 @@ ggplot(legendarios, aes(x = Generation, y = count)) +
   theme_minimal()
 
 ```
+
+En general, se observa una tendencia al alza en el número de Pokémon legendarios por generación, con picos significativos en las generaciones 5 y 8, lo que indica que no existe una fórmula fija a la hora de introducir nuevos Pokémon legendarios.
 
 ### Resúmenes numéricos
 
@@ -347,46 +383,97 @@ print(tabla_generacion_pokemons)
 print(media_total_pokemons)
 ````
 
-#### Análisis descriptivo de estadísticas
+#### Análisis descriptivo de las estadísticas
+
 
 ````{r}
 with(pokemon, stby(HP,Generation, descr))
 ````
+La vida de los Pokémon se irá estabilizando, con un aumento en el valor mínimo y una ligera variación con tendencia a la baja. Al comparar la primera generación con la última, la variación no es significativa.
+
 
 
 ````{r}
 with(pokemon, stby(Attack,Generation, descr))
 ````
+El ataque, contrario a la vida, tendrá su máximo decayendo con cada generación, lo que generará una mayor simetría, medida por el Skewness (coeficiente de asimetría).
+
 
 
 ````{r}
 with(pokemon, stby(Defense,Generation, descr))
 ````
+La defensa será la estadística que genera mayor asimetría. Sus valores máximos seguirán en aumento, mientras que el valor mínimo mantendrá la misma tendencia observada en las tablas anteriores.
+
 
 
 ````{r}
 with(pokemon, stby(Sp_attack,Generation, descr))
 ````
-
-
 ````{r}
 with(pokemon, stby(Sp_defense,Generation, descr))
 ````
+Ambas tablas de ataque y defensa especial estarán en consonancia con las estadísticas correspondientes, reforzando la idea de que estas variables están proporcionalmente relacionadas, como se comprobará a continuación.
+
 
 
 ````{r}
 with(pokemon, stby(Speed,Generation, descr))
 ````
+La velocidad varía de manera diferente a las demás estadísticas, llegando incluso a tener un coeficiente de asimetría negativo, algo que no había ocurrido hasta ahora. El valor mínimo se mantendrá constante en el tiempo, mientras que el máximo fluctúa sin seguir un patrón claro.
+
 
 
 ## 4.2 Datos bivariantes
 
 ### Scatter plot
 
-#### Correlación entre attack vs. sp_attack
+En este apartado analizaremos la posible existencia de correlación entre estadísticas de cualidades similares de los Pokémons, con el fin de verificar si están relacionadas directa o indirectamente.
 
-#### Correlación entre defense vs. sp_defense
+#### Correlación entre Attack vs. sp_attack
 
+```{r}
+# Crear el scatterplot
+ggplot(pokemon, aes(x = Attack, y = Sp_attack)) +
+  geom_point(color = "black", alpha = 0.6) +
+    geom_smooth(method = "lm", color = "#3565fc", se = FALSE) +
+  # Gráfico de dispersión
+  labs(title = "Relación entre Attack y Sp_attack",
+       x = "Attack",
+       y = "Sp_attack") +
+  theme_minimal()
+
+# Calcular y mostrar la correlación
+correlation <- cor(pokemon$Attack, pokemon$Sp_attack, use = "complete.obs")  
+# Calcular correlación
+print(paste("Correlación entre Attack y Sp_attack:", round(correlation, 2)))
+```
+
+El análisis muestra que existe una relación positiva pero débil entre el ataque físico y el ataque especial de los Pokémon. Esto indica que, en general, un Pokémon con un valor alto de Attack tiende a tener también un valor alto de Sp_Attack, pero no es una regla estricta, y hay bastante variabilidad entre los individuos. 
+Además, la correlación moderada y la dispersión reflejan que ciertos Pokémon están especializados en uno de estos tipos de ataque, dependiendo de su tipo o rol en las batallas.
+
+
+#### Correlación entre Defense vs. sp_defense
+
+```{r}
+# Crear el scatterplot
+ggplot(pokemon, aes(x = Defense, y = Sp_defense)) +
+  geom_point(color = "black", alpha = 0.6) +
+  geom_smooth(method = "lm", color = "#3565fc", se = FALSE) +
+  # Gráfico de dispersión
+  labs(title = "Relación entre Defense y Sp_defense",
+       x = "Defense",
+       y = "Sp_defense") +
+  theme_minimal()
+
+# Calcular y mostrar la correlación
+correlation <- cor(pokemon$Defense, pokemon$Sp_defense, use = "complete.obs")  
+# Calcular correlación
+print(paste("Correlación entre Defense y Sp_defense:", round(correlation, 2)))
+```
+
+Al igual que en la correlación anterior, el análisis muestra que existe una relación moderada positiva entre las variables, sin embargo, esta relación no es lo suficientemente fuerte como para ser considerada una relación lineal clara. 
+También, es importante  considerar otras variables que podrían estar en juego, como el tipo de Pokémon, la evolución, o incluso el nivel. Por lo que la correlación no implica causalidad.
 
 ### Gráfico de regresión
 
@@ -410,9 +497,10 @@ filtered_data|>
 
 ggplot(aes(x = Stat_Average, y = Usage_Percentage)) +   geom_point() +
   
-geom_smooth(method = lm) +
+  geom_smooth(method = lm) +
   
-labs(title = "Gráfico de dispersión con ajuste de regresión")
+  labs(title = "Gráfico de dispersión Stat_Average vs Usage_Percentage")+
+  theme_minimal()
 
 #TOTAL VS USAGE
 
@@ -430,41 +518,47 @@ filtered_data|>
 
 ggplot(aes(x = Total, y = Usage_Percentage)) +   geom_point() +
   
-geom_smooth(method = lm) +
+  geom_smooth(method = lm) +
   
-labs(title = "Gráfico de dispersión con ajuste de regresión")
+  labs(title = "Gráfico de dispersión Total vs Usage_Percentage")+
+  theme_minimal()
 
 ```
 
+En tanto el grafico comparando el porcentaje de uso con el total de estadística, como en el que compara el porcentaje de uso con la media de estadísticas, podemos apreciar una clara pero débil relación directamente proporcional entre el uso de un Pokémon y sus estadísticas. Podemos concluir entonces, que el uso de un Pokémon en competitivo está menos determinado por sus estadísticas, y más relacionado con otros factores, como su tipo, plantel de movimientos, relevancia en cuanto al "metajuego" del momento, o incluso la combinación de todos estos factores.
+
+Esta conclusión es reforzada al observar los Pokémon más usados en competitivo, como Incineroar, que a pesar de caer alrededor de la mitad del eje X en la gráfica en cuanto a estadísticas, es el Pokémon más usado en el competitivo, con 52,33% de los equipos registrados teniéndolo en uno de sus seis puestos. Incineroar, al mismo tiempo, pertenece al tipo Fuego (3er tipo más usado) y al tipo Siniestro (6to tipo más usado), lo cual sugiere que las interacciones de tipo tengan una mayor importancia al decidir la relevancia de un Pokémon.
+
 # 5. Conclusión
-A lo largo de las generaciones, tanto los tipos de pokémon como sus estadísticas han tendido a equilibrarse, evitando grandes picos de disparidad.
-Las variaciones entre las estadísticas individuales de los pokémon de cada generación han sido relativamente consistentes, lo que sugiere que la tendencia hacia un equilibrio continuará en la 9ª generación.
+A lo largo de las generaciones, tanto los tipos de Pokémon como sus estadísticas han tendido a equilibrarse, evitando grandes picos de disparidad.
+Las variaciones entre las estadísticas individuales de los Pokémon de cada generación han sido relativamente consistentes, lo que sugiere que la tendencia hacia un equilibrio continuará en la 9ª generación.
 
 A partir de todos los datos analizados, se puede hacer una estimación a valores generales y particulares.
 
 ## Valores generales
-La media de pokémon por generación es de 134, por lo que podemos esperar que la 9ª generación presente un número similar de nuevos pokémon.
+La media de Pokémon por generación es de 134, por lo que podemos esperar que la 9ª generación presente un número similar de nuevos Pokémon.
 De la misma manera, la media de los legendarios rondan los 15, por lo que se sugiere un número similar no muy lejano.
 
 ## Valores particulares
-Según los gráficos de barras los tipos de pokemon se puede esperar que ronden los valores entre 20 y 10 por elemento, donde los más perjudiciados, con valores menores, serán los tipos de Ground y Normal.
+Según los gráficos de barras los tipos de Pokémon se puede esperar que ronden los valores entre 20 y 10 por elemento, donde los más perjudicados, con valores menores, serán los tipos "Ground" y "Normal".
 
-En cuanto a las estadísticas básicas de los pokemons:
+En cuanto a las estadísticas básicas de los Pokémons:
 
-- El 50% de los pokémon probablemente tendrá un HP rondando los 70.
+- El 50% de los Pokémon probablemente tendrá un HP rondando los 70.
 
-- El 50% de los pokémon tendrán un ataque cercano a 80.
+- El 50% de los Pokémon tendrán un ataque cercano a 80.
 
-- El 50% de los pokémon mostrarán una defensa en torno a 75.
+- El 50% de los Pokémon mostrarán una defensa en torno a 75.
 
 - Para las estadísticas especiales, el 50% tendrá un sp_ataque alrededor y una sp_defensa cercana a 70.
 
-- La velocidad de los pokémon también será similar a generaciones previas, con el 50% de ellos rondando los 65 puntos.
+- La velocidad de los Pokémon también será similar a generaciones previas, con el 50% de ellos rondando los 65 puntos.
 
-- Finalmente, el 50% de los pokémon tendrán un total de estadísticas cercanas a 500.
+- Finalmente, el 50% de los Pokémon tendrán un total de estadísticas cercanas a 500.
 
 
 # 6. Bibliografía
-https://www.smogon.com/stats/2022-04/gen8vgc2022-0.txt
 
-https://www.kaggle.com/datasets/jaidalmotra/pokemon-dataset
+* https://www.smogon.com/stats/2022-04/gen8vgc2022-0.txt
+
+* https://www.kaggle.com/datasets/jaidalmotra/pokemon-dataset
