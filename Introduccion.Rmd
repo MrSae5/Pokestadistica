@@ -17,23 +17,23 @@ suppressPackageStartupMessages(library(summarytools))
 
 # 1. Introducción y definición de objetivos
 
-En este estudio se analizarán datos obtenidos de "smogon" y "kaggle" que recogen las estadísticas y usabilidad de cada pokémon desde la primera hasta la octava generación.
+En este estudio se analizarán datos obtenidos de "smogon" y "kaggle" que recogen las estadísticas y usabilidad de cada Pokémon desde la primera hasta la octava generación.
 
 Los objetivos de este análisis se centrarán en:
 
-1.  Determinar la variación de las estadísticas de los pokémons entre generaciones. Con esto se busca analizar la variación de HP, Attack, Defense, Sp_attack, Sp_defense y Speed; y analizar cómo está repartida la suma de estas estadísticas entre todos los pokemon.
+1.  Determinar la variación de las estadísticas de los Pokémons entre generaciones. Con esto, se busca analizar la variación de HP, Attack, Defense, Sp_attack, Sp_defense y Speed; y analizar cómo está repartida la suma de estas estadísticas entre todos los Pokémons.
 
-2.  Determinar la variación de tipos de pokémons entre generaciones. Se busca determinar la variación de tipos en distintas generaciones, para ver tendencias y comprender cómo ha variado la forma de elegir los tipos de cada pokémon en cada generación. También se estudiarán los tipos más usados en la escena competitiva.
+2.  Determinar la variación de tipos de Pokémons entre generaciones. Se busca determinar la variación entre tipos en distintas generaciones, para ver tendencias y comprender cómo ha variado la forma de elegir los tipos de cada Pokémon. También se estudiarán los tipos más usados en la escena competitiva.
 
-3.  Determinar la variación de la cantidad de pokémons legendarios entre generaciones. Así se intenta determinar la tendencia que están tomando los juegos según avanzan a la hora de determinar la cantidad de pokémon legendarios presentes en cada juego.
+3.  Determinar la variación de la cantidad de Pokémons legendarios entre generaciones. Ayudará a comprender la tendencia que están tomando los juegos de la saga Pokémon según avanza a la hora de introducir nuevos Pokémons legendarios en cada juego.
 
-4.  Comprobar la posibilidad de existencia de correlaciones entre estadísticas de cualidades similares. Es decir, se busca si estadísticas como Attack influyen en la cantidad de una estadística similar, es decir Sp_attack, en cada pokemon. También se busca encontrar una relación entre el uso de cada pokemon en la escena competitiva con respecto a su media de estadísticas.
+4.  Comprobar la posibilidad de existencia de correlaciones entre estadísticas de cualidades similares. Es decir, veríficar si estadísticas como Attack y Defense, influyen de alguna manera en las estadísticas Sp_attack y Sp_defense respectivamente en cada Pokémon. Además de, encontrar una relación entre el uso de cada Pokémon en la escena competitiva con respecto a su media de estadísticas.
 
-Una vez recogidos todos estos datos, los siguientes objetivos son:
+Una vez recogidos todos estos datos, los siguientes objetivos se centrarán en:
 
-5.  Concluir cuáles son los pokémons más usados en el ámbito competitivo y sus motivos. Se quiere determinar qué factores pueden influir a la hora de usar un pokémon en la escena competitiva del juego.
+5.  Concluir cuáles son los Pokémons más usados en el ámbito competitivo y sus motivos. Se quiere definir qué factores pueden influir a la hora de usar un Pokémon en la escena competitiva del juego.
 
-6.  Elaborar una predicción sobre la novena generación de pokémons. Una vez analizada la progresión en las distintas variables por cada generación, ver qué tendencia están tomando para formular lo que se espera para una posible novena generación.
+6.  Elaborar una predicción sobre la novena generación de Pokémons. Una vez analizada la progresión en las distintas variables por cada generación, ver qué tendencia están tomando para formular lo que se espera para una posible novena generación.
 
 
 # 2. Importación de datos y carga de paquetes
@@ -75,7 +75,7 @@ pokemon <- read_excel("data/PokemonV4.xlsx")
   - Variable tipo: Numérica discreta.
 * **`Stat_Average:`** La media de las estadísticas del Pokémon.
   - Variable tipo: Numérica continua.
-* **`Generation:`** La generación de juegos que pertenece el Pokémon.
+* **`Generation:`** La generación de juegos a la que pertenece el Pokémon.
   - Variable tipo: Categórica ordinal.
 * **`Legendary:`** Si el Pokémon es legendario o no (YES/NO).
   - Variable tipo: Categórica dicotómica.
@@ -120,8 +120,12 @@ Podemos observar que la mayoría de las estadísticas de los Pokémon se encuent
 #### Grafico de cajas HP y Generación 
 
 ```{r}
-# Definimos el dataframe pokemon, definiremos el estilo del blox pot y a continuación indicaremos que datos debe tener cada variable , y le asignaremos un nombre.
-pokemon |> ggplot(aes(y=HP , x=factor(Generation))) +  geom_boxplot(fill = "#3565fc") + labs(x="Generacion") + theme_minimal()
+# Definimos el dataframe Pokémon, definiremos el estilo del blox pot y a continuación indicaremos que datos debe tener cada variable , y le asignaremos un nombre.
+pokemon |> ggplot(aes(y=HP , x=factor(Generation))) +  
+  geom_boxplot(fill = "#3565fc") + 
+  labs(title = "Variación de HP entre generaciones", 
+       x="Generación") + 
+  theme_minimal()
 
 ```
 
@@ -131,7 +135,11 @@ Podemos concluir que la octava generación es la que tiene el mayor HP, ya que m
 #### Grafico de cajas Attack y Generación 
 
 ```{r}
-pokemon |> ggplot(aes(y=Attack , x=factor(Generation))) +  geom_boxplot(fill = "#3565fc") + labs(x="Generacion") + theme_minimal()
+pokemon |> ggplot(aes(y=Attack , x=factor(Generation))) +  
+  geom_boxplot(fill = "#3565fc") + 
+  labs(title = "Variación de Attack entre generaciones",
+       x="Generación") + 
+  theme_minimal()
 ```
 
 En este gráfico de cajas compara la estadística de Attack con el número de generación de los Pokémon. 
@@ -141,7 +149,11 @@ Aunque todas las generaciones presentan un rango de dispersión similar, podemos
 #### Grafico de cajas Defense y Generación 
 
 ```{r}
-pokemon |> ggplot(aes(y=Defense , x=factor(Generation))) +  geom_boxplot(fill = "#3565fc") + labs(x="Generacion") + theme_minimal()
+pokemon |> ggplot(aes(y=Defense , x=factor(Generation))) +  
+  geom_boxplot(fill = "#3565fc") + 
+  labs(title = "Variación de Defense entre generaciones",
+       x="Generación") +
+  theme_minimal()
 ```
 
 Este gráfico de cajas compara la estadística de Defense con el número de generación de los Pokémon. Podemos observar que, en todas las generaciones, excepto en la cuarta, hay casos atípicos que superan los 150 puntos de Defense. En particular, en las generaciones 2, 3, 6 y 7, se encuentran casos que superan los 200 puntos, e incluso algunos llegan a los 250.
@@ -151,7 +163,11 @@ La cuarta generación es la que presenta una defensa mayor, ya que su caja es m�
 #### Grafico de cajas Sp_attack y Generación 
 
 ```{r}
-pokemon |> ggplot(aes(y=Sp_attack , x=factor(Generation))) +  geom_boxplot(fill = "#3565fc") + labs(x="Generacion") + theme_minimal()
+pokemon |> ggplot(aes(y=Sp_attack , x=factor(Generation))) +  
+  geom_boxplot(fill = "#3565fc") + 
+  labs(title = "Variación de Sp_attack entre generaciones",
+       x="Generación") + 
+  theme_minimal()
 ```
 
 Este gráfico de cajas compara la estadística de Sp_attack con el número de generación de los Pokémon. Podemos observar que, en todas las generaciones, excepto en la cuarta, hay casos atípicos que superan los 150 puntos de Sp_attack.
@@ -161,7 +177,11 @@ La cuarta generación es la que presenta una Sp_attack mayor, ya que su caja es 
 #### Grafico de cajas Sp_defense y Generación 
 
 ```{r}
-pokemon|> ggplot(aes(y=Sp_defense , x=factor(Generation))) +  geom_boxplot(fill = "#3565fc") + labs(x="Generacion") + theme_minimal()
+pokemon|> ggplot(aes(y=Sp_defense , x=factor(Generation))) +  
+  geom_boxplot(fill = "#3565fc") + 
+  labs(title = "Variación de Sp_defense entre generaciones",
+       x="Generación") + 
+  theme_minimal()
 ```
 
 Este gráfico de cajas compara la estadística de Sp_defense con el número de generación de los Pokémon. Podemos observar que en las generaciones 2,3,6 y 8 hay casos atípicos que superan los 150 puntos de Sp_defense y en la 2 y 8 llegando a superar los 200.
@@ -169,10 +189,14 @@ Este gráfico de cajas compara la estadística de Sp_defense con el número de g
 La cuarta generación es la que presenta una Sp_defense mayor, ya que su caja es ligeramente más alta que las demás, lo que indica una mayor dispersión de datos y una mediana más elevada. 
 
 
-#### Grafico de cajas Speed y Generacion 
+#### Grafico de cajas Speed y Generación 
 
 ```{r}
-pokemon|> ggplot(aes(y=Speed , x=factor(Generation))) +  geom_boxplot(fill = "#3565fc") + labs(x="Generacion") + theme_minimal()
+pokemon|> ggplot(aes(y=Speed , x=factor(Generation))) +  
+  geom_boxplot(fill = "#3565fc") + 
+  labs(title = "Variación de Speed entre generaciones",
+       x="Generación") + 
+  theme_minimal()
 ```
 
 Este gráfico de cajas compara la estadística de Speed con el número de generación de los Pokémon. Podemos observar que en las generaciones 3 y 8 hay casos atípicos viendo que en la 3 hay más cantidad que en la 8. 
@@ -218,8 +242,7 @@ pokemon_long <- pokemon %>%
 # Agrupar por generación y tipo de Pokémon, contando las ocurrencias
 pokemon_by_type <- pokemon_long %>%
   group_by(Generation, Types) %>%
-  summarise(count = n()) %>%
-  ungroup()
+  summarise(count = n(), .groups = "drop")
 ```
 
 ```{r echo=FALSE}
@@ -315,7 +338,7 @@ Podemos apreciar la gran disparidad entre uso de cada tipo Pokémon. Lógicament
 
 ### Gráfico de líneas
 
-A continuación, en el gráfico se muestra la variación de la cantidad de pokémons legendarios entre generaciones, además de la media, la mediana y la moda. Estos datos servirán luego para poder crear una predicción de la posible 9ª generación de Pokémon.
+A continuación, en el gráfico se muestra la variación de la cantidad de Pokémons legendarios entre generaciones, además de la media y la mediana. Estos datos servirán luego para poder crear una predicción de la posible 9ª generación de Pokémons.
 
 ```{r echo=TRUE}
 # Agrupar los Pokémons legendarios
@@ -328,36 +351,25 @@ legendarios <- pokemon %>%
 media <- mean(legendarios$count)
 mediana <- median(legendarios$count)
 
-# Función para calcular la moda
-moda <- function(x) {
-  ux <- unique(x)
-  ux[which.max(tabulate(match(x, ux)))]
-}
-
-moda_val <- moda(legendarios$count)
-
 # Crear el gráfico de líneas
 ggplot(legendarios, aes(x = Generation, y = count)) +
   geom_line(color = "black", linewidth  = 1) +  
   geom_point(size = 3, color = "black") + 
   
-  # Agregar líneas para media, mediana y moda
+  # Agregar líneas para media y mediana
   geom_hline(yintercept = media, color = "#3565fc", linetype = "dashed", linewidth = 1) +
   geom_hline(yintercept = mediana, color = "red", linetype = "dotted", linewidth = 1) +
-  geom_hline(yintercept = moda_val, color = "darkgreen", linetype = "solid", linewidth = 1) +
-  
-  # Agregar etiquetas para media, mediana y moda
+
+  # Agregar etiquetas para media y mediana
   annotate("text", x = max(legendarios$Generation) + 1, y = media + 0.5, 
            label = paste("Media:", round(media, 1)), color = "#3565fc", hjust = 1) +
   annotate("text", x = max(legendarios$Generation) + 1, y = mediana + 0.5, 
            label = paste("Mediana:", round(mediana, 1)), color = "red", hjust = 1) +
-  annotate("text", x = max(legendarios$Generation) + 1, y = moda_val + 0.5, 
-           label = paste("Moda:", round(moda_val, 1)), color = "darkgreen", hjust = 1) +
-  
+
   # Ajustes en los ejes del gráfico
   scale_x_continuous(breaks = seq(min(legendarios$Generation), max(legendarios$Generation), by = 1)) +
   scale_y_continuous(breaks = seq(min(legendarios$count), max(legendarios$count), by = 1)) +
-  labs(title = "Cantidad de Pokémon legendarios por generación",
+  labs(title = "Cantidad de Pokémons legendarios por generación",
        x = "Generación",
        y = "Cantidad") +
  
@@ -365,7 +377,7 @@ ggplot(legendarios, aes(x = Generation, y = count)) +
 
 ```
 
-En general, se observa una tendencia al alza en el número de Pokémon legendarios por generación, con picos significativos en las generaciones 5 y 8, lo que indica que no existe una fórmula fija a la hora de introducir nuevos Pokémon legendarios.
+En general, se observa una tendencia al alza en el número de Pokémons legendarios por generación, con picos significativos en las generaciones 5 y 8, lo que indica que no existe una fórmula fija a la hora de introducir nuevos Pokémons legendarios.
 
 ### Resúmenes numéricos
 
@@ -437,14 +449,15 @@ En este apartado analizaremos la posible existencia de correlación entre estad�
 #### Correlación entre Attack vs. sp_attack
 
 ```{r}
-# Crear el scatterplot
-ggplot(pokemon, aes(x = Attack, y = Sp_attack)) +
-  geom_point(color = "black", alpha = 0.6) +
-    geom_smooth(method = "lm", color = "#3565fc", se = FALSE) +
+# Crear el scatterplot con colores por generación
+ggplot(pokemon, aes(x = Attack, y = Sp_attack, color = as.factor(Generation))) +  
+  geom_point(alpha = 0.6) + 
+  geom_smooth(method = "lm", color = "#3565fc", se = FALSE) +  # Línea de regresión
   # Gráfico de dispersión
-  labs(title = "Relación entre Attack y Sp_attack",
+  labs(title = "Relación entre Attack y Sp_attack entre generaciones",
        x = "Attack",
-       y = "Sp_attack") +
+       y = "Sp_attack",
+       color = "Generación") +
   theme_minimal()
 
 # Calcular y mostrar la correlación
@@ -461,13 +474,14 @@ Además, la correlación moderada y la dispersión reflejan que ciertos Pokémon
 
 ```{r}
 # Crear el scatterplot
-ggplot(pokemon, aes(x = Defense, y = Sp_defense)) +
-  geom_point(color = "black", alpha = 0.6) +
+ggplot(pokemon, aes(x = Defense, y = Sp_defense, color = as.factor(Generation))) +
+  geom_point(alpha = 0.6) +
   geom_smooth(method = "lm", color = "#3565fc", se = FALSE) +
   # Gráfico de dispersión
-  labs(title = "Relación entre Defense y Sp_defense",
+  labs(title = "Relación entre Defense y Sp_defense entre generaciones",
        x = "Defense",
-       y = "Sp_defense") +
+       y = "Sp_defense",
+       color = "Generación") +
   theme_minimal()
 
 # Calcular y mostrar la correlación
