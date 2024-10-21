@@ -506,6 +506,13 @@ ggplot(aes(x = Stat_Average, y = Usage_Percentage)) +   geom_point() +
   labs(title = "Gráfico de dispersión Stat_Average vs Usage_Percentage")+
   theme_minimal()
 
+model <- lm(Usage_Percentage ~ Stat_Average, data = filtered_data)
+model_summary <- summary(model)
+r_squared <- model_summary$r.squared
+
+#R^2:
+print(r_squared)
+
 #TOTAL VS USAGE
 
 # Define ranges for x and y
@@ -526,6 +533,13 @@ ggplot(aes(x = Total, y = Usage_Percentage)) +   geom_point() +
   
   labs(title = "Gráfico de dispersión Total vs Usage_Percentage")+
   theme_minimal()
+
+model <- lm(Usage_Percentage ~ Total, data = filtered_data)
+model_summary <- summary(model)
+r_squared <- model_summary$r.squared
+
+#R^2:
+print(r_squared)
 
 ```
 
