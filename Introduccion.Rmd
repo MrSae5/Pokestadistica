@@ -105,6 +105,160 @@ tabla_frecuencias <- pokemon|>
 knitr::kable(tabla_frecuencias, digits = 3)
 
 ```
+
+### Tabla de frecuencia de intervalos de HP
+
+```{r echo=TRUE}
+# Transformamos el dataframe pokemon creando una nueva columna llamada " intervalos_HP" que creara 20 intervalos del dato HP.
+pokemon <- pokemon |>
+  mutate(intervalos_HP = cut(HP, breaks = 20))
+
+# Creamos una tabla de frecuencias a partir del dataframe pokemon.
+tabla_frecuencias <- pokemon|> 
+# Contamos los intervalos que hay y creamos la frecuencia relativa, la frecuencia acumulada, la frecuencia relativa acumulada.
+ count(intervalos_HP) |>
+  mutate(f = n/nrow(pokemon),
+   N = cumsum(n),
+    F = cumsum(f)) 
+#Pintamos y definimos el número de decimales queremos que tenga nuestra tabla
+knitr::kable(tabla_frecuencias, digits = 3)
+
+```
+
+En esta tabla podemos ver que el valor más común de HP se encuentra entre 65 y 78, con un total de 256 Pokémon. Los valores más bajos de HP son menos comunes, ya que hay pocos Pokémon por debajo de 14.
+
+### Tabla de frecuencia de intervalos de Attack
+
+```{r echo=TRUE}
+# Transformamos el dataframe pokemon creando una nueva columna llamada " intervalos_Attack" que creara 20 intervalos de Attack.
+pokemon <- pokemon |>
+  mutate(intervalos_Attack = cut(Attack, breaks = 20))
+
+# Creamos una tabla de frecuencias a partir del dataframe pokemon.
+tabla_frecuencias <- pokemon|> 
+# Contamos los intervalos que hay y creamos la frecuencia relativa, la frecuencia acumulada, la frecuencia relativa acumulada.
+ count(intervalos_Attack) |>
+  mutate(f = n/nrow(pokemon),
+   N = cumsum(n),
+    F = cumsum(f)) 
+#Pintamos y definimos el número de decimales queremos que tenga nuestra tabla
+knitr::kable(tabla_frecuencias, digits = 3)
+
+```
+
+En esta tabla, el ataque se distribuye de manera bastante uniforme en los intervalos intermedios. El intervalo (80, 89) tiene el mayor número de Pokémon, con 130 en total, y los valores de ataque muy bajos o muy altos son raros, ya que hay pocos Pokémon en esos extremos.
+
+### Tabla de frecuencia de intervalos de Defense
+
+```{r echo=TRUE}
+# Transformamos el dataframe pokemon creando una nueva columna llamada " intervalos_Attack" que creara 20 intervalos de Defense.
+pokemon <- pokemon |>
+  mutate(intervalos_Defense = cut(Defense, breaks = 20))
+
+# Creamos una tabla de frecuencias a partir del dataframe pokemon.
+tabla_frecuencias <- pokemon|> 
+# Contamos los intervalos que hay y creamos la frecuencia relativa, la frecuencia acumulada, la frecuencia relativa acumulada.
+ count(intervalos_Defense) |>
+  mutate(f = n/nrow(pokemon),
+   N = cumsum(n),
+    F = cumsum(f)) 
+#Pintamos y definimos el número de decimales queremos que tenga nuestra tabla
+knitr::kable(tabla_frecuencias, digits = 3)
+
+```
+
+### Tabla de frecuencia de intervalos de Sp_attack
+
+```{r echo=TRUE}
+# Transformamos el dataframe pokemon creando una nueva columna llamada " intervalos_Sp_attack" que creara 20 intervalos de Sp_attack.
+pokemon <- pokemon |>
+  mutate(intervalos_Sp_attack = cut(Sp_attack, breaks = 20))
+
+# Creamos una tabla de frecuencias a partir del dataframe pokemon.
+tabla_frecuencias <- pokemon|> 
+# Contamos los intervalos que hay y creamos la frecuencia relativa, la frecuencia acumulada, la frecuencia relativa acumulada.
+ count(intervalos_Sp_attack) |>
+  mutate(f = n/nrow(pokemon),
+   N = cumsum(n),
+    F = cumsum(f)) 
+#Pintamos y definimos el número de decimales queremos que tenga nuestra tabla
+knitr::kable(tabla_frecuencias, digits = 3)
+
+```
+
+### Tabla de frecuencia de intervalos de Sp_defense
+
+```{r echo=TRUE}
+# Transformamos el dataframe pokemon creando una nueva columna llamada " intervalos_Sp_defense" que creara 20 intervalos de Sp_defense.
+pokemon <- pokemon |>
+  mutate(intervalos_Sp_defense = cut(Sp_defense, breaks = 20))
+
+# Creamos una tabla de frecuencias a partir del dataframe pokemon.
+tabla_frecuencias <- pokemon|> 
+# Contamos los intervalos que hay y creamos la frecuencia relativa, la frecuencia acumulada, la frecuencia relativa acumulada.
+ count(intervalos_Sp_defense) |>
+  mutate(f = n/nrow(pokemon),
+   N = cumsum(n),
+    F = cumsum(f)) 
+#Pintamos y definimos el número de decimales queremos que tenga nuestra tabla
+knitr::kable(tabla_frecuencias, digits = 3)
+
+```
+
+### Tabla de frecuencia de intervalos de Speed
+
+```{r echo=TRUE}
+# Transformamos el dataframe pokemon creando una nueva columna llamada " intervalos_Speed" que creara 20 intervalos de Speed.
+pokemon <- pokemon |>
+  mutate(intervalos_Speed = cut(Speed, breaks = 20))
+
+# Creamos una tabla de frecuencias a partir del dataframe pokemon.
+tabla_frecuencias <- pokemon|> 
+# Contamos los intervalos que hay y creamos la frecuencia relativa, la frecuencia acumulada, la frecuencia relativa acumulada.
+ count(intervalos_Speed) |>
+  mutate(f = n/nrow(pokemon),
+   N = cumsum(n),
+    F = cumsum(f)) 
+#Pintamos y definimos el número de decimales queremos que tenga nuestra tabla
+knitr::kable(tabla_frecuencias, digits = 3)
+
+```
+
+Podemos observar que la mayoría de los Pokémon tienen velocidades entre 460 y 555 (232 Pokémon) y que las velocidades muy altas (mayores de 792) son muy raras, con solo 1 Pokémon en el último intervalo.
+
+### Tabla de frecuencia de Type_1
+
+```{r echo=TRUE}
+
+# Creamos una tabla de frecuencias a partir del dataframe pokemon.
+tabla_frecuencias <- pokemon|> 
+# Contamos los intervalos que hay y creamos la frecuencia relativa, la frecuencia acumulada, la frecuencia relativa acumulada.
+ count(Type_1) |>
+  mutate(f = n/nrow(pokemon),
+   N = cumsum(n),
+    F = cumsum(f)) 
+#Pintamos y definimos el número de decimales queremos que tenga nuestra tabla
+knitr::kable(tabla_frecuencias, digits = 3)
+
+```
+
+
+### Tabla de frecuencia de Type_2
+
+```{r echo=TRUE}
+
+# Creamos una tabla de frecuencias a partir del dataframe pokemon.
+tabla_frecuencias <- pokemon|> 
+# Contamos los intervalos que hay y creamos la frecuencia relativa, la frecuencia acumulada, la frecuencia relativa acumulada.
+ count(Type_2) |>
+  mutate(f = n/nrow(pokemon),
+   N = cumsum(n),
+    F = cumsum(f)) 
+#Pintamos y definimos el número de decimales queremos que tenga nuestra tabla
+knitr::kable(tabla_frecuencias, digits = 3)
+
+```
+
 ### Histograma de los intervalos de total
 ```{r echo=TRUE}
 # Creamos un histograma a partir de los datos Total. 
