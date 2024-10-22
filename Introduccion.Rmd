@@ -360,77 +360,8 @@ La cuarta octaba es la que presenta una Speed mayor, ya que su caja es ligeramen
 
 ### Gráficos de barras
 
-#### Tipos de Pokémons por generación
-A continuación, se va a analizar la cantidad de apariciones de cada tipo de Pokémon en cada generación, con el objetivo de diferenciar las cantidades entre tipos y entre cada juego. Se espera que en las primeras generaciones las cantidades entre tipos, sean más dispares y que los valores se estabilicen según avancen las generaciones, porque es lógico que el equilibrio al comienzo sea menos importante, que según se iban creando más y más generaciones. También se espera que, si hay un crecimiento repentino de un tipo en una generación, en la siguiente haya un descenso igual de importante, para compensar por la disparidad anterior.
-```{r echo=FALSE}
-# Definir una paleta de colores personalizada para los tipos (son los colores oficiales para los tipos)
-
-colors <- c("Fighting" = "#C22E28",
-            "Fire" = "#F08030",
-            "Electric" = "#F8D030",
-            "Grass" = "#78C850",
-            "Bug" = "#A8B820",
-            "Flying" = "#A890F0",
-            "Water" = "#6890F0",
-            "Dragon" = "#7038F8",
-            "Psychic" = "#F85888",
-            "Poison" = "#A040A0",
-            "Ghost" = "#705898",
-            "Dark" = "#705848",
-            "Ground" = "#E0C068",
-            "Rock" = "#B8A038",
-            "Steel" = "#B8B8D0",
-            "Fairy" = "#EE99AC",
-            "Ice" = "#98D8D8",
-            "Normal" = "#A8A878")
-```
-
-```{r echo=TRUE}
-# Agrupar los tipos de Pokémon
-pokemon_long <- pokemon %>%
-  # Convertir en formato largo para contar ambos tipos
-  pivot_longer(cols = c(Type_1, Type_2), names_to = "Type", values_to = "Types") %>%
-  # Eliminar los NA, que representan Pokémon que no tienen segundo tipo
-  filter(!is.na(Types))
-
-# Agrupar por generación y tipo de Pokémon, contando las ocurrencias
-pokemon_by_type <- pokemon_long %>%
-  group_by(Generation, Types) %>%
-  summarise(count = n(), .groups = "drop")
-```
-
-```{r echo=FALSE}
-# Asegurarse de que el orden de los tipos siga el de la paleta de colores
-pokemon_by_type$Types <- factor(pokemon_by_type$Types, levels = names(colors))
-```
-Una vez agrupadas y contadas todas las ocurrencias de cada tipo, se procede a crear el gráfico.
-```{r echo=TRUE}
-# Crear los gráficos de barras, uno por cada generación, con colores personalizados
-ggplot(pokemon_by_type, aes(x = Types, y = count, fill = Types)) +
-  geom_bar(stat = "identity") +
-  scale_fill_manual(values = colors) +  # Aplicar la paleta de colores personalizada
-  scale_y_continuous(breaks = seq(0, max(pokemon_by_type$count), by = 5)) +  # Ajustar el eje Y
-  facet_wrap(~ Generation, ncol = 4) +  # Distribuir en 4 columnas
-  labs(title = "Distribución de Tipos de Pokémon por Generación",
-       x = "Tipo de Pokémon",
-       y = "Cantidad") +
-  theme_minimal() +
-  theme(axis.text.x = element_blank(),  # Eliminar el texto del eje x
-        axis.ticks.x = element_blank(),  # Eliminar las marcas del eje x
-        strip.text = element_text(size = 12),  # Tamaño de los títulos de las facetas (Generación)
-        panel.spacing = unit(2, "lines"),  # Aumentar el espacio entre gráficos
-        legend.title = element_blank())  # Eliminar el título de la leyenda
-```
-
-
-A partir de la cuarta generación en adelante, la cantidad de tipos tiende a estabilizarse. Sin embargo, las primeras generaciones muestran una mayor disparidad en los tipos, como en la primera, donde la cantidad de tipos Dark, Dragon o Ghost, y de Water o Poison, son muy dispares.
-
-Un fenómeno interesante es la variabilidad de ciertos tipos a lo largo del tiempo. Por ejemplo, en la segunda y tercera generación, el tipo Dragon muestra un crecimiento, que luego se estabiliza. Otros tipos, como Electric, Grass o Fire, parecen mantenerse más consistentes. El cambio más drástico se produce con el tipo Poison de primera a segunda generación.
-
-En general, se cumple la tendencia esperada: conforme avanzan las generaciones, la cantidad de Pokémon de cada tipo tiende a nivelarse, y que grandes picos van acompañados por grandes caídas, que luego se estabilizan.
-
 #### Tipos de Pokémons
-A continuación, se va a analizar la cantidad de apariciones de cada tipo de Pokémon en cada generación, con el objetivo de diferenciar las cantidades entre tipos y entre cada juego. Se espera que en las primeras generaciones las cantidades entre tipos, sean más dispares y que los valores se estabilicen según avancen las generaciones, porque es lógico que el equilibrio al comienzo sea menos importante, que según se iban creando más y más generaciones. También se espera que, si hay un crecimiento repentino de un tipo en una generación, en la siguiente haya un descenso igual de importante, para compensar por la disparidad anterior.
+Vamos ahora a ayudarnos de un gráfico de barras para analizar la cantidad de apariciones de cada tipo en el conjunto de todos los pokemon, para concluir cuales son los tipos más comunes de pokemon.
 ```{r echo=FALSE}
 # Definir una paleta de colores personalizada para los tipos (son los colores oficiales para los tipos)
 
@@ -461,14 +392,14 @@ pokemon_long <- pokemon %>%
   pivot_longer(cols = c(Type_1, Type_2), names_to = "Type", values_to = "Types") %>%
   # Eliminar los NA, que representan Pokémon que no tienen segundo tipo
   filter(!is.na(Types))
+```
 
+```{r echo=FALSE}
 # Agrupar por generación y tipo de Pokémon, contando las ocurrencias
 pokemon_by_type <- pokemon_long %>%
   group_by(Types) %>%
   summarise(count = n(), .groups = "drop")
-```
 
-```{r echo=FALSE}
 # Asegurarse de que el orden de los tipos siga el de la paleta de colores
 pokemon_by_type$Types <- factor(pokemon_by_type$Types, levels = names(colors))
 ```
@@ -491,11 +422,7 @@ ggplot(pokemon_by_type, aes(x = Types, y = count, fill = Types)) +
 ```
 
 
-A partir de la cuarta generación en adelante, la cantidad de tipos tiende a estabilizarse. Sin embargo, las primeras generaciones muestran una mayor disparidad en los tipos, como en la primera, donde la cantidad de tipos Dark, Dragon o Ghost, y de Water o Poison, son muy dispares.
-
-Un fenómeno interesante es la variabilidad de ciertos tipos a lo largo del tiempo. Por ejemplo, en la segunda y tercera generación, el tipo Dragon muestra un crecimiento, que luego se estabiliza. Otros tipos, como Electric, Grass o Fire, parecen mantenerse más consistentes. El cambio más drástico se produce con el tipo Poison de primera a segunda generación.
-
-En general, se cumple la tendencia esperada: conforme avanzan las generaciones, la cantidad de Pokémon de cada tipo tiende a nivelarse, y que grandes picos van acompañados por grandes caídas, que luego se estabilizan.
+Se puede observar que los pokemon tipo Water son los más comunes con diferencia, seguidos de los tipo Grass, Flying, Psychic y Normal. El resto de tipos de pokemon más o menos se encuentran equilibrados entre ellos.
 
 #### Top 100 tipos más usados 
 
@@ -663,6 +590,77 @@ La velocidad varía de manera diferente a las demás estadísticas, llegando inc
 
 
 ## 4.2 Datos bivariantes
+
+
+#### Tipos de Pokémons por generación
+A continuación, se va a analizar la cantidad de apariciones de cada tipo de Pokémon en cada generación, con el objetivo de diferenciar las cantidades entre tipos y entre cada juego. Se espera que en las primeras generaciones las cantidades entre tipos, sean más dispares y que los valores se estabilicen según avancen las generaciones, porque es lógico que el equilibrio al comienzo sea menos importante, que según se iban creando más y más generaciones. También se espera que, si hay un crecimiento repentino de un tipo en una generación, en la siguiente haya un descenso igual de importante, para compensar por la disparidad anterior.
+```{r echo=FALSE}
+# Definir una paleta de colores personalizada para los tipos (son los colores oficiales para los tipos)
+
+colors <- c("Fighting" = "#C22E28",
+            "Fire" = "#F08030",
+            "Electric" = "#F8D030",
+            "Grass" = "#78C850",
+            "Bug" = "#A8B820",
+            "Flying" = "#A890F0",
+            "Water" = "#6890F0",
+            "Dragon" = "#7038F8",
+            "Psychic" = "#F85888",
+            "Poison" = "#A040A0",
+            "Ghost" = "#705898",
+            "Dark" = "#705848",
+            "Ground" = "#E0C068",
+            "Rock" = "#B8A038",
+            "Steel" = "#B8B8D0",
+            "Fairy" = "#EE99AC",
+            "Ice" = "#98D8D8",
+            "Normal" = "#A8A878")
+```
+
+```{r echo=TRUE}
+# Agrupar los tipos de Pokémon
+pokemon_long <- pokemon %>%
+  # Convertir en formato largo para contar ambos tipos
+  pivot_longer(cols = c(Type_1, Type_2), names_to = "Type", values_to = "Types") %>%
+  # Eliminar los NA, que representan Pokémon que no tienen segundo tipo
+  filter(!is.na(Types))
+
+# Agrupar por generación y tipo de Pokémon, contando las ocurrencias
+pokemon_by_type <- pokemon_long %>%
+  group_by(Generation, Types) %>%
+  summarise(count = n(), .groups = "drop")
+```
+
+```{r echo=FALSE}
+# Asegurarse de que el orden de los tipos siga el de la paleta de colores
+pokemon_by_type$Types <- factor(pokemon_by_type$Types, levels = names(colors))
+```
+Una vez agrupadas y contadas todas las ocurrencias de cada tipo, se procede a crear el gráfico.
+```{r echo=TRUE}
+# Crear los gráficos de barras, uno por cada generación, con colores personalizados
+ggplot(pokemon_by_type, aes(x = Types, y = count, fill = Types)) +
+  geom_bar(stat = "identity") +
+  scale_fill_manual(values = colors) +  # Aplicar la paleta de colores personalizada
+  scale_y_continuous(breaks = seq(0, max(pokemon_by_type$count), by = 5)) +  # Ajustar el eje Y
+  facet_wrap(~ Generation, ncol = 4) +  # Distribuir en 4 columnas
+  labs(title = "Distribución de Tipos de Pokémon por Generación",
+       x = "Tipo de Pokémon",
+       y = "Cantidad") +
+  theme_minimal() +
+  theme(axis.text.x = element_blank(),  # Eliminar el texto del eje x
+        axis.ticks.x = element_blank(),  # Eliminar las marcas del eje x
+        strip.text = element_text(size = 12),  # Tamaño de los títulos de las facetas (Generación)
+        panel.spacing = unit(2, "lines"),  # Aumentar el espacio entre gráficos
+        legend.title = element_blank())  # Eliminar el título de la leyenda
+```
+
+
+A partir de la cuarta generación en adelante, la cantidad de tipos tiende a estabilizarse. Sin embargo, las primeras generaciones muestran una mayor disparidad en los tipos, como en la primera, donde la cantidad de tipos Dark, Dragon o Ghost, y de Water o Poison, son muy dispares.
+
+Un fenómeno interesante es la variabilidad de ciertos tipos a lo largo del tiempo. Por ejemplo, en la segunda y tercera generación, el tipo Dragon muestra un crecimiento, que luego se estabiliza. Otros tipos, como Electric, Grass o Fire, parecen mantenerse más consistentes. El cambio más drástico se produce con el tipo Poison de primera a segunda generación.
+
+En general, se cumple la tendencia esperada: conforme avanzan las generaciones, la cantidad de Pokémon de cada tipo tiende a nivelarse, y que grandes picos van acompañados por grandes caídas, que luego se estabilizan.
+
 
 ### Scatter plot
 
