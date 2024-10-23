@@ -88,7 +88,9 @@ pokemon <- read_excel("data/PokemonV4.xlsx")
 
 ## 4.1 Datos univariantes 
 
-### Tabla de frecuencia de intervalos de total de estadísticas
+### Tablas de frecuencias
+
+#### Tabla de frecuencia de intervalos de total de estadísticas
 ```{r echo=TRUE}
 # Transformamos el dataframe pokemon creando una nueva columna llamada " intervalos_totales" que creara 20 intervalos del dato total.
 pokemon <- pokemon |>
@@ -106,7 +108,7 @@ knitr::kable(tabla_frecuencias, digits = 3)
 
 ```
 
-### Tabla de frecuencia de intervalos de HP
+#### Tabla de frecuencia de intervalos de HP
 
 ```{r echo=TRUE}
 # Transformamos el dataframe pokemon creando una nueva columna llamada " intervalos_HP" que creara 20 intervalos del dato HP.
@@ -127,7 +129,7 @@ knitr::kable(tabla_frecuencias, digits = 3)
 
 En esta tabla podemos ver que el valor más común de HP se encuentra entre 65 y 78, con un total de 256 Pokémon. Los valores más bajos de HP son menos comunes, ya que hay pocos Pokémon por debajo de 14.
 
-### Tabla de frecuencia de intervalos de Attack
+#### Tabla de frecuencia de intervalos de Attack
 
 ```{r echo=TRUE}
 # Transformamos el dataframe pokemon creando una nueva columna llamada " intervalos_Attack" que creara 20 intervalos de Attack.
@@ -148,7 +150,7 @@ knitr::kable(tabla_frecuencias, digits = 3)
 
 En esta tabla, el ataque se distribuye de manera bastante uniforme en los intervalos intermedios. El intervalo (80, 89) tiene el mayor número de Pokémon, con 130 en total, y los valores de ataque muy bajos o muy altos son raros, ya que hay pocos Pokémon en esos extremos.
 
-### Tabla de frecuencia de intervalos de Defense
+#### Tabla de frecuencia de intervalos de Defense
 
 ```{r echo=TRUE}
 # Transformamos el dataframe pokemon creando una nueva columna llamada " intervalos_Attack" que creara 20 intervalos de Defense.
@@ -167,7 +169,7 @@ knitr::kable(tabla_frecuencias, digits = 3)
 
 ```
 
-### Tabla de frecuencia de intervalos de Sp_attack
+#### Tabla de frecuencia de intervalos de Sp_attack
 
 ```{r echo=TRUE}
 # Transformamos el dataframe pokemon creando una nueva columna llamada " intervalos_Sp_attack" que creara 20 intervalos de Sp_attack.
@@ -186,7 +188,7 @@ knitr::kable(tabla_frecuencias, digits = 3)
 
 ```
 
-### Tabla de frecuencia de intervalos de Sp_defense
+#### Tabla de frecuencia de intervalos de Sp_defense
 
 ```{r echo=TRUE}
 # Transformamos el dataframe pokemon creando una nueva columna llamada " intervalos_Sp_defense" que creara 20 intervalos de Sp_defense.
@@ -205,7 +207,7 @@ knitr::kable(tabla_frecuencias, digits = 3)
 
 ```
 
-### Tabla de frecuencia de intervalos de Speed
+#### Tabla de frecuencia de intervalos de Speed
 
 ```{r echo=TRUE}
 # Transformamos el dataframe pokemon creando una nueva columna llamada " intervalos_Speed" que creara 20 intervalos de Speed.
@@ -226,7 +228,7 @@ knitr::kable(tabla_frecuencias, digits = 3)
 
 Podemos observar que la mayoría de los Pokémon tienen velocidades entre 460 y 555 (232 Pokémon) y que las velocidades muy altas (mayores de 792) son muy raras, con solo 1 Pokémon en el último intervalo.
 
-### Tabla de frecuencia de Type_1
+#### Tabla de frecuencia de Type_1
 
 ```{r echo=TRUE}
 
@@ -243,7 +245,7 @@ knitr::kable(tabla_frecuencias, digits = 3)
 ```
 
 
-### Tabla de frecuencia de Type_2
+#### Tabla de frecuencia de Type_2
 
 ```{r echo=TRUE}
 
@@ -270,6 +272,8 @@ pokemon |> ggplot(aes(Total)) +
 ```
 
 Podemos observar que la mayoría de las estadísticas de los Pokémon se encuentran dentro del rango de 300 a 600, con un pico más pronunciado entre 500 y 600. Además, notamos que solo hay un Pokémon que se encuentra fuera de estos rangos, cuyo total supera los 1000
+
+### Boxplots
 
 #### Grafico de cajas HP y Generación 
 
@@ -548,7 +552,18 @@ print(tabla_generacion_pokemons)
 print(media_total_pokemons)
 ````
 
-#### Análisis descriptivo de las estadísticas
+#### Análisis descriptivo de las estadísticas globales
+````{r}
+pokemon_stats <- pokemon %>%
+  select(HP,Attack, Defense, Sp_attack, Sp_defense, Speed)
+summary_stats <- descr(pokemon_stats)
+
+print(summary_stats)
+
+````
+
+
+#### Análisis descriptivo de las estadísticas según generación
 
 
 ````{r}
@@ -592,7 +607,7 @@ La velocidad varía de manera diferente a las demás estadísticas, llegando inc
 ## 4.2 Datos bivariantes
 
 
-#### Tipos de Pokémons por generación
+### Gráfico de barras de tipos de Pokémons por generación
 A continuación, se va a analizar la cantidad de apariciones de cada tipo de Pokémon en cada generación, con el objetivo de diferenciar las cantidades entre tipos y entre cada juego. Se espera que en las primeras generaciones las cantidades entre tipos, sean más dispares y que los valores se estabilicen según avancen las generaciones, porque es lógico que el equilibrio al comienzo sea menos importante, que según se iban creando más y más generaciones. También se espera que, si hay un crecimiento repentino de un tipo en una generación, en la siguiente haya un descenso igual de importante, para compensar por la disparidad anterior.
 ```{r echo=FALSE}
 # Definir una paleta de colores personalizada para los tipos (son los colores oficiales para los tipos)

@@ -1529,14 +1529,12 @@ espera para una posible novena generación.</p></li>
 </div>
 <div id="importación-de-datos-y-carga-de-paquetes" class="section level1">
 <h1>2. Importación de datos y carga de paquetes</h1>
-<pre class="r"><code>library(readxl)</code></pre>
-<pre><code>## Warning: package &#39;readxl&#39; was built under R version 4.4.1</code></pre>
-<pre class="r"><code>library(tidyverse)
+<pre class="r"><code>library(readxl)
+library(tidyverse)
 library(summarytools)
 library(ggplot2)
-library(knitr)</code></pre>
-<pre><code>## Warning: package &#39;knitr&#39; was built under R version 4.4.1</code></pre>
-<pre class="r"><code>library(&#39;dplyr&#39;)
+library(knitr)
+library(&#39;dplyr&#39;)
 
 
 pokemon &lt;- read_excel(&quot;data/PokemonV4.xlsx&quot;)</code></pre>
@@ -1628,8 +1626,10 @@ cada Pokémon en torneos competitivos.
 <h1>4. Análisis exploratorio de datos</h1>
 <div id="datos-univariantes" class="section level2">
 <h2>4.1 Datos univariantes</h2>
-<div id="tabla-de-frecuencia-de-intervalos-de-total-de-estadísticas" class="section level3">
-<h3>Tabla de frecuencia de intervalos de total de estadísticas</h3>
+<div id="tablas-de-frecuencias" class="section level3">
+<h3>Tablas de frecuencias</h3>
+<div id="tabla-de-frecuencia-de-intervalos-de-total-de-estadísticas" class="section level4">
+<h4>Tabla de frecuencia de intervalos de total de estadísticas</h4>
 <pre class="r"><code># Transformamos el dataframe pokemon creando una nueva columna llamada &quot; intervalos_totales&quot; que creara 20 intervalos del dato total.
 pokemon &lt;- pokemon |&gt;
   mutate(intervalos_totales = cut(Total, breaks = 20))
@@ -1755,8 +1755,8 @@ knitr::kable(tabla_frecuencias, digits = 3)</code></pre>
 </tbody>
 </table>
 </div>
-<div id="tabla-de-frecuencia-de-intervalos-de-hp" class="section level3">
-<h3>Tabla de frecuencia de intervalos de HP</h3>
+<div id="tabla-de-frecuencia-de-intervalos-de-hp" class="section level4">
+<h4>Tabla de frecuencia de intervalos de HP</h4>
 <pre class="r"><code># Transformamos el dataframe pokemon creando una nueva columna llamada &quot; intervalos_HP&quot; que creara 20 intervalos del dato HP.
 pokemon &lt;- pokemon |&gt;
   mutate(intervalos_HP = cut(HP, breaks = 20))
@@ -1920,8 +1920,8 @@ knitr::kable(tabla_frecuencias, digits = 3)</code></pre>
 entre 65 y 78, con un total de 256 Pokémon. Los valores más bajos de HP
 son menos comunes, ya que hay pocos Pokémon por debajo de 14.</p>
 </div>
-<div id="tabla-de-frecuencia-de-intervalos-de-attack" class="section level3">
-<h3>Tabla de frecuencia de intervalos de Attack</h3>
+<div id="tabla-de-frecuencia-de-intervalos-de-attack" class="section level4">
+<h4>Tabla de frecuencia de intervalos de Attack</h4>
 <pre class="r"><code># Transformamos el dataframe pokemon creando una nueva columna llamada &quot; intervalos_Attack&quot; que creara 20 intervalos de Attack.
 pokemon &lt;- pokemon |&gt;
   mutate(intervalos_Attack = cut(Attack, breaks = 20))
@@ -2093,8 +2093,8 @@ los intervalos intermedios. El intervalo (80, 89) tiene el mayor número
 de Pokémon, con 130 en total, y los valores de ataque muy bajos o muy
 altos son raros, ya que hay pocos Pokémon en esos extremos.</p>
 </div>
-<div id="tabla-de-frecuencia-de-intervalos-de-defense" class="section level3">
-<h3>Tabla de frecuencia de intervalos de Defense</h3>
+<div id="tabla-de-frecuencia-de-intervalos-de-defense" class="section level4">
+<h4>Tabla de frecuencia de intervalos de Defense</h4>
 <pre class="r"><code># Transformamos el dataframe pokemon creando una nueva columna llamada &quot; intervalos_Attack&quot; que creara 20 intervalos de Defense.
 pokemon &lt;- pokemon |&gt;
   mutate(intervalos_Defense = cut(Defense, breaks = 20))
@@ -2255,8 +2255,8 @@ knitr::kable(tabla_frecuencias, digits = 3)</code></pre>
 </tbody>
 </table>
 </div>
-<div id="tabla-de-frecuencia-de-intervalos-de-sp_attack" class="section level3">
-<h3>Tabla de frecuencia de intervalos de Sp_attack</h3>
+<div id="tabla-de-frecuencia-de-intervalos-de-sp_attack" class="section level4">
+<h4>Tabla de frecuencia de intervalos de Sp_attack</h4>
 <pre class="r"><code># Transformamos el dataframe pokemon creando una nueva columna llamada &quot; intervalos_Sp_attack&quot; que creara 20 intervalos de Sp_attack.
 pokemon &lt;- pokemon |&gt;
   mutate(intervalos_Sp_attack = cut(Sp_attack, breaks = 20))
@@ -2424,8 +2424,8 @@ knitr::kable(tabla_frecuencias, digits = 3)</code></pre>
 </tbody>
 </table>
 </div>
-<div id="tabla-de-frecuencia-de-intervalos-de-sp_defense" class="section level3">
-<h3>Tabla de frecuencia de intervalos de Sp_defense</h3>
+<div id="tabla-de-frecuencia-de-intervalos-de-sp_defense" class="section level4">
+<h4>Tabla de frecuencia de intervalos de Sp_defense</h4>
 <pre class="r"><code># Transformamos el dataframe pokemon creando una nueva columna llamada &quot; intervalos_Sp_defense&quot; que creara 20 intervalos de Sp_defense.
 pokemon &lt;- pokemon |&gt;
   mutate(intervalos_Sp_defense = cut(Sp_defense, breaks = 20))
@@ -2565,8 +2565,8 @@ knitr::kable(tabla_frecuencias, digits = 3)</code></pre>
 </tbody>
 </table>
 </div>
-<div id="tabla-de-frecuencia-de-intervalos-de-speed" class="section level3">
-<h3>Tabla de frecuencia de intervalos de Speed</h3>
+<div id="tabla-de-frecuencia-de-intervalos-de-speed" class="section level4">
+<h4>Tabla de frecuencia de intervalos de Speed</h4>
 <pre class="r"><code># Transformamos el dataframe pokemon creando una nueva columna llamada &quot; intervalos_Speed&quot; que creara 20 intervalos de Speed.
 pokemon &lt;- pokemon |&gt;
   mutate(intervalos_Speed = cut(Speed, breaks = 20))
@@ -2723,8 +2723,8 @@ knitr::kable(tabla_frecuencias, digits = 3)</code></pre>
 entre 460 y 555 (232 Pokémon) y que las velocidades muy altas (mayores
 de 792) son muy raras, con solo 1 Pokémon en el último intervalo.</p>
 </div>
-<div id="tabla-de-frecuencia-de-type_1" class="section level3">
-<h3>Tabla de frecuencia de Type_1</h3>
+<div id="tabla-de-frecuencia-de-type_1" class="section level4">
+<h4>Tabla de frecuencia de Type_1</h4>
 <pre class="r"><code># Creamos una tabla de frecuencias a partir del dataframe pokemon.
 tabla_frecuencias &lt;- pokemon|&gt; 
 # Contamos los intervalos que hay y creamos la frecuencia relativa, la frecuencia acumulada, la frecuencia relativa acumulada.
@@ -2874,8 +2874,8 @@ knitr::kable(tabla_frecuencias, digits = 3)</code></pre>
 </tbody>
 </table>
 </div>
-<div id="tabla-de-frecuencia-de-type_2" class="section level3">
-<h3>Tabla de frecuencia de Type_2</h3>
+<div id="tabla-de-frecuencia-de-type_2" class="section level4">
+<h4>Tabla de frecuencia de Type_2</h4>
 <pre class="r"><code># Creamos una tabla de frecuencias a partir del dataframe pokemon.
 tabla_frecuencias &lt;- pokemon|&gt; 
 # Contamos los intervalos que hay y creamos la frecuencia relativa, la frecuencia acumulada, la frecuencia relativa acumulada.
@@ -3032,6 +3032,7 @@ knitr::kable(tabla_frecuencias, digits = 3)</code></pre>
 </tbody>
 </table>
 </div>
+</div>
 <div id="histograma-de-los-intervalos-de-total" class="section level3">
 <h3>Histograma de los intervalos de total</h3>
 <pre class="r"><code># Creamos un histograma a partir de los datos Total. 
@@ -3045,6 +3046,9 @@ pokemon |&gt; ggplot(aes(Total)) +
 encuentran dentro del rango de 300 a 600, con un pico más pronunciado
 entre 500 y 600. Además, notamos que solo hay un Pokémon que se
 encuentra fuera de estos rangos, cuyo total supera los 1000</p>
+</div>
+<div id="boxplots" class="section level3">
+<h3>Boxplots</h3>
 <div id="grafico-de-cajas-hp-y-generación" class="section level4">
 <h4>Grafico de cajas HP y Generación</h4>
 <pre class="r"><code># Definimos el dataframe Pokémon, definiremos el estilo del blox pot y a continuación indicaremos que datos debe tener cada variable , y le asignaremos un nombre.
@@ -3299,8 +3303,37 @@ print(tabla_generacion_pokemons)</code></pre>
 print(media_total_pokemons)</code></pre>
 <pre><code>## [1] 134</code></pre>
 </div>
-<div id="análisis-descriptivo-de-las-estadísticas" class="section level4">
-<h4>Análisis descriptivo de las estadísticas</h4>
+<div id="análisis-descriptivo-de-las-estadísticas-globales" class="section level4">
+<h4>Análisis descriptivo de las estadísticas globales</h4>
+<pre class="r"><code>pokemon_stats &lt;- pokemon %&gt;%
+  select(HP,Attack, Defense, Sp_attack, Sp_defense, Speed)
+summary_stats &lt;- descr(pokemon_stats)
+
+print(summary_stats)</code></pre>
+<pre><code>## Descriptive Statistics  
+## pokemon_stats  
+## N: 1072  
+## 
+##                      Attack   Defense        HP   Sp_attack   Sp_defense     Speed
+## ----------------- --------- --------- --------- ----------- ------------ ---------
+##              Mean     80.94     74.97     70.49       73.27        72.48     68.79
+##           Std.Dev     32.46     31.21     26.87       32.64        27.93     30.08
+##               Min      5.00      5.00      1.00       10.00        20.00      5.00
+##                Q1     56.00     52.00     50.00       50.00        50.00     45.00
+##            Median     80.00     70.00     68.00       65.00        70.00     65.00
+##                Q3    100.00     90.00     84.00       95.00        90.00     90.00
+##               Max    190.00    250.00    255.00      194.00       250.00    200.00
+##               MAD     30.39     29.65     25.20       31.13        29.65     32.62
+##               IQR     44.00     38.00     34.00       45.00        40.00     45.00
+##                CV      0.40      0.42      0.38        0.45         0.39      0.44
+##          Skewness      0.46      1.14      1.76        0.71         0.92      0.42
+##       SE.Skewness      0.07      0.07      0.07        0.07         0.07      0.07
+##          Kurtosis     -0.05      2.84      7.91        0.19         2.36     -0.08
+##           N.Valid   1072.00   1072.00   1072.00     1072.00      1072.00   1072.00
+##         Pct.Valid    100.00    100.00    100.00      100.00       100.00    100.00</code></pre>
+</div>
+<div id="análisis-descriptivo-de-las-estadísticas-según-generación" class="section level4">
+<h4>Análisis descriptivo de las estadísticas según generación</h4>
 <pre class="r"><code>with(pokemon, stby(HP,Generation, descr))</code></pre>
 <pre><code>## Descriptive Statistics  
 ## HP by Generation  
@@ -3463,8 +3496,8 @@ claro.</p>
 </div>
 <div id="datos-bivariantes" class="section level2">
 <h2>4.2 Datos bivariantes</h2>
-<div id="tipos-de-pokémons-por-generación" class="section level4">
-<h4>Tipos de Pokémons por generación</h4>
+<div id="gráfico-de-barras-de-tipos-de-pokémons-por-generación" class="section level3">
+<h3>Gráfico de barras de tipos de Pokémons por generación</h3>
 <p>A continuación, se va a analizar la cantidad de apariciones de cada
 tipo de Pokémon en cada generación, con el objetivo de diferenciar las
 cantidades entre tipos y entre cada juego. Se espera que en las primeras
