@@ -88,7 +88,9 @@ pokemon <- read_excel("data/PokemonV4.xlsx")
 
 ## 4.1 Datos univariantes 
 
-### Tabla de frecuencia de intervalos de total de estadísticas
+### Tablas de frecuencias y histogramas
+
+#### Tabla de frecuencia de intervalos de total de estadísticas
 ```{r echo=TRUE}
 # Transformamos el dataframe pokemon creando una nueva columna llamada " intervalos_totales" que creara 20 intervalos del dato total.
 pokemon <- pokemon |>
@@ -106,7 +108,21 @@ knitr::kable(tabla_frecuencias, digits = 3)
 
 ```
 
-### Tabla de frecuencia de intervalos de HP
+Observamos que la mayor parte de los datos se concentra en los intervalos (270-508), ya que los intervalos con mayor frecuencia relativa se encuentran en este rango. A partir del intervalo (555-602), los datos comienzan a disminuir significativamente, lo que indica que los valores más altos son mucho menos comunes en esta distribución.
+
+#### Histograma de total
+```{r echo=TRUE}
+# Creamos un histograma a partir de los datos Total. 
+pokemon |> ggplot(aes(Total)) + 
+# Definimos el color y el numero de barras que tendrá nuestro historama. Calculamos el número de barras a través de la raíz cuadrada de nuestro número de datos.
+  geom_histogram(fill = "#3565fc", bins = 33, col = "white") + 
+# Indicamos el tema.
+  theme_minimal() 
+```
+
+Podemos observar que la mayoría de las estadísticas de los Pokémon se encuentran dentro del rango de 300 a 500, con un pico más pronunciado entre 500 y 600. Además, notamos que solo hay un Pokémon cuya estadística total supera los 1000, situándose fuera de estos rangos.
+
+#### Tabla de frecuencia de intervalos de HP
 
 ```{r echo=TRUE}
 # Transformamos el dataframe pokemon creando una nueva columna llamada " intervalos_HP" que creara 20 intervalos del dato HP.
@@ -125,9 +141,22 @@ knitr::kable(tabla_frecuencias, digits = 3)
 
 ```
 
-En esta tabla podemos ver que el valor más común de HP se encuentra entre 65 y 78, con un total de 256 Pokémon. Los valores más bajos de HP son menos comunes, ya que hay pocos Pokémon por debajo de 14.
+En esta tabla podemos ver que el valor más común de HP se encuentra entre 64.5 y 77.2, con un total de 256 Pokémon. Los valores más bajos de HP son menos comunes, ya que hay pocos Pokémon con un valor por debajo de 14.
 
-### Tabla de frecuencia de intervalos de Attack
+#### Histograma de HP
+
+```{r echo=TRUE}
+# Creamos un histograma a partir de los datos HP. 
+pokemon |> ggplot(aes(HP)) + 
+# Definimos el color y el numero de barras que tendrá nuestro historama. Calculamos el número de barras a través de la raíz cuadrada de nuestro número de datos.
+  geom_histogram(fill = "#3565fc", bins = 33, col = "white") + 
+# Indicamos el tema.
+  theme_minimal() 
+```
+
+Podemos observar que la mayoría de las estadísticas de los Pokémon se encuentran dentro del rango de 30 a 130, con picos más pronunciados entre 60 y 80. Además, notamos que hay varios Pokémon fuera de estos rangos, con valores de HP que superan los 200, y muy pocos casos por debajo de 30, con solo dos Pokémon comprendidos entre 0 y 10.
+
+#### Tabla de frecuencia de intervalos de Attack
 
 ```{r echo=TRUE}
 # Transformamos el dataframe pokemon creando una nueva columna llamada " intervalos_Attack" que creara 20 intervalos de Attack.
@@ -146,12 +175,25 @@ knitr::kable(tabla_frecuencias, digits = 3)
 
 ```
 
-En esta tabla, el ataque se distribuye de manera bastante uniforme en los intervalos intermedios. El intervalo (80, 89) tiene el mayor número de Pokémon, con 130 en total, y los valores de ataque muy bajos o muy altos son raros, ya que hay pocos Pokémon en esos extremos.
+En esta tabla, el Attack se distribuye de manera bastante uniforme en los intervalos intermedios. El intervalo (79-88.2) tiene el mayor número de Pokémon, con un total de 130. Los valores de Attack muy bajos o muy altos son raros, ya que hay pocos Pokémon en esos extremos.
 
-### Tabla de frecuencia de intervalos de Defense
+#### Histograma de Attack
 
 ```{r echo=TRUE}
-# Transformamos el dataframe pokemon creando una nueva columna llamada " intervalos_Attack" que creara 20 intervalos de Defense.
+# Creamos un histograma a partir de los datos Attack. 
+pokemon |> ggplot(aes(Attack)) + 
+# Definimos el color y el numero de barras que tendrá nuestro historama. Calculamos el número de barras a través de la raíz cuadrada de nuestro número de datos.
+  geom_histogram(fill = "#3565fc", bins = 33, col = "white") + 
+# Indicamos el tema.
+  theme_minimal() 
+```
+
+Podemos observar que la mayoría de las estadísticas de los Pokémon se encuentran dentro del rango de 50 a 100, con picos más pronunciados en 70 y 90. Además, notamos que hay Pokémon distribuidos a lo largo de todo el histograma, mostrando una gran variabilidad en los valores.
+
+#### Tabla de frecuencia de intervalos de Defense
+
+```{r echo=TRUE}
+# Transformamos el dataframe pokemon creando una nueva columna llamada " intervalos_Defense" que creara 20 intervalos de Defense.
 pokemon <- pokemon |>
   mutate(intervalos_Defense = cut(Defense, breaks = 20))
 
@@ -167,7 +209,22 @@ knitr::kable(tabla_frecuencias, digits = 3)
 
 ```
 
-### Tabla de frecuencia de intervalos de Sp_attack
+En esta tabla podemos observar que la mayor parte de los datos está concentrada entre los intervalos (41.8-90.8). A partir de valores mayores a 128, los datos se vuelven muy poco comunes, lo que indica que estos valores son extremadamente raros.
+
+#### Histograma de Defense
+
+```{r echo=TRUE}
+# Creamos un histograma a partir de los datos Defense. 
+pokemon |> ggplot(aes(Defense)) + 
+# Definimos el color y el numero de barras que tendrá nuestro historama. Calculamos el número de barras a través de la raíz cuadrada de nuestro número de datos.
+  geom_histogram(fill = "#3565fc", bins = 33, col = "white") + 
+# Indicamos el tema.
+  theme_minimal() 
+```
+
+Vemos que la mayoría de las estadísticas de los Pokémon se encuentran dentro del rango de 40 a 90, con picos más pronunciados entre 70 y 80. Además, notamos que hay varios Pokémon fuera de estos rangos, con valores de Defense que van de 190 a 250, donde las barras están distanciadas y son muy pequeñas.
+
+#### Tabla de frecuencia de intervalos de Sp_attack
 
 ```{r echo=TRUE}
 # Transformamos el dataframe pokemon creando una nueva columna llamada " intervalos_Sp_attack" que creara 20 intervalos de Sp_attack.
@@ -186,7 +243,22 @@ knitr::kable(tabla_frecuencias, digits = 3)
 
 ```
 
-### Tabla de frecuencia de intervalos de Sp_defense
+La mayor parte de los datos está concentrada en los intervalos (37.6-83.6). Los valores mayores de 111 son mucho menos comunes y, al igual que en las otras tablas, a partir de 130 los valores se vuelven prácticamente inexistentes.
+
+#### Histograma de Sp_attack
+
+```{r echo=TRUE}
+# Creamos un histograma a partir de los datos Sp_attack. 
+pokemon |> ggplot(aes(Sp_attack)) + 
+# Definimos el color y el numero de barras que tendrá nuestro historama. Calculamos el número de barras a través de la raíz cuadrada de nuestro número de datos.
+  geom_histogram(fill = "#3565fc", bins = 33, col = "white") + 
+# Indicamos el tema.
+  theme_minimal() 
+```
+
+Podemos observar que la mayoría de las estadísticas de los Pokémon se encuentran dentro del rango de 25 a 100, con picos más pronunciados en 40 y 95. Además, notamos que la gráfica, a partir de 100, va descendiendo, encontrándose cada vez menos Pokémon con Sp. Attack alto.
+
+#### Tabla de frecuencia de intervalos de Sp_defense
 
 ```{r echo=TRUE}
 # Transformamos el dataframe pokemon creando una nueva columna llamada " intervalos_Sp_defense" que creara 20 intervalos de Sp_defense.
@@ -205,7 +277,22 @@ knitr::kable(tabla_frecuencias, digits = 3)
 
 ```
 
-### Tabla de frecuencia de intervalos de Speed
+Podemos observar que la mayoría de los Pokémon tienen Sp. Defense entre 54.5 y 66, y que los Pokémon con Sp. Defense muy alta (entre 238 y 250) son muy raros, con solo 1 Pokémon en el último intervalo.
+
+#### Histograma de Sp_defense
+
+```{r echo=TRUE}
+# Creamos un histograma a partir de los datos Sp_defense. 
+pokemon |> ggplot(aes(Sp_defense)) + 
+# Definimos el color y el numero de barras que tendrá nuestro historama. Calculamos el número de barras a través de la raíz cuadrada de nuestro número de datos.
+  geom_histogram(fill = "#3565fc", bins = 33, col = "white") + 
+# Indicamos el tema.
+  theme_minimal() 
+```
+
+Vemos que la mayoría de las estadísticas de los Pokémon se encuentran dentro del rango de 50 a 90, con picos más pronunciados en 60 y 80. Además, notamos que hay 3 Pokémon situados a partir de 200, teniendo estos valores muy altos de Sp. Defense.
+
+#### Tabla de frecuencia de intervalos de Speed
 
 ```{r echo=TRUE}
 # Transformamos el dataframe pokemon creando una nueva columna llamada " intervalos_Speed" que creara 20 intervalos de Speed.
@@ -224,9 +311,22 @@ knitr::kable(tabla_frecuencias, digits = 3)
 
 ```
 
-Podemos observar que la mayoría de los Pokémon tienen velocidades entre 460 y 555 (232 Pokémon) y que las velocidades muy altas (mayores de 792) son muy raras, con solo 1 Pokémon en el último intervalo.
+Podemos observar que la mayoría de los Pokémon tienen velocidades entre los intervalos (34.2-112) y que las velocidades muy altas, en el rango de (151-200), son muy raras, con solo 1 Pokémon en los últimos 3 intervalos.
 
-### Tabla de frecuencia de Type_1
+#### Histograma de Speed
+
+```{r echo=TRUE}
+# Creamos un histograma a partir de los datos Speed. 
+pokemon |> ggplot(aes(Speed)) + 
+# Definimos el color y el numero de barras que tendrá nuestro historama. Calculamos el número de barras a través de la raíz cuadrada de nuestro número de datos.
+  geom_histogram(fill = "#3565fc", bins = 33, col = "white") + 
+# Indicamos el tema.
+  theme_minimal() 
+```
+
+Vemos que la mayoría de las estadísticas de los Pokémon se encuentran dentro del rango de 30 a 100, con picos más pronunciados en 40, 60 y 90. Además, notamos que hay 2 Pokémon que están situados por encima de 150, teniendo estos valores muy altos de Speed.
+
+#### Tabla de frecuencia de Type_1
 
 ```{r echo=TRUE}
 
@@ -242,8 +342,7 @@ knitr::kable(tabla_frecuencias, digits = 3)
 
 ```
 
-
-### Tabla de frecuencia de Type_2
+#### Tabla de frecuencia de Type_2
 
 ```{r echo=TRUE}
 
@@ -259,109 +358,10 @@ knitr::kable(tabla_frecuencias, digits = 3)
 
 ```
 
-### Histograma de los intervalos de total
-```{r echo=TRUE}
-# Creamos un histograma a partir de los datos Total. 
-pokemon |> ggplot(aes(Total)) + 
-# Definimos el color y el numero de barras que tendrá nuestro historama. Calculamos el número de barras a través de la raíz cuadrada de nuestro número de datos.
-  geom_histogram(fill = "#3565fc", bins = 33, col = "white") + 
-# Indicamos el tema.
-  theme_minimal() 
-```
-
-Podemos observar que la mayoría de las estadísticas de los Pokémon se encuentran dentro del rango de 300 a 600, con un pico más pronunciado entre 500 y 600. Además, notamos que solo hay un Pokémon que se encuentra fuera de estos rangos, cuyo total supera los 1000
-
-#### Grafico de cajas HP y Generación 
-
-```{r}
-# Definimos el dataframe Pokémon, definiremos el estilo del blox pot y a continuación indicaremos que datos debe tener cada variable , y le asignaremos un nombre.
-pokemon |> ggplot(aes(y=HP , x=factor(Generation))) +  
-  geom_boxplot(fill = "#3565fc") + 
-  labs(title = "Variación de HP entre generaciones", 
-       x="Generación") + 
-  theme_minimal()
-
-```
-
-En este gráfico de cajas compara la estadística de HP con el número de generación de los Pokémon. Podemos observar que la mediana es similar y siempre se encuentra por debajo de 100. También podemos notar que en todas las generaciones hay Pokémon que se salen de la norma y están por encima de 100 HP; por el contrario, solo vemos un caso atípico por debajo de 100, situado en la tercera generación. 
-Podemos concluir que la octava generación es la que tiene el mayor HP, ya que muestra una mayor concentración de valores cercanos a los niveles superiores teniendo la caja más alta y teniendo valores atípicos que superan los 200.
-
-#### Grafico de cajas Attack y Generación 
-
-```{r}
-pokemon |> ggplot(aes(y=Attack , x=factor(Generation))) +  
-  geom_boxplot(fill = "#3565fc") + 
-  labs(title = "Variación de Attack entre generaciones",
-       x="Generación") + 
-  theme_minimal()
-```
-
-En este gráfico de cajas compara la estadística de Attack con el número de generación de los Pokémon. 
-Podemos observar que, desde la primera hasta la cuarta generación, hay casos atípicos que superan los 150 puntos de Attack. Sin embargo, a partir de la cuarta generación, estos valores atípicos desaparecen. 
-Aunque todas las generaciones presentan un rango de dispersión similar, podemos concluir que la octava generación es la que tiene el mayor Attack, ya que muestra una mayor concentración de valores cercanos a los niveles superiores teniendo la caja más alta. Además, no se observan valores atípicos en esta generación, lo que indica que los datos están consistentemente concentrados en un rango más alto.
-
-#### Grafico de cajas Defense y Generación 
-
-```{r}
-pokemon |> ggplot(aes(y=Defense , x=factor(Generation))) +  
-  geom_boxplot(fill = "#3565fc") + 
-  labs(title = "Variación de Defense entre generaciones",
-       x="Generación") +
-  theme_minimal()
-```
-
-Este gráfico de cajas compara la estadística de Defense con el número de generación de los Pokémon. Podemos observar que, en todas las generaciones, excepto en la cuarta, hay casos atípicos que superan los 150 puntos de Defense. En particular, en las generaciones 2, 3, 6 y 7, se encuentran casos que superan los 200 puntos, e incluso algunos llegan a los 250.
-
-La cuarta generación es la que presenta una defensa mayor, ya que su caja es más amplia y ligeramente más alta que las demás, lo que indica una mayor dispersión de datos y una mediana más elevada. Aunque la octava generación muestra algunos valores atípicos muy altos, su caja está algo más baja en comparación con la cuarta generación.
-
-#### Grafico de cajas Sp_attack y Generación 
-
-```{r}
-pokemon |> ggplot(aes(y=Sp_attack , x=factor(Generation))) +  
-  geom_boxplot(fill = "#3565fc") + 
-  labs(title = "Variación de Sp_attack entre generaciones",
-       x="Generación") + 
-  theme_minimal()
-```
-
-Este gráfico de cajas compara la estadística de Sp_attack con el número de generación de los Pokémon. Podemos observar que, en todas las generaciones, excepto en la cuarta, hay casos atípicos que superan los 150 puntos de Sp_attack.
-
-La cuarta generación es la que presenta una Sp_attack mayor, ya que su caja es ligeramente más alta que las demás, lo que indica una mayor dispersión de datos y una mediana más elevada. 
-
-#### Grafico de cajas Sp_defense y Generación 
-
-```{r}
-pokemon|> ggplot(aes(y=Sp_defense , x=factor(Generation))) +  
-  geom_boxplot(fill = "#3565fc") + 
-  labs(title = "Variación de Sp_defense entre generaciones",
-       x="Generación") + 
-  theme_minimal()
-```
-
-Este gráfico de cajas compara la estadística de Sp_defense con el número de generación de los Pokémon. Podemos observar que en las generaciones 2,3,6 y 8 hay casos atípicos que superan los 150 puntos de Sp_defense y en la 2 y 8 llegando a superar los 200.
-
-La cuarta generación es la que presenta una Sp_defense mayor, ya que su caja es ligeramente más alta que las demás, lo que indica una mayor dispersión de datos y una mediana más elevada. 
-
-
-#### Grafico de cajas Speed y Generación 
-
-```{r}
-pokemon|> ggplot(aes(y=Speed , x=factor(Generation))) +  
-  geom_boxplot(fill = "#3565fc") + 
-  labs(title = "Variación de Speed entre generaciones",
-       x="Generación") + 
-  theme_minimal()
-```
-
-Este gráfico de cajas compara la estadística de Speed con el número de generación de los Pokémon. Podemos observar que en las generaciones 3 y 8 hay casos atípicos viendo que en la 3 hay más cantidad que en la 8. 
-
-La cuarta octaba es la que presenta una Speed mayor, ya que su caja es ligeramente más alta que las demás y tiene un dato atípico que supera los 200.
-
-
 ### Gráficos de barras
 
-#### Tipos de Pokémons por generación
-A continuación, se va a analizar la cantidad de apariciones de cada tipo de Pokémon en cada generación, con el objetivo de diferenciar las cantidades entre tipos y entre cada juego. Se espera que en las primeras generaciones las cantidades entre tipos, sean más dispares y que los valores se estabilicen según avancen las generaciones, porque es lógico que el equilibrio al comienzo sea menos importante, que según se iban creando más y más generaciones. También se espera que, si hay un crecimiento repentino de un tipo en una generación, en la siguiente haya un descenso igual de importante, para compensar por la disparidad anterior.
+#### Tipos de Pokémons
+Vamos ahora a ayudarnos de un gráfico de barras para analizar la cantidad de apariciones de cada tipo en el conjunto de todos los pokemon, para concluir cuales son los tipos más comunes de pokemon.
 ```{r echo=FALSE}
 # Definir una paleta de colores personalizada para los tipos (son los colores oficiales para los tipos)
 
@@ -392,14 +392,14 @@ pokemon_long <- pokemon %>%
   pivot_longer(cols = c(Type_1, Type_2), names_to = "Type", values_to = "Types") %>%
   # Eliminar los NA, que representan Pokémon que no tienen segundo tipo
   filter(!is.na(Types))
-
-# Agrupar por generación y tipo de Pokémon, contando las ocurrencias
-pokemon_by_type <- pokemon_long %>%
-  group_by(Generation, Types) %>%
-  summarise(count = n(), .groups = "drop")
 ```
 
 ```{r echo=FALSE}
+# Agrupar por generación y tipo de Pokémon, contando las ocurrencias
+pokemon_by_type <- pokemon_long %>%
+  group_by(Types) %>%
+  summarise(count = n(), .groups = "drop")
+
 # Asegurarse de que el orden de los tipos siga el de la paleta de colores
 pokemon_by_type$Types <- factor(pokemon_by_type$Types, levels = names(colors))
 ```
@@ -410,7 +410,6 @@ ggplot(pokemon_by_type, aes(x = Types, y = count, fill = Types)) +
   geom_bar(stat = "identity") +
   scale_fill_manual(values = colors) +  # Aplicar la paleta de colores personalizada
   scale_y_continuous(breaks = seq(0, max(pokemon_by_type$count), by = 5)) +  # Ajustar el eje Y
-  facet_wrap(~ Generation, ncol = 4) +  # Distribuir en 4 columnas
   labs(title = "Distribución de Tipos de Pokémon por Generación",
        x = "Tipo de Pokémon",
        y = "Cantidad") +
@@ -423,11 +422,7 @@ ggplot(pokemon_by_type, aes(x = Types, y = count, fill = Types)) +
 ```
 
 
-A partir de la cuarta generación en adelante, la cantidad de tipos tiende a estabilizarse. Sin embargo, las primeras generaciones muestran una mayor disparidad en los tipos, como en la primera, donde la cantidad de tipos Dark, Dragon o Ghost, y de Water o Poison, son muy dispares.
-
-Un fenómeno interesante es la variabilidad de ciertos tipos a lo largo del tiempo. Por ejemplo, en la segunda y tercera generación, el tipo Dragon muestra un crecimiento, que luego se estabiliza. Otros tipos, como Electric, Grass o Fire, parecen mantenerse más consistentes. El cambio más drástico se produce con el tipo Poison de primera a segunda generación.
-
-En general, se cumple la tendencia esperada: conforme avanzan las generaciones, la cantidad de Pokémon de cada tipo tiende a nivelarse, y que grandes picos van acompañados por grandes caídas, que luego se estabilizan.
+Se puede observar que los pokemon tipo Water son los más comunes con diferencia, seguidos de los tipo Grass, Flying, Psychic y Normal. El resto de tipos de pokemon más o menos se encuentran equilibrados entre ellos.
 
 #### Top 100 tipos más usados 
 
@@ -553,7 +548,18 @@ print(tabla_generacion_pokemons)
 print(media_total_pokemons)
 ````
 
-#### Análisis descriptivo de las estadísticas
+#### Análisis descriptivo de las estadísticas globales
+````{r}
+pokemon_stats <- pokemon %>%
+  select(HP,Attack, Defense, Sp_attack, Sp_defense, Speed)
+summary_stats <- descr(pokemon_stats)
+
+print(summary_stats)
+
+````
+
+
+#### Análisis descriptivo de las estadísticas según generación
 
 
 ````{r}
@@ -595,6 +601,164 @@ La velocidad varía de manera diferente a las demás estadísticas, llegando inc
 
 
 ## 4.2 Datos bivariantes
+
+
+### Gráfico de barras de tipos de Pokémons por generación
+A continuación, se va a analizar la cantidad de apariciones de cada tipo de Pokémon en cada generación, con el objetivo de diferenciar las cantidades entre tipos y entre cada juego. Se espera que en las primeras generaciones las cantidades entre tipos, sean más dispares y que los valores se estabilicen según avancen las generaciones, porque es lógico que el equilibrio al comienzo sea menos importante, que según se iban creando más y más generaciones. También se espera que, si hay un crecimiento repentino de un tipo en una generación, en la siguiente haya un descenso igual de importante, para compensar por la disparidad anterior.
+```{r echo=FALSE}
+# Definir una paleta de colores personalizada para los tipos (son los colores oficiales para los tipos)
+
+colors <- c("Fighting" = "#C22E28",
+            "Fire" = "#F08030",
+            "Electric" = "#F8D030",
+            "Grass" = "#78C850",
+            "Bug" = "#A8B820",
+            "Flying" = "#A890F0",
+            "Water" = "#6890F0",
+            "Dragon" = "#7038F8",
+            "Psychic" = "#F85888",
+            "Poison" = "#A040A0",
+            "Ghost" = "#705898",
+            "Dark" = "#705848",
+            "Ground" = "#E0C068",
+            "Rock" = "#B8A038",
+            "Steel" = "#B8B8D0",
+            "Fairy" = "#EE99AC",
+            "Ice" = "#98D8D8",
+            "Normal" = "#A8A878")
+```
+
+```{r echo=TRUE}
+# Agrupar los tipos de Pokémon
+pokemon_long <- pokemon %>%
+  # Convertir en formato largo para contar ambos tipos
+  pivot_longer(cols = c(Type_1, Type_2), names_to = "Type", values_to = "Types") %>%
+  # Eliminar los NA, que representan Pokémon que no tienen segundo tipo
+  filter(!is.na(Types))
+
+# Agrupar por generación y tipo de Pokémon, contando las ocurrencias
+pokemon_by_type <- pokemon_long %>%
+  group_by(Generation, Types) %>%
+  summarise(count = n(), .groups = "drop")
+```
+
+```{r echo=FALSE}
+# Asegurarse de que el orden de los tipos siga el de la paleta de colores
+pokemon_by_type$Types <- factor(pokemon_by_type$Types, levels = names(colors))
+```
+Una vez agrupadas y contadas todas las ocurrencias de cada tipo, se procede a crear el gráfico.
+```{r echo=TRUE}
+# Crear los gráficos de barras, uno por cada generación, con colores personalizados
+ggplot(pokemon_by_type, aes(x = Types, y = count, fill = Types)) +
+  geom_bar(stat = "identity") +
+  scale_fill_manual(values = colors) +  # Aplicar la paleta de colores personalizada
+  scale_y_continuous(breaks = seq(0, max(pokemon_by_type$count), by = 5)) +  # Ajustar el eje Y
+  facet_wrap(~ Generation, ncol = 4) +  # Distribuir en 4 columnas
+  labs(title = "Distribución de Tipos de Pokémon por Generación",
+       x = "Tipo de Pokémon",
+       y = "Cantidad") +
+  theme_minimal() +
+  theme(axis.text.x = element_blank(),  # Eliminar el texto del eje x
+        axis.ticks.x = element_blank(),  # Eliminar las marcas del eje x
+        strip.text = element_text(size = 12),  # Tamaño de los títulos de las facetas (Generación)
+        panel.spacing = unit(2, "lines"),  # Aumentar el espacio entre gráficos
+        legend.title = element_blank())  # Eliminar el título de la leyenda
+```
+
+
+A partir de la cuarta generación en adelante, la cantidad de tipos tiende a estabilizarse. Sin embargo, las primeras generaciones muestran una mayor disparidad en los tipos, como en la primera, donde la cantidad de tipos Dark, Dragon o Ghost, y de Water o Poison, son muy dispares.
+
+Un fenómeno interesante es la variabilidad de ciertos tipos a lo largo del tiempo. Por ejemplo, en la segunda y tercera generación, el tipo Dragon muestra un crecimiento, que luego se estabiliza. Otros tipos, como Electric, Grass o Fire, parecen mantenerse más consistentes. El cambio más drástico se produce con el tipo Poison de primera a segunda generación.
+
+En general, se cumple la tendencia esperada: conforme avanzan las generaciones, la cantidad de Pokémon de cada tipo tiende a nivelarse, y que grandes picos van acompañados por grandes caídas, que luego se estabilizan.
+
+### Boxplots
+
+#### Grafico de cajas HP y Generación 
+
+```{r}
+# Definimos el dataframe Pokémon, definiremos el estilo del blox pot y a continuación indicaremos que datos debe tener cada variable , y le asignaremos un nombre.
+pokemon |> ggplot(aes(y=HP , x=factor(Generation))) +  
+  geom_boxplot(fill = "#3565fc") + 
+  labs(title = "Variación de HP entre generaciones", 
+       x="Generación") + 
+  theme_minimal()
+
+```
+
+En este gráfico de cajas compara la estadística de HP con el número de generación de los Pokémon. Podemos observar que la mediana es similar y siempre se encuentra por debajo de 100. También podemos notar que en todas las generaciones hay Pokémon que se salen de la norma y están por encima de 100 HP; por el contrario, solo vemos un caso atípico por debajo de 100, situado en la tercera generación. 
+Podemos concluir que la octava generación es la que tiene el mayor HP, ya que muestra una mayor concentración de valores cercanos a los niveles superiores teniendo la caja más alta y teniendo valores atípicos que superan los 200.
+
+#### Grafico de cajas Attack y Generación 
+
+```{r}
+pokemon |> ggplot(aes(y=Attack , x=factor(Generation))) +  
+  geom_boxplot(fill = "#3565fc") + 
+  labs(title = "Variación de Attack entre generaciones",
+       x="Generación") + 
+  theme_minimal()
+```
+
+En este gráfico de cajas compara la estadística de Attack con el número de generación de los Pokémon. 
+Podemos observar que, desde la primera hasta la cuarta generación, hay casos atípicos que superan los 150 puntos de Attack. Sin embargo, a partir de la cuarta generación, estos valores atípicos desaparecen. 
+Aunque todas las generaciones presentan un rango de dispersión similar, podemos concluir que la octava generación es la que tiene el mayor Attack, ya que muestra una mayor concentración de valores cercanos a los niveles superiores teniendo la caja más alta. Además, no se observan valores atípicos en esta generación, lo que indica que los datos están consistentemente concentrados en un rango más alto.
+
+#### Grafico de cajas Defense y Generación 
+
+```{r}
+pokemon |> ggplot(aes(y=Defense , x=factor(Generation))) +  
+  geom_boxplot(fill = "#3565fc") + 
+  labs(title = "Variación de Defense entre generaciones",
+       x="Generación") +
+  theme_minimal()
+```
+
+Este gráfico de cajas compara la estadística de Defense con el número de generación de los Pokémon. Podemos observar que, en todas las generaciones, excepto en la cuarta, hay casos atípicos que superan los 150 puntos de Defense. En particular, en las generaciones 2, 3, 6 y 7, se encuentran casos que superan los 200 puntos, e incluso algunos llegan a los 250.
+
+La cuarta generación es la que presenta una defensa mayor, ya que su caja es más amplia y ligeramente más alta que las demás, lo que indica una mayor dispersión de datos y una mediana más elevada. Aunque la octava generación muestra algunos valores atípicos muy altos, su caja está algo más baja en comparación con la cuarta generación.
+
+#### Grafico de cajas Sp_attack y Generación 
+
+```{r}
+pokemon |> ggplot(aes(y=Sp_attack , x=factor(Generation))) +  
+  geom_boxplot(fill = "#3565fc") + 
+  labs(title = "Variación de Sp_attack entre generaciones",
+       x="Generación") + 
+  theme_minimal()
+```
+
+Este gráfico de cajas compara la estadística de Sp_attack con el número de generación de los Pokémon. Podemos observar que, en todas las generaciones, excepto en la cuarta, hay casos atípicos que superan los 150 puntos de Sp_attack.
+
+La cuarta generación es la que presenta una Sp_attack mayor, ya que su caja es ligeramente más alta que las demás, lo que indica una mayor dispersión de datos y una mediana más elevada. 
+
+#### Grafico de cajas Sp_defense y Generación 
+
+```{r}
+pokemon|> ggplot(aes(y=Sp_defense , x=factor(Generation))) +  
+  geom_boxplot(fill = "#3565fc") + 
+  labs(title = "Variación de Sp_defense entre generaciones",
+       x="Generación") + 
+  theme_minimal()
+```
+
+Este gráfico de cajas compara la estadística de Sp_defense con el número de generación de los Pokémon. Podemos observar que en las generaciones 2,3,6 y 8 hay casos atípicos que superan los 150 puntos de Sp_defense y en la 2 y 8 llegando a superar los 200.
+
+La cuarta generación es la que presenta una Sp_defense mayor, ya que su caja es ligeramente más alta que las demás, lo que indica una mayor dispersión de datos y una mediana más elevada. 
+
+
+#### Grafico de cajas Speed y Generación 
+
+```{r}
+pokemon|> ggplot(aes(y=Speed , x=factor(Generation))) +  
+  geom_boxplot(fill = "#3565fc") + 
+  labs(title = "Variación de Speed entre generaciones",
+       x="Generación") + 
+  theme_minimal()
+```
+
+Este gráfico de cajas compara la estadística de Speed con el número de generación de los Pokémon. Podemos observar que en las generaciones 3 y 8 hay casos atípicos viendo que en la 3 hay más cantidad que en la 8. 
+
+La cuarta octaba es la que presenta una Speed mayor, ya que su caja es ligeramente más alta que las demás y tiene un dato atípico que supera los 200.
 
 ### Scatter plot
 
@@ -676,10 +840,8 @@ ggplot(aes(x = Stat_Average, y = Usage_Percentage)) +   geom_point() +
 
 model <- lm(Usage_Percentage ~ Stat_Average, data = filtered_data)
 model_summary <- summary(model)
-r_squared <- model_summary$r.squared
 
-#R^2:
-print(r_squared)
+print(model_summary)
 
 #TOTAL VS USAGE
 
@@ -704,10 +866,9 @@ ggplot(aes(x = Total, y = Usage_Percentage)) +   geom_point() +
 
 model <- lm(Usage_Percentage ~ Total, data = filtered_data)
 model_summary <- summary(model)
-r_squared <- model_summary$r.squared
 
-#R^2:
-print(r_squared)
+print(model_summary)
+
 
 ```
 
