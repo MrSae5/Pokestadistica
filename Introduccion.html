@@ -1529,12 +1529,14 @@ espera para una posible novena generación.</p></li>
 </div>
 <div id="importación-de-datos-y-carga-de-paquetes" class="section level1">
 <h1>2. Importación de datos y carga de paquetes</h1>
-<pre class="r"><code>library(readxl)
-library(tidyverse)
+<pre class="r"><code>library(readxl)</code></pre>
+<pre><code>## Warning: package &#39;readxl&#39; was built under R version 4.4.1</code></pre>
+<pre class="r"><code>library(tidyverse)
 library(summarytools)
 library(ggplot2)
-library(knitr)
-library(&#39;dplyr&#39;)
+library(knitr)</code></pre>
+<pre><code>## Warning: package &#39;knitr&#39; was built under R version 4.4.1</code></pre>
+<pre class="r"><code>library(&#39;dplyr&#39;)
 
 
 pokemon &lt;- read_excel(&quot;data/PokemonV4.xlsx&quot;)</code></pre>
@@ -1764,7 +1766,7 @@ los valores más altos son mucho menos comunes en esta distribución.</p>
 <h4>Histograma de total</h4>
 <pre class="r"><code># Creamos un histograma a partir de los datos Total. 
 pokemon |&gt; ggplot(aes(Total)) + 
-# Definimos el color y el numero de barras que tendrá nuestro historama. Calculamos el número de barras a través de la raíz cuadrada de nuestro número de datos.
+# Definimos el color y el número de barras que tendrá nuestro histograma. Calculamos el número de barras a través de la raíz cuadrada de nuestro número de datos.
   geom_histogram(fill = &quot;#3565fc&quot;, bins = 33, col = &quot;white&quot;) + 
 # Indicamos el tema.
   theme_minimal() </code></pre>
@@ -1944,7 +1946,7 @@ de 14.</p>
 <h4>Histograma de HP</h4>
 <pre class="r"><code># Creamos un histograma a partir de los datos HP. 
 pokemon |&gt; ggplot(aes(HP)) + 
-# Definimos el color y el numero de barras que tendrá nuestro historama. Calculamos el número de barras a través de la raíz cuadrada de nuestro número de datos.
+# Definimos el color y el número de barras que tendrá nuestro histograma. Calculamos el número de barras a través de la raíz cuadrada de nuestro número de datos.
   geom_histogram(fill = &quot;#3565fc&quot;, bins = 33, col = &quot;white&quot;) + 
 # Indicamos el tema.
   theme_minimal() </code></pre>
@@ -2132,7 +2134,7 @@ altos son raros, ya que hay pocos Pokémon en esos extremos.</p>
 <h4>Histograma de Attack</h4>
 <pre class="r"><code># Creamos un histograma a partir de los datos Attack. 
 pokemon |&gt; ggplot(aes(Attack)) + 
-# Definimos el color y el numero de barras que tendrá nuestro historama. Calculamos el número de barras a través de la raíz cuadrada de nuestro número de datos.
+# Definimos el color y el número de barras que tendrá nuestro histograma. Calculamos el número de barras a través de la raíz cuadrada de nuestro número de datos.
   geom_histogram(fill = &quot;#3565fc&quot;, bins = 33, col = &quot;white&quot;) + 
 # Indicamos el tema.
   theme_minimal() </code></pre>
@@ -2312,7 +2314,7 @@ estos valores son extremadamente raros.</p>
 <h4>Histograma de Defense</h4>
 <pre class="r"><code># Creamos un histograma a partir de los datos Defense. 
 pokemon |&gt; ggplot(aes(Defense)) + 
-# Definimos el color y el numero de barras que tendrá nuestro historama. Calculamos el número de barras a través de la raíz cuadrada de nuestro número de datos.
+# Definimos el color y el número de barras que tendrá nuestro histograma. Calculamos el número de barras a través de la raíz cuadrada de nuestro número de datos.
   geom_histogram(fill = &quot;#3565fc&quot;, bins = 33, col = &quot;white&quot;) + 
 # Indicamos el tema.
   theme_minimal() </code></pre>
@@ -2500,7 +2502,7 @@ prácticamente inexistentes.</p>
 <h4>Histograma de Sp_attack</h4>
 <pre class="r"><code># Creamos un histograma a partir de los datos Sp_attack. 
 pokemon |&gt; ggplot(aes(Sp_attack)) + 
-# Definimos el color y el numero de barras que tendrá nuestro historama. Calculamos el número de barras a través de la raíz cuadrada de nuestro número de datos.
+# Definimos el color y el número de barras que tendrá nuestro histograma. Calculamos el número de barras a través de la raíz cuadrada de nuestro número de datos.
   geom_histogram(fill = &quot;#3565fc&quot;, bins = 33, col = &quot;white&quot;) + 
 # Indicamos el tema.
   theme_minimal() </code></pre>
@@ -2659,7 +2661,7 @@ entre 54.5 y 66, y que los Pokémon con Sp_Defense muy alta (entre 238 y
 <h4>Histograma de Sp_defense</h4>
 <pre class="r"><code># Creamos un histograma a partir de los datos Sp_defense. 
 pokemon |&gt; ggplot(aes(Sp_defense)) + 
-# Definimos el color y el numero de barras que tendrá nuestro historama. Calculamos el número de barras a través de la raíz cuadrada de nuestro número de datos.
+# Definimos el color y el número de barras que tendrá nuestro histograma. Calculamos el número de barras a través de la raíz cuadrada de nuestro número de datos.
   geom_histogram(fill = &quot;#3565fc&quot;, bins = 33, col = &quot;white&quot;) + 
 # Indicamos el tema.
   theme_minimal() </code></pre>
@@ -2832,7 +2834,7 @@ intervalos.</p>
 <h4>Histograma de Speed</h4>
 <pre class="r"><code># Creamos un histograma a partir de los datos Speed. 
 pokemon |&gt; ggplot(aes(Speed)) + 
-# Definimos el color y el numero de barras que tendrá nuestro historama. Calculamos el número de barras a través de la raíz cuadrada de nuestro número de datos.
+# Definimos el color y el número de barras que tendrá nuestro histograma. Calculamos el número de barras a través de la raíz cuadrada de nuestro número de datos.
   geom_histogram(fill = &quot;#3565fc&quot;, bins = 33, col = &quot;white&quot;) + 
 # Indicamos el tema.
   theme_minimal() </code></pre>
@@ -3190,7 +3192,7 @@ ellos.</p>
 <div id="top-100-tipos-más-usados" class="section level4">
 <h4>Top 100 tipos más usados</h4>
 <p>A continuación, se analiza la cantidad de apariciones de cada tipo
-Pokémon en el top 100 Pokémon más usados en el ambito competitivo:</p>
+Pokémon en el top 100 Pokémon más usados en el ámbito competitivo:</p>
 <pre class="r"><code>  # Agrupar los tipos de Pokémon
   top100usage &lt;- head(pokemon_by_usage,100) %&gt;%
   # Convertir en formato largo para contar ambos tipos

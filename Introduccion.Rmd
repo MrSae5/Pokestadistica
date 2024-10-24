@@ -114,7 +114,7 @@ Observamos que la mayor parte de los datos se concentra en los intervalos (270-5
 ```{r echo=TRUE}
 # Creamos un histograma a partir de los datos Total. 
 pokemon |> ggplot(aes(Total)) + 
-# Definimos el color y el numero de barras que tendrá nuestro historama. Calculamos el número de barras a través de la raíz cuadrada de nuestro número de datos.
+# Definimos el color y el número de barras que tendrá nuestro histograma. Calculamos el número de barras a través de la raíz cuadrada de nuestro número de datos.
   geom_histogram(fill = "#3565fc", bins = 33, col = "white") + 
 # Indicamos el tema.
   theme_minimal() 
@@ -148,7 +148,7 @@ En esta tabla podemos ver que el valor más común de HP se encuentra entre 64.5
 ```{r echo=TRUE}
 # Creamos un histograma a partir de los datos HP. 
 pokemon |> ggplot(aes(HP)) + 
-# Definimos el color y el numero de barras que tendrá nuestro historama. Calculamos el número de barras a través de la raíz cuadrada de nuestro número de datos.
+# Definimos el color y el número de barras que tendrá nuestro histograma. Calculamos el número de barras a través de la raíz cuadrada de nuestro número de datos.
   geom_histogram(fill = "#3565fc", bins = 33, col = "white") + 
 # Indicamos el tema.
   theme_minimal() 
@@ -182,7 +182,7 @@ En esta tabla, el Attack se distribuye de manera bastante uniforme en los interv
 ```{r echo=TRUE}
 # Creamos un histograma a partir de los datos Attack. 
 pokemon |> ggplot(aes(Attack)) + 
-# Definimos el color y el numero de barras que tendrá nuestro historama. Calculamos el número de barras a través de la raíz cuadrada de nuestro número de datos.
+# Definimos el color y el número de barras que tendrá nuestro histograma. Calculamos el número de barras a través de la raíz cuadrada de nuestro número de datos.
   geom_histogram(fill = "#3565fc", bins = 33, col = "white") + 
 # Indicamos el tema.
   theme_minimal() 
@@ -216,7 +216,7 @@ En esta tabla podemos observar que la mayor parte de los datos está concentrada
 ```{r echo=TRUE}
 # Creamos un histograma a partir de los datos Defense. 
 pokemon |> ggplot(aes(Defense)) + 
-# Definimos el color y el numero de barras que tendrá nuestro historama. Calculamos el número de barras a través de la raíz cuadrada de nuestro número de datos.
+# Definimos el color y el número de barras que tendrá nuestro histograma. Calculamos el número de barras a través de la raíz cuadrada de nuestro número de datos.
   geom_histogram(fill = "#3565fc", bins = 33, col = "white") + 
 # Indicamos el tema.
   theme_minimal() 
@@ -250,7 +250,7 @@ La mayor parte de los datos está concentrada en los intervalos (37.6-83.6). Los
 ```{r echo=TRUE}
 # Creamos un histograma a partir de los datos Sp_attack. 
 pokemon |> ggplot(aes(Sp_attack)) + 
-# Definimos el color y el numero de barras que tendrá nuestro historama. Calculamos el número de barras a través de la raíz cuadrada de nuestro número de datos.
+# Definimos el color y el número de barras que tendrá nuestro histograma. Calculamos el número de barras a través de la raíz cuadrada de nuestro número de datos.
   geom_histogram(fill = "#3565fc", bins = 33, col = "white") + 
 # Indicamos el tema.
   theme_minimal() 
@@ -284,7 +284,7 @@ Podemos observar que la mayoría de los Pokémon tienen Sp_Defense entre 54.5 y 
 ```{r echo=TRUE}
 # Creamos un histograma a partir de los datos Sp_defense. 
 pokemon |> ggplot(aes(Sp_defense)) + 
-# Definimos el color y el numero de barras que tendrá nuestro historama. Calculamos el número de barras a través de la raíz cuadrada de nuestro número de datos.
+# Definimos el color y el número de barras que tendrá nuestro histograma. Calculamos el número de barras a través de la raíz cuadrada de nuestro número de datos.
   geom_histogram(fill = "#3565fc", bins = 33, col = "white") + 
 # Indicamos el tema.
   theme_minimal() 
@@ -318,7 +318,7 @@ Podemos observar que la mayoría de los Pokémon tienen velocidades entre los in
 ```{r echo=TRUE}
 # Creamos un histograma a partir de los datos Speed. 
 pokemon |> ggplot(aes(Speed)) + 
-# Definimos el color y el numero de barras que tendrá nuestro historama. Calculamos el número de barras a través de la raíz cuadrada de nuestro número de datos.
+# Definimos el color y el número de barras que tendrá nuestro histograma. Calculamos el número de barras a través de la raíz cuadrada de nuestro número de datos.
   geom_histogram(fill = "#3565fc", bins = 33, col = "white") + 
 # Indicamos el tema.
   theme_minimal() 
@@ -426,7 +426,7 @@ Se puede observar que los Pokémon tipo Water son los más comunes con diferenci
 
 #### Top 100 tipos más usados 
 
-A continuación, se analiza la cantidad de apariciones de cada tipo Pokémon en el top 100 Pokémon más usados en el ambito competitivo:
+A continuación, se analiza la cantidad de apariciones de cada tipo Pokémon en el top 100 Pokémon más usados en el ámbito competitivo:
 
 ````{r echo=FALSE}
   pokemon_by_usage <- arrange(pokemon,desc(Usage_Percentage))
